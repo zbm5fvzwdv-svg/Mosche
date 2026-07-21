@@ -81,7 +81,7 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .nav-links a {
@@ -104,12 +104,12 @@
             color: var(--text-light);
         }
 
-        /* ==================== HERO SECTION (KREATIV OHNE BILD) ==================== */
+        /* ==================== HERO SECTION ==================== */
         .hero {
             position: relative;
             background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #0d1b2a 100%);
             color: var(--text-light);
-            padding: 5rem 2rem;
+            padding: 4rem 2rem;
             text-align: center;
             overflow: hidden;
             box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.3);
@@ -145,14 +145,14 @@
         }
 
         .hero h2 {
-            font-size: 2.3rem;
+            font-size: 2.2rem;
             margin-bottom: 1rem;
             color: var(--light-blue);
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .hero p {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             margin-bottom: 1.5rem;
             opacity: 0.95;
         }
@@ -167,6 +167,47 @@
             font-size: 0.85rem;
             margin-bottom: 1rem;
             box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+        }
+
+        /* MOSCHEE SELECTION STYLES */
+        .mosque-selector-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .mosque-selector-box h3 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+        }
+
+        .mosque-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .mosque-btn {
+            background-color: transparent;
+            border: 2px solid var(--light-blue);
+            color: var(--text-light);
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .mosque-btn:hover, .mosque-btn.active {
+            background-color: var(--light-blue);
+            color: var(--dark-blue);
+            box-shadow: 0 4px 12px rgba(72, 202, 228, 0.4);
         }
 
         /* ==================== MAIN CONTAINER & SECTIONS ==================== */
@@ -416,14 +457,26 @@
             gap: 0.3rem;
         }
 
-        /* STYLES FÜR DIE DISKUSSIONSRUNDE */
-        .question-card {
+        /* STYLES FÜR DIE DISKUSSIONSRUNDE & KINDER-GESCHICHTEN */
+        .question-card, .story-card {
             background: white;
             border-left: 4px solid var(--light-blue);
-            padding: 1.2rem;
+            padding: 1.5rem;
             margin-bottom: 1.5rem;
             border-radius: 6px;
             box-shadow: var(--card-shadow);
+        }
+
+        .story-card {
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        .story-card h3 {
+            color: var(--dark-blue);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .author-info {
@@ -543,6 +596,7 @@
             </div>
             <ul class="nav-links" id="nav-links">
                 <li><a href="#" class="nav-btn active" data-tab="home">Startseite</a></li>
+                <li><a href="#" class="nav-btn" data-tab="kids-stories">Geschichten & Islam</a></li>
                 <li><a href="#" class="nav-btn" data-tab="discussion">Diskussionsrunde</a></li>
                 <li><a href="#" class="nav-btn" data-tab="calendar">Hijri Kalender</a></li>
                 <li><a href="#" class="nav-btn" data-tab="learn">Lernen & Bücher</a></li>
@@ -552,12 +606,11 @@
         </nav>
     </header>
 
-    <!-- HERO SECTION (KREATIV OHNE HINTERGRUNDBILD) -->
+    <!-- HERO SECTION MIT MOSCHEE-AUSWAHL -->
     <section class="hero">
         <div class="hero-content">
             <span class="badge-hessen">Region Hessen</span>
             
-            <!-- Stilisierte SVG-Moschee als Gotteshaus-Symbol -->
             <div class="mosque-icon-wrapper">
                 <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 3v2"/>
@@ -568,7 +621,20 @@
             </div>
 
             <h2>Willkommen in unserer Gemeinde</h2>
-            <p>Ein Ort des Gebets, des Wissens, der Gemeinschaft und des Gedenkens an die Ahlulbayt (a.s.).</p>
+            <p>Wählen Sie Ihre Moschee aus, um das passende Wochenprogramm anzuzeigen:</p>
+
+            <!-- MOSCHEE AUSWAHL BUTTONS -->
+            <div class="mosque-selector-box">
+                <h3><i class="fas fa-mosque"></i> Bitte wähle deine Moschee:</h3>
+                <div class="mosque-buttons">
+                    <button class="mosque-btn active" id="btn-klarenthal" onclick="selectMosque('klarenthal')">
+                        <i class="fas fa-map-marker-alt"></i> Klarenthal
+                    </button>
+                    <button class="mosque-btn" id="btn-kastel" onclick="selectMosque('kastel')">
+                        <i class="fas fa-map-marker-alt"></i> Mainz-Kastel
+                    </button>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -590,32 +656,31 @@
                 </ul>
             </div>
 
-            <h2 class="section-title">Aktuelle Programme & Veranstaltungen</h2>
+            <!-- DYNAMISCHER TITEL JE NACH GEWÄHLTER MOSCHEE -->
+            <h2 class="section-title" id="program-title">Programm für Klarenthal</h2>
             
-            <!-- GRID FÜR PROGRAMME (Mit Bild-Platzhaltern) -->
-            <div class="grid">
+            <!-- PROGRAMM KLARENTHAL -->
+            <div id="program-klarenthal" class="grid">
                 
-                <!-- Karte 1 -->
                 <div class="card">
                     <div class="card-img-placeholder">
-                        <i class="fas fa-image"></i>
-                        <span>Hier eigenes Bild einfügen</span>
+                        <i class="fas fa-moon"></i>
+                        <span>Donnerstag Abend</span>
                     </div>
                     <div class="card-body">
                         <span class="event-badge">Wöchentlich</span>
                         <h3 class="card-title" style="margin-top:0.5rem;">Donnerstagabend Programm</h3>
                         <div class="card-meta">
-                            <span><i class="far fa-clock"></i> Jeden Do. ab 19:00 Uhr</span>
+                            <span><i class="far fa-clock"></i> Jeden Do. um 19:00 Uhr</span>
                         </div>
                         <p>Gemeinsames Rezitieren von Dua Kumayl, gefolgt von einem deutschsprachigen Vortrag und Abendgebet.</p>
                     </div>
                 </div>
 
-                <!-- Karte 2 -->
                 <div class="card">
                     <div class="card-img-placeholder">
-                        <i class="fas fa-image"></i>
-                        <span>Hier eigenes Bild einfügen</span>
+                        <i class="fas fa-kaaba"></i>
+                        <span>Freitagsgebet</span>
                     </div>
                     <div class="card-body">
                         <span class="event-badge">Freitag</span>
@@ -627,26 +692,133 @@
                     </div>
                 </div>
 
-                <!-- Karte 3 -->
                 <div class="card">
                     <div class="card-img-placeholder">
-                        <i class="fas fa-image"></i>
-                        <span>Hier eigenes Bild einfügen</span>
+                        <i class="fas fa-book-open"></i>
+                        <span>Samstag</span>
                     </div>
                     <div class="card-body">
-                        <span class="event-badge" style="background-color: var(--light-blue); color:white;">Jugend</span>
-                        <h3 class="card-title" style="margin-top:0.5rem;">Jugendkreis Hessen</h3>
+                        <span class="event-badge" style="background-color: var(--light-blue); color:white;">Kinder & Jugend</span>
+                        <h3 class="card-title" style="margin-top:0.5rem;">Koranstunde</h3>
                         <div class="card-meta">
-                            <span><i class="far fa-clock"></i> Jeden 2. Samstag</span>
+                            <span><i class="far fa-clock"></i> Jeden Samstag</span>
                         </div>
-                        <p>Offene Fragerunden, Diskussionskreise über Glaubensfragen im Alltag und gemeinsame Aktivitäten.</p>
+                        <p>Koranunterricht für Kinder und Jugendliche mit schiitischem Lehrplan.</p>
                     </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img-placeholder">
+                        <i class="fas fa-user-graduate"></i>
+                        <span>Sonntag</span>
+                    </div>
+                    <div class="card-body">
+                        <span class="event-badge" style="background-color: #2a9d8f; color:white;">Diskussion</span>
+                        <h3 class="card-title" style="margin-top:0.5rem;">Diskussionsrunde mit Doktor</h3>
+                        <div class="card-meta">
+                            <span><i class="far fa-clock"></i> Jeden Sonntag</span>
+                        </div>
+                        <p>Spannende Diskussions- und Fragerunde zu vertiefenden religiösen und gesellschaftlichen Themen mit dem Doktor.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- PROGRAMM MAINZ-KASTEL (Standardmäßig ausgeblendet) -->
+            <div id="program-kastel" class="grid" style="display: none;">
+                
+                <div class="card">
+                    <div class="card-img-placeholder">
+                        <i class="fas fa-moon"></i>
+                        <span>Donnerstag Abend</span>
+                    </div>
+                    <div class="card-body">
+                        <span class="event-badge">Wöchentlich</span>
+                        <h3 class="card-title" style="margin-top:0.5rem;">Donnerstagabend Programm</h3>
+                        <div class="card-meta">
+                            <span><i class="far fa-clock"></i> Jeden Donnerstag</span>
+                        </div>
+                        <p>Gemeinsames Abendprogramm mit Bittgebeten (Dua) und Vortrag in Mainz-Kastel.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img-placeholder">
+                        <i class="fas fa-child"></i>
+                        <span>Samstag Morgen</span>
+                    </div>
+                    <div class="card-body">
+                        <span class="event-badge" style="background-color: var(--light-blue); color:white;">Kinder</span>
+                        <h3 class="card-title" style="margin-top:0.5rem;">Kinder-Koranstunde</h3>
+                        <div class="card-meta">
+                            <span><i class="far fa-clock"></i> Jeden Samstag ab 10:00 Uhr</span>
+                        </div>
+                        <p>Spielerische Koranstunde und islamische Grundlagen speziell für unsere Kinder ab 10:00 Uhr morgens.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= NEUER TAB: GESCHICHTEN & ISLAM FÜR KINDER ================= -->
+        <div id="kids-stories" class="tab-content">
+            <h2 class="section-title">Geschichten über den Islam & Ahlulbayt</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: #555;">
+                Hier lernen Kinder und Jugendliche spannende Geschichten über die Propheten, Imam Hussein (a.s.) und die 12 Imame.
+            </p>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                
+                <!-- Geschichte 1: Die Propheten -->
+                <div class="story-card">
+                    <h3><i class="fas fa-star" style="color:var(--accent-gold);"></i> Die Geschichte der Propheten</h3>
+                    <p class="author-info">Kategorie: Propheten im Islam</p>
+                    <p>
+                        Allah hat den Menschen viele Propheten gesandt, um ihnen den richtigen Weg zu zeigen. Der allererste Prophet war Prophet Adam (a.s.). 
+                        Später kamen große Propheten wie Prophet Ibrahim (a.s.), der die Kaaba erbaute, Prophet Musa (a.s.) und Prophet Isa (a.s.). 
+                        Der allerletzte und Siegel der Propheten ist unser geliebter Prophet Muhammad (s.a.a.s.), der uns den heiligen Koran brachte.
+                    </p>
+                </div>
+
+                <!-- Geschichte 2: Imam Hussein & Kerbela -->
+                <div class="story-card">
+                    <h3><i class="fas fa-heart" style="color:#e63946;"></i> Imam Hussein (a.s.) & Die Ereignisse von Kerbela</h3>
+                    <p class="author-info">Kategorie: Ereignisse von Kerbela (Ashura)</p>
+                    <p>
+                        Imam Hussein (a.s.) ist der Enkel des Propheten Muhammad (s.a.a.s.). Er stand für Wahrheit, Gerechtigkeit und Freiheit ein. 
+                        In der Wüste von Kerbela kämpfte er am Tage von Ashura (10. Muharram) mutig gegen Ungerechtigkeit, um den echten Islam zu beschützen. 
+                        Wir gedenken Imam Hussein (a.s.) und seiner Familie voller Liebe und Respekt, weil er uns gelehrt hat, niemals vor Ungerechtigkeit zu schweigen.
+                    </p>
+                </div>
+
+                <!-- Geschichte 3: Die 12 Imame -->
+                <div class="story-card">
+                    <h3><i class="fas fa-crown" style="color:var(--accent-gold);"></i> Die 12 Imame (a.s.)</h3>
+                    <p class="author-info">Kategorie: Die Reine Ahlulbayt</p>
+                    <p>
+                        Nach dem Propheten Muhammad (s.a.a.s.) gab es 12 von Allah erwählte Führer, die uns den Koran erklären und die Gemeinschaft leiten:
+                    </p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: #444;">
+                        <li>1. Imam Ali (a.s.)</li>
+                        <li>2. Imam Hassan (a.s.)</li>
+                        <li>3. Imam Hussein (a.s.)</li>
+                        <li>4. Imam Sajjad (a.s.)</li>
+                        <li>5. Imam Baqir (a.s.)</li>
+                        <li>6. Imam Sadiq (a.s.)</li>
+                        <li>7. Imam Kazim (a.s.)</li>
+                        <li>8. Imam Reza (a.s.)</li>
+                        <li>9. Imam Jawad (a.s.)</li>
+                        <li>10. Imam Hadi (a.s.)</li>
+                        <li>11. Imam Askari (a.s.)</li>
+                        <li>12. Imam Mahdi (a.j.f.) – Der erwartete Erlöser</li>
+                    </ul>
                 </div>
 
             </div>
         </div>
 
-        <!-- ================= NEUER TAB: DISKUSSIONSRUNDE (OHNE ACCOUNT) ================= -->
+        <!-- ================= TAB: DISKUSSIONSRUNDE ================= -->
         <div id="discussion" class="tab-content">
             <h2 class="section-title">Offene Diskussionsrunde</h2>
             
@@ -677,7 +849,7 @@
             </div>
         </div>
 
-        <!-- ================= TAB 2: ARABISCHER / SCHIITISCHER KALENDER ================= -->
+        <!-- ================= TAB: ARABISCHER / SCHIITISCHER KALENDER ================= -->
         <div id="calendar" class="tab-content">
             <h2 class="section-title">Islamischer Kalender (Hijri)</h2>
             <div class="calendar-container">
@@ -733,7 +905,7 @@
             </div>
         </div>
 
-        <!-- ================= TAB 3: LERNEN & BÜCHER ================= -->
+        <!-- ================= TAB: LERNEN & BÜCHER ================= -->
         <div id="learn" class="tab-content">
             <h2 class="section-title">Wissen & Schriften</h2>
             
@@ -760,7 +932,7 @@
             </div>
         </div>
 
-        <!-- ================= TAB 4: MEDIATHEK / RÜCKBLICK ================= -->
+        <!-- ================= TAB: MEDIATHEK / RÜCKBLICK ================= -->
         <div id="media" class="tab-content">
             <h2 class="section-title">Mediathek & Rückblick</h2>
             <p style="text-align:center; margin-bottom: 2rem;">Hier finden Sie Aufzeichnungen von Vorträgen, Fotos und Berichte, falls Sie an einer Veranstaltung nicht teilnehmen konnten.</p>
@@ -796,7 +968,7 @@
             </div>
         </div>
 
-        <!-- ================= TAB 5: ANONYME FRAGEN AN DEN PREDIGER ================= -->
+        <!-- ================= TAB: ANONYME FRAGEN AN DEN PREDIGER ================= -->
         <div id="ask" class="tab-content">
             <h2 class="section-title">Fragen im Herzen?</h2>
             
@@ -836,7 +1008,7 @@
 
     </main>
 
-    <!-- FOOTER -->
+    <!-- FOOTER MIT DEINEM NAMEN UND KONTAKTDATEN -->
     <footer>
         <div class="footer-content">
             <div class="footer-column">
@@ -845,18 +1017,20 @@
             </div>
             <div class="footer-column">
                 <h3>Kontakt & Anfahrt</h3>
-                <p><i class="fas fa-map-marker-alt"></i> Gebiet Hessen, Deutschland</p>
-                <p><i class="fas fa-envelope"></i> kontakt@moschee-hessen.de</p>
+                <p id="footer-address"><i class="fas fa-map-marker-alt"></i> Otto-Wels-Straße 138 (Klarenthal)</p>
+                <p><i class="fas fa-user"></i> Ansprechpartner: Amir Qayumi</p>
+                <p><i class="fas fa-envelope"></i> qayumiamir10@icloud.com</p>
+                <p><i class="fas fa-phone"></i> 017660847680</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Schiitische Moscheegemeinde Hessen. Alle Rechte vorbehalten.</p>
+            <p>&copy; 2026 Schiitische Moscheegemeinde Hessen. Erstellt von Amir Qayumi. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
 
-    <!-- JAVASCRIPT FÜR DIE INTERAKTION -->
+    <!-- JAVASCRIPT FÜR DIE INTERAKTION & LOGIK -->
     <script>
-        // Navigation zwischen den Tabs/Seiten
+        // NAVIGATION ZWISCHEN DEN TABS
         const navButtons = document.querySelectorAll('.nav-btn');
         const tabContents = document.querySelectorAll('.tab-content');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -866,11 +1040,9 @@
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 
-                // Aktiven Button hervorheben
                 navButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
 
-                // Tab wechseln
                 const targetTab = button.getAttribute('data-tab');
                 tabContents.forEach(content => {
                     content.classList.remove('active');
@@ -879,22 +1051,46 @@
                     }
                 });
 
-                // Mobilmenü schließen nach Klick
                 if (navLinks.classList.contains('active')) {
                     navLinks.classList.remove('active');
                 }
 
-                // Smooth Scroll nach oben
                 window.scrollTo({top: 0, behavior: 'smooth'});
             });
         });
 
-        // Mobile Menu Toggle
+        // MOBILE MENU TOGGLE
         mobileMenu.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
 
-        // Formular-Handling (Anonyme Frage)
+        // LOGIK FÜR DIE SELEKTION DER MOSCHEE
+        function selectMosque(mosqueKey) {
+            const btnKlarenthal = document.getElementById('btn-klarenthal');
+            const btnKastel = document.getElementById('btn-kastel');
+            const progKlarenthal = document.getElementById('program-klarenthal');
+            const progKastel = document.getElementById('program-kastel');
+            const progTitle = document.getElementById('program-title');
+            const footerAddress = document.getElementById('footer-address');
+
+            if (mosqueKey === 'klarenthal') {
+                btnKlarenthal.classList.add('active');
+                btnKastel.classList.remove('active');
+                progKlarenthal.style.display = 'grid';
+                progKastel.style.display = 'none';
+                progTitle.innerText = "Programm für Moschee Klarenthal";
+                footerAddress.innerHTML = `<i class="fas fa-map-marker-alt"></i> Otto-Wels-Straße 138, Klarenthal`;
+            } else if (mosqueKey === 'kastel') {
+                btnKastel.classList.add('active');
+                btnKlarenthal.classList.remove('active');
+                progKastel.style.display = 'grid';
+                progKlarenthal.style.display = 'none';
+                progTitle.innerText = "Programm für Moschee Mainz-Kastel";
+                footerAddress.innerHTML = `<i class="fas fa-map-marker-alt"></i> Mainz-Kastel`;
+            }
+        }
+
+        // FORMULAR ANONYME FRAGE
         document.getElementById('anonymous-form').addEventListener('submit', function(e) {
             e.preventDefault();
             document.getElementById('anonymous-form').reset();
@@ -904,14 +1100,14 @@
             }, 5000);
         });
 
-        // ================= LOGIK FÜR DIE DISKUSSIONSRUNDE =================
+        // LOGIK FÜR DIE DISKUSSIONSRUNDE
         let discussionQuestions = [
             {
                 id: 1,
                 author: "Ali",
-                text: "Wann beginnt am Donnerstagabend genau das Programm?",
+                text: "Wann beginnt am Donnerstagabend genau das Programm in Klarenthal?",
                 answers: [
-                    { author: "Gemeinde-Team", text: "Das Programm startet pünktlich um 19:00 Uhr mit Dua Kumayl." }
+                    { author: "Amir Qayumi", text: "Das Programm startet in Klarenthal pünktlich um 19:00 Uhr." }
                 ]
             }
         ];
@@ -993,10 +1189,8 @@
             });
         }
 
-        // Initiales Laden der Diskussionsbeiträge
+        // INITIALES LADEN DER DISKUSSIONSBEITRÄGE
         renderDiscussion();
     </script>
 </body>
 </html>
-
-      

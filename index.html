@@ -1,824 +1,522 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schiitische Moscheegemeinde Hessen</title>
-    <!-- FontAwesome für Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* ==================== GLOBAL STYLES ==================== */
-        :root {
-            --dark-blue: #0d1b2a;
-            --medium-blue: #1b263b;
-            --light-blue: #48cae4;
-            --accent-gold: #d4af37;
-            --text-light: #f8f9fa;
-            --text-dark: #212529;
-            --bg-light: #f4f6f9;
-            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* ==================== HEADER & NAVIGATION ==================== */
-        header {
-            background: linear-gradient(135deg, var(--dark-blue), var(--medium-blue));
-            color: var(--text-light);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo i {
-            font-size: 2rem;
-            color: var(--light-blue);
-        }
-
-        .logo-text h1 {
-            font-size: 1.4rem;
-            color: var(--text-light);
-        }
-
-        .logo-text p {
-            font-size: 0.8rem;
-            color: var(--light-blue);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-
-        .nav-links a {
-            color: var(--text-light);
-            font-weight: 500;
-            transition: color 0.3s;
-            padding: 0.5rem 0.8rem;
-            border-radius: 4px;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--light-blue);
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-light);
-        }
-
-        /* ==================== HERO SECTION ==================== */
-        .hero {
-            background: linear-gradient(rgba(13, 27, 42, 0.75), rgba(27, 38, 59, 0.75)), 
-                        url('https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-            color: var(--text-light);
-            padding: 5rem 2rem;
-            text-align: center;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h2 {
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-            color: var(--light-blue);
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .badge-hessen {
-            display: inline-block;
-            background-color: var(--accent-gold);
-            color: var(--dark-blue);
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-        }
-
-        /* ==================== MAIN CONTAINER & SECTIONS ==================== */
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 1.8rem;
-            color: var(--dark-blue);
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background-color: var(--light-blue);
-            margin: 0.5rem auto 0;
-            border-radius: 2px;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* ==================== MOSQUE SELECTION CARDS ==================== */
-        .mosque-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 1.5rem;
-        }
-
-        .mosque-card {
-            background-color: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            border-top: 5px solid var(--accent-gold);
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .mosque-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .mosque-header {
-            background: linear-gradient(135deg, var(--dark-blue), var(--medium-blue));
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        .mosque-header h3 {
-            font-size: 1.4rem;
-            color: var(--light-blue);
-            margin-bottom: 0.3rem;
-        }
-
-        .mosque-header p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .mosque-body {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .program-list {
-            list-style: none;
-            margin: 1rem 0;
-        }
-
-        .program-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.8rem;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        .program-item:last-child {
-            border-bottom: none;
-        }
-
-        .program-day {
-            background-color: var(--dark-blue);
-            color: var(--accent-gold);
-            font-size: 0.75rem;
-            font-weight: bold;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            white-space: nowrap;
-        }
-
-        .program-details h4 {
-            font-size: 1rem;
-            color: var(--dark-blue);
-        }
-
-        .program-details p {
-            font-size: 0.85rem;
-            color: #6c757d;
-        }
-
-        /* ==================== SCHIITISCHER KALENDER ==================== */
-        .calendar-container {
-            background-color: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: var(--card-shadow);
-        }
-
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            background-color: var(--dark-blue);
-            color: white;
-            padding: 1rem;
-            border-radius: 6px;
-        }
-
-        .event-badge {
-            background-color: var(--accent-gold);
-            color: var(--dark-blue);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: bold;
-        }
-
-        .event-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .event-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background-color: #f8f9fa;
-            border-left: 4px solid var(--accent-gold);
-            border-radius: 4px;
-        }
-
-        /* ==================== FORMULAR (ANONYME FRAGEN) ==================== */
-        .form-container {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: var(--card-shadow);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--dark-blue);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--dark-blue);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: background-color 0.3s;
-            text-align: center;
-        }
-
-        .btn:hover {
-            background-color: var(--medium-blue);
-        }
-
-        .btn-light {
-            background-color: var(--light-blue);
-            color: var(--dark-blue);
-        }
-
-        .btn-light:hover {
-            background-color: #3ab8d2;
-        }
-
-        .privacy-note {
-            font-size: 0.85rem;
-            color: #6c757d;
-            margin-top: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            border-top: 4px solid var(--light-blue);
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card-img-placeholder {
-            width: 100%;
-            height: 180px;
-            background-color: #e9ecef;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #6c757d;
-            border-bottom: 1px solid #dee2e6;
-        }
-
-        .card-body {
-            padding: 1.5rem;
-        }
-
-        .card-title {
-            font-size: 1.2rem;
-            color: var(--dark-blue);
-            margin-bottom: 0.5rem;
-        }
-
-        .card-meta {
-            font-size: 0.85rem;
-            color: #6c757d;
-            margin-bottom: 1rem;
-            display: flex;
-            gap: 1rem;
-        }
-
-        /* ==================== FOOTER ==================== */
-        footer {
-            background-color: var(--dark-blue);
-            color: var(--text-light);
-            padding: 3rem 1.5rem 1rem;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            color: var(--light-blue);
-            margin-bottom: 1rem;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: #adb5bd;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                background-color: var(--dark-blue);
-                padding: 1rem;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .event-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ahlulbayt Zentrum - Schiitische Moscheegemeinde Hessen</title>
+  <style>
+    /* Reset & Grundlegende Stile */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f8fafc;
+      color: #1e293b;
+    }
+
+    /* Header & Navigation */
+    .header {
+      background-color: #0d1b2a;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 35px;
+      height: 35px;
+      background-color: #38bdf8;
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    }
+
+    .brand-title {
+      color: #ffffff;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .brand-subtitle {
+      color: #38bdf8;
+      font-size: 0.75rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #38bdf8;
+    }
+
+    /* HERO-BEREICH (OHNE FOTO) */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #0d1b2a 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(234, 179, 8, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .region-badge {
+      display: inline-block;
+      background-color: #eab308;
+      color: #0d1b2a;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(234, 179, 8, 0.3);
+    }
+
+    .mosque-icon-wrapper {
+      margin: 10px 0 20px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .mosque-icon-wrapper svg {
+      filter: drop-shadow(0 0 10px rgba(234, 179, 8, 0.5));
+    }
+
+    .hero-title {
+      color: #38bdf8;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-subtitle {
+      color: #f1f5f9;
+      font-size: 1.15rem;
+      line-height: 1.6;
+      max-width: 650px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    /* Standort-Auswahl */
+    .selection-container {
+      max-width: 1000px;
+      margin: 50px auto 30px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .selection-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 10px;
+    }
+
+    .selection-subtitle {
+      color: #64748b;
+      margin-bottom: 30px;
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .location-btn {
+      background-color: #0d1b2a;
+      color: #ffffff;
+      border: none;
+      padding: 18px 24px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .location-btn:hover {
+      background-color: #1e293b;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      color: #38bdf8;
+    }
+
+    /* DISKUSSIONSRUNDE (OHNE ACCOUNT) */
+    .discussion-section {
+      max-width: 900px;
+      margin: 50px auto 80px auto;
+      padding: 0 20px;
+    }
+
+    .discussion-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .discussion-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .discussion-sub {
+      color: #64748b;
+      font-size: 0.95rem;
+      margin-top: 5px;
+    }
+
+    .ask-box {
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 30px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .ask-box h3 {
+      font-size: 1.2rem;
+      color: #0d1b2a;
+      margin-bottom: 15px;
+    }
+
+    .ask-box input, .ask-box textarea, .reply-box input, .reply-box textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      background-color: #f8fafc;
+    }
+
+    .ask-box input:focus, .ask-box textarea:focus, 
+    .reply-box input:focus, .reply-box textarea:focus {
+      outline: none;
+      border-color: #38bdf8;
+      background-color: #ffffff;
+    }
+
+    .submit-btn {
+      background-color: #0d1b2a;
+      color: #ffffff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+
+    .submit-btn:hover {
+      background-color: #1e293b;
+    }
+
+    .question-card {
+      background: #ffffff;
+      border-left: 4px solid #38bdf8;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      border-top: 1px solid #f1f5f9;
+      border-right: 1px solid #f1f5f9;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .author-info {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-bottom: 10px;
+    }
+
+    .author-name {
+      color: #0d1b2a;
+      font-weight: 600;
+    }
+
+    .question-text {
+      font-size: 1.1rem;
+      color: #1e293b;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .answers-list {
+      margin-top: 15px;
+      padding-left: 15px;
+      border-left: 2px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .answer-card {
+      background: #f8fafc;
+      padding: 12px 15px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      border: 1px solid #e2e8f0;
+    }
+
+    .reply-box {
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px dashed #e2e8f0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        gap: 15px;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero-section {
+        padding: 50px 15px;
+      }
+      .hero-title {
+        font-size: 1.8rem;
+      }
+      .hero-subtitle {
+        font-size: 0.98rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- HEADER & NAVIGATION -->
-    <header>
-        <nav class="navbar">
-            <div class="logo">
-                <i class="fa-solid fa-kaaba"></i>
-                <div class="logo-text">
-                    <h1>Ahlulbayt Zentrum</h1>
-                    <p>Schiitische Moscheegemeinde Hessen</p>
-                </div>
-            </div>
-            <div class="menu-toggle" id="mobile-menu">
-                <i class="fas fa-bars"></i>
-            </div>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#" class="nav-btn active" data-tab="home">Startseite</a></li>
-                <li><a href="#" class="nav-btn" data-tab="calendar">Hijri Kalender</a></li>
-                <li><a href="#" class="nav-btn" data-tab="learn">Lernen & Bücher</a></li>
-                <li><a href="#" class="nav-btn" data-tab="media">Mediathek</a></li>
-                <li><a href="#" class="nav-btn" data-tab="ask">Anonyme Frage</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- Navigation / Header -->
+  <header class="header">
+    <div class="brand">
+      <div class="brand-logo"></div>
+      <div>
+        <div class="brand-title">Ahlulbayt Zentrum</div>
+        <div class="brand-subtitle">Schiitische Moscheegemeinde Hessen</div>
+      </div>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#" class="active">Startseite</a></li>
+        <li><a href="#diskussion">Diskussionsrunde</a></li>
+        <li><a href="#">Hijri Kalender</a></li>
+        <li><a href="#">Lernen & Bücher</a></li>
+        <li><a href="#">Mediathek</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- HERO SECTION MIT KAABA BILD BACKGROUND -->
-    <section class="hero">
-        <div class="hero-content">
-            <span class="badge-hessen">Region Hessen</span>
-            <h2>Willkommen in unserer Gemeinde</h2>
-            <p>Ein Ort des Gebets, des Wissens, der Gemeinschaft und des Gedenkens an die Ahlulbayt (a.s.).</p>
-        </div>
-    </section>
+  <!-- KREATIVER HERO-BEREICH -->
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    
+    <div class="hero-content">
+      <span class="region-badge">Region Hessen</span>
 
-    <!-- MAIN CONTENT AREA -->
-    <main class="container">
+      <!-- Moschee-Symbol (SVG) -->
+      <div class="mosque-icon-wrapper">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v2"/>
+          <path d="M12 5a7 7 0 0 0-7 7v7h14v-7a7 7 0 0 0-7-7z"/>
+          <path d="M9 19v-4a3 3 0 0 1 6 0v4"/>
+          <path d="M4 19h16"/>
+        </svg>
+      </div>
 
-        <!-- ================= TAB 1: STARTSEITE / HAUPTMENÜ ================= -->
-        <div id="home" class="tab-content active">
-            
-            <h2 class="section-title">Wähle deinen Standort / Moschee</h2>
-            <p style="text-align: center; color: #555; margin-bottom: 2rem;">Bitte wählen Sie Ihre bevorzugte Moscheegemeinde für detaillierte Informationen und Wochenprogramme:</p>
-            
-            <!-- MOSCHEE AUSWAHL AUF DER HAUPTSEITE -->
-            <div class="mosque-grid">
-                
-                <!-- Moschee 1: Wiesbaden-Klarenthal -->
-                <div class="mosque-card">
-                    <div class="mosque-header">
-                        <h3><i class="fas fa-mosque"></i> Moschee Wiesbaden-Klarenthal</h3>
-                        <p><i class="fas fa-map-marker-alt"></i> Wiesbaden Klarenthal</p>
-                    </div>
-                    <div class="mosque-body">
-                        <div>
-                            <p style="font-weight: 600; color: var(--dark-blue); margin-bottom: 0.5rem;">Wöchentliche Programme & Kurse:</p>
-                            <ul class="program-list">
-                                <li class="program-item">
-                                    <span class="program-day">Donnerstag</span>
-                                    <div class="program-details">
-                                        <h4>Abendprogramm & Dua Kumayl</h4>
-                                        <p>Gemeinsames Gebet, Dua Rezitation und Vortrag.</p>
-                                    </div>
-                                </li>
-                                <li class="program-item">
-                                    <span class="program-day">Freitag</span>
-                                    <div class="program-details">
-                                        <h4>Quranstunde & Freitagsgebet</h4>
-                                        <p>Unterricht, Quranrezitation und Freitagsansprache.</p>
-                                    </div>
-                                </li>
-                                <li class="program-item">
-                                    <span class="program-day">Samstag</span>
-                                    <div class="program-details">
-                                        <h4>Quranstunde & Unterricht</h4>
-                                        <p>Vertiefender Quranunterricht für Kinder und Jugendliche.</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <button class="btn btn-light" style="width: 100%; margin-top: 1rem;">Moschee Klarenthal Auswählen</button>
-                    </div>
-                </div>
+      <h1 class="hero-title">Willkommen in unserer Gemeinde</h1>
+      <p class="hero-subtitle">
+        Ein Ort des Gebets, des Wissens, der Gemeinschaft und des Gedenkens an die Ahlulbayt (a.s.).
+      </p>
+    </div>
+  </section>
 
-                <!-- Moschee 2: Mainz-Kastel -->
-                <div class="mosque-card">
-                    <div class="mosque-header">
-                        <h3><i class="fas fa-mosque"></i> Moschee Mainz-Kastel</h3>
-                        <p><i class="fas fa-map-marker-alt"></i> Mainz-Kastel</p>
-                    </div>
-                    <div class="mosque-body">
-                        <div>
-                            <p style="font-weight: 600; color: var(--dark-blue); margin-bottom: 0.5rem;">Wöchentliche Programme:</p>
-                            <ul class="program-list">
-                                <li class="program-item">
-                                    <span class="program-day">Donnerstag</span>
-                                    <div class="program-details">
-                                        <h4>Donnerstags-Programm</h4>
-                                        <p>Glaubensabend mit Dua Kumayl und gemeinsamer Andacht.</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <button class="btn btn-light" style="width: 100%; margin-top: 1rem;">Moschee Kastel Auswählen</button>
-                    </div>
-                </div>
+  <!-- Standort-Auswahl -->
+  <main class="selection-container">
+    <h2 class="selection-title">Wähle deinen Standort / Moschee</h2>
+    <p class="selection-subtitle">Bitte wählen Sie Ihre bevorzugte Moscheegemeinde für detaillierte Informationen und Wochenprogramme:</p>
 
-            </div>
-        </div>
+    <div class="button-grid">
+      <button class="location-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+        Moschee Wiesbaden-Klarenthal
+      </button>
 
-        <!-- ================= TAB 2: ARABISCHER / SCHIITISCHER KALENDER ================= -->
-        <div id="calendar" class="tab-content">
-            <h2 class="section-title">Islamischer Kalender (Hijri)</h2>
-            <div class="calendar-container">
-                <div class="calendar-header">
-                    <div>
-                        <h2>Schiitische Gedenktage & Ereignisse</h2>
-                        <p style="font-size:0.9rem; color:var(--light-blue);">Wichtige Tage im islamischen Mondkalender</p>
-                    </div>
-                    <i class="fas fa-moon fa-2x" style="color: var(--accent-gold);"></i>
-                </div>
+      <button class="location-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+        Moschee Mainz-Kastel
+      </button>
+    </div>
+  </main>
 
-                <div class="event-list">
-                    <div class="event-item">
-                        <div>
-                            <strong>10. Muharram (Ashura)</strong>
-                            <p style="font-size:0.9rem; color:#555;">Märtyrertum von Imam Hussain (a.s.) in Kerbala</p>
-                        </div>
-                        <span class="event-badge">Trauertag / Gedenken</span>
-                    </div>
+  <!-- DISKUSSIONSRUNDE (OHNE ANMELDUNG) -->
+  <section class="discussion-section" id="diskussion">
+    <div class="discussion-header">
+      <h2 class="discussion-title">Diskussionsrunde & Fragen</h2>
+      <p class="discussion-sub">Stelle eine Frage oder antworte direkt – ohne Registrierung!</p>
+    </div>
 
-                    <div class="event-item">
-                        <div>
-                            <strong>20. Safar (Arbaeen)</strong>
-                            <p style="font-size:0.9rem; color:#555;">40. Tag nach Ashura – Gedenken an die Rückkehr der Ahlulbayt nach Kerbala</p>
-                        </div>
-                        <span class="event-badge">Trauertag / Gedenken</span>
-                    </div>
+    <!-- Formular zum Einstellen einer neuen Frage -->
+    <div class="ask-box">
+      <h3>Neue Frage stellen</h3>
+      <input type="text" id="guestName" placeholder="Dein Name oder Pseudonym (optional, sonst 'Anonym')">
+      <textarea id="questionText" placeholder="Schreibe hier deine Frage..." rows="3"></textarea>
+      <button onclick="addQuestion()" class="submit-btn">Frage veröffentlichen</button>
+    </div>
 
-                    <div class="event-item">
-                        <div>
-                            <strong>17. Rabi' al-Awwal</strong>
-                            <p style="font-size:0.9rem; color:#555;">Geburtstag des Propheten Muhammad (s.a.a.s.) & Imam Ja'far al-Sadiq (a.s.)</p>
-                        </div>
-                        <span class="event-badge" style="background-color:#2a9d8f; color:white;">Festtag</span>
-                    </div>
+    <!-- Liste aller veröffentlichter Fragen -->
+    <div id="questionsContainer">
+      <!-- Fragen werden hier über JavaScript geladen -->
+    </div>
+  </section>
 
-                    <div class="event-item">
-                        <div>
-                            <strong>13. Rajab</strong>
-                            <p style="font-size:0.9rem; color:#555;">Geburtstag von Amir al-Mu'minin Imam Ali ibn Abi Talib (a.s.) in der Kaaba</p>
-                        </div>
-                        <span class="event-badge" style="background-color:#2a9d8f; color:white;">Festtag</span>
-                    </div>
+  <!-- JAVASCRIPT-LOGIK -->
+  <script>
+    // Lokaler Speicher für Fragen & Antworten
+    let questions = [
+      {
+        id: 1,
+        author: "Ali",
+        text: "Wann beginnt am Freitag das Gebet in Wiesbaden-Klarenthal?",
+        answers: [
+          { author: "Gemeinde-Team", text: "Das Freitagsgebet beginnt pünktlich um 13:15 Uhr." }
+        ]
+      }
+    ];
 
-                    <div class="event-item">
-                        <div>
-                            <strong>18. Dhu al-Hijjah (Eid al-Ghadir)</strong>
-                            <p style="font-size:0.9rem; color:#555;">Ernennung von Imam Ali (a.s.) zum Nachfolger durch den Propheten (s.a.a.s.)</p>
-                        </div>
-                        <span class="event-badge" style="background-color:#2a9d8f; color:white;">Größter Festtag</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+    // Funktion: Neue Frage hinzufügen
+    function addQuestion() {
+      const nameInput = document.getElementById('guestName').value.trim();
+      const textInput = document.getElementById('questionText').value.trim();
 
-        <!-- ================= TAB 3: LERNEN & BÜCHER ================= -->
-        <div id="learn" class="tab-content">
-            <h2 class="section-title">Wissen & Schriften</h2>
-            
-            <div class="grid" style="margin-bottom: 2rem;">
-                <div class="card">
-                    <div class="card-body">
-                        <i class="fas fa-hands-wash fa-2x" style="color:var(--light-blue); margin-bottom:1rem;"></i>
-                        <h3 class="card-title">Gebet & Wudu lernen</h3>
-                        <p>Schritt-für-Schritt-Anleitung für das rituelle Gebet und die Waschungen nach schiitischer Rechtssprechung (Fiqh).</p>
-                        <br>
-                        <a href="#" class="btn btn-light" style="font-size:0.85rem;">Anleitung öffnen</a>
-                    </div>
-                </div>
+      if (!textInput) {
+        alert("Bitte gib eine Frage ein!");
+        return;
+      }
 
-                <div class="card">
-                    <div class="card-body">
-                        <i class="fas fa-book-quran fa-2x" style="color:var(--light-blue); margin-bottom:1rem;"></i>
-                        <h3 class="card-title">Bibliothek & Bücher</h3>
-                        <p>Zugriff auf wichtige Werke wie Nahj al-Balagha, Al-Sahifa al-Sajjadiyya und Koranübersetzungen.</p>
-                        <br>
-                        <a href="#" class="btn btn-light" style="font-size:0.85rem;">Bücher durchstöbern</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+      const newQuestion = {
+        id: Date.now(),
+        author: nameInput !== "" ? nameInput : "Anonym",
+        text: textInput,
+        answers: []
+      };
 
-        <!-- ================= TAB 4: MEDIATHEK / RÜCKBLICK ================= -->
-        <div id="media" class="tab-content">
-            <h2 class="section-title">Mediathek & Rückblick</h2>
-            <p style="text-align:center; margin-bottom: 2rem;">Hier finden Sie Aufzeichnungen von Vorträgen, Fotos und Berichte, falls Sie an einer Veranstaltung nicht teilnehmen konnten.</p>
+      questions.unshift(newQuestion);
+      
+      document.getElementById('guestName').value = '';
+      document.getElementById('questionText').value = '';
 
-            <div class="grid">
-                <div class="card">
-                    <div class="card-img-placeholder" style="background-color:#000; color:white;">
-                        <i class="fas fa-play-circle fa-3x"></i>
-                        <span style="margin-top:0.5rem;">Video-Aufzeichnung</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Vortrag: Die Philosophie von Ashura</h3>
-                        <div class="card-meta">
-                            <span><i class="far fa-calendar"></i> Muharram 1448</span>
-                        </div>
-                        <p>Ein ausführlicher Vortrag über die zeitlosen Lehren von Imam Hussain (a.s.) auf Deutsch.</p>
-                    </div>
-                </div>
+      renderQuestions();
+    }
 
-                <div class="card">
-                    <div class="card-img-placeholder">
-                        <i class="fas fa-camera"></i>
-                        <span>Bildergalerie vom Programm</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Eindrücke vom Ghadir-Fest</h3>
-                        <div class="card-meta">
-                            <span><i class="far fa-image"></i> 12 Fotos</span>
-                        </div>
-                        <p>Bilder und Zusammenfassung unserer Feierlichkeiten zum Tag von Eid al-Ghadir.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    // Funktion: Antwort zu einer Frage hinzufügen
+    function addAnswer(questionId) {
+      const answerAuthor = document.getElementById(`reply-name-${questionId}`).value.trim();
+      const answerText = document.getElementById(`reply-text-${questionId}`).value.trim();
 
-        <!-- ================= TAB 5: ANONYME FRAGEN AN DEN PREDIGER ================= -->
-        <div id="ask" class="tab-content">
-            <h2 class="section-title">Fragen im Herzen?</h2>
-            
-            <div class="form-container">
-                <p style="margin-bottom: 1.5rem; text-align:center;">
-                    Hier können Sie Ihre Fragen zu Glaubensthemen, Lebensführung oder Fiqh direkt und <strong>vollständig anonym</strong> an unseren Gelehrten / Prediger stellen.
-                </p>
+      if (!answerText) {
+        alert("Bitte gib eine Antwort ein!");
+        return;
+      }
 
-                <form id="anonymous-form">
-                    <div class="form-group">
-                        <label for="topic">Kategorie / Thema</label>
-                        <select id="topic" class="form-control">
-                            <option value="allgemein">Allgemeine Glaubensfrage</option>
-                            <option value="fiqh">Rechtslehre (Fiqh)</option>
-                            <option value="familie">Familie & Jugend</option>
-                            <option value="ethik">Ethik & Moral (Akhlaq)</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="question">Ihre Frage</label>
-                        <textarea id="question" class="form-control" placeholder="Schreiben Sie hier Ihre Frage ganz unbesorgt..." required></textarea>
-                    </div>
-
-                    <p class="privacy-note">
-                        <i class="fas fa-lock"></i> Ihre Frage wird vertraulich behandelt. Es werden keinerlei IP-Adressen oder persönliche Daten gespeichert.
-                    </p>
-                    <br>
-                    <button type="submit" class="btn" style="width:100%;">Anonym absenden</button>
-                </form>
-                
-                <div id="form-success" style="display:none; text-align:center; color:green; margin-top:1rem; font-weight:bold;">
-                    <i class="fas fa-check-circle"></i> Ihre Frage wurde anonym weitergeleitet. Vielen Dank!
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>Ahlulbayt Zentrum Hessen</h3>
-                <p>Ein Treffpunkt für alle Muslime zur Stärkung der Gemeinschaft, Weiterbildung und Andacht.</p>
-            </div>
-            <div class="footer-column">
-                <h3>Kontakt & Anfahrt</h3>
-                <p><i class="fas fa-map-marker-alt"></i> Wiesbaden & Mainz-Kastel, Deutschland</p>
-                <p><i class="fas fa-envelope"></i> kontakt@moschee-hessen.de</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Schiitische Moscheegemeinde Hessen. Alle Rechte vorbehalten.</p>
-        </div>
-    </footer>
-
-    <!-- JAVASCRIPT FÜR DIE INTERAKTION -->
-    <script>
-        // Navigation zwischen den Tabs/Seiten
-        const navButtons = document.querySelectorAll('.nav-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = document.getElementById('nav-links');
-
-        navButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                // Aktiven Button hervorheben
-                navButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-
-                // Tab wechseln
-                const targetTab = button.getAttribute('data-tab');
-                tabContents.forEach(content => {
-                    content.classList.remove('active');
-                    if (content.id === targetTab) {
-                        content.classList.add('active');
-                    }
-                });
-
-                // Mobilmenü schließen nach Klick
-                if (navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                }
-
-                // Smooth Scroll nach oben
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            });
+      const question = questions.find(q => q.id === questionId);
+      if (question) {
+        question.answers.push({
+          author: answerAuthor !== "" ? answerAuthor : "Anonym",
+          text: answerText
         });
+        renderQuestions();
+      }
+    }
 
-        // Mobile Menu Toggle
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
+    // Funktion: Fragen auf der Seite anzeigen
+    function renderQuestions() {
+      const container = document.getElementById('questionsContainer');
+      container.innerHTML = '';
 
-        // Formular-Handling (Anonyme Frage)
-        document.getElementById('anonymous-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.getElementById('anonymous-form').reset();
-            document.getElementById('form-success').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('form-success').style.display = 'none';
-            }, 5000);
-        });
-    </script>
+      questions.forEach(q => {
+        const answersHTML = q.answers.map(a => `
+          <div class="answer-card">
+            <strong class="author-name">${a.author}:</strong> ${a.text}
+          </div>
+        `).join('');
+
+        container.innerHTML += `
+          <div class="question-card">
+            <div class="author-info">Gefragt von <span class="author-name">${q.author}</span></div>
+            <div class="question-text">${q.text}</div>
+            
+            <div class="answers-list">
+              ${answersHTML}
+            </div>
+
+            <div class="reply-box">
+              <input type="text" id="reply-name-${q.id}" placeholder="Dein Name (optional)">
+              <textarea id="reply-text-${q.id}" placeholder="Deine Antwort schreiben..." rows="2"></textarea>
+              <button onclick="addAnswer(${q.id})" class="submit-btn" style="padding: 8px 14px; font-size: 0.85rem;">Antworten</button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    // Erste Anzeige beim Laden der Seite
+    renderQuestions();
+  </script>
+
 </body>
 </html>

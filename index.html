@@ -106,10 +106,10 @@
 
         /* ==================== HERO SECTION ==================== */
         .hero {
-            background: linear-gradient(rgba(13, 27, 42, 0.85), rgba(27, 38, 59, 0.85)), 
-                        url('https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            background: linear-gradient(rgba(13, 27, 42, 0.75), rgba(27, 38, 59, 0.75)), 
+                        url('https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
             color: var(--text-light);
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
             text-align: center;
         }
 
@@ -173,98 +173,91 @@
             display: block;
         }
 
-        /* ==================== CARDS & GRID ==================== */
-        .grid {
+        /* ==================== MOSQUE SELECTION CARDS ==================== */
+        .mosque-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
         }
 
-        .card {
+        .mosque-card {
             background-color: white;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
             box-shadow: var(--card-shadow);
-            border-top: 4px solid var(--light-blue);
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card-img-placeholder {
-            width: 100%;
-            height: 180px;
-            background-color: #e9ecef;
+            border-top: 5px solid var(--accent-gold);
+            transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #6c757d;
-            border-bottom: 1px solid #dee2e6;
         }
 
-        .card-img-placeholder i {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+        .mosque-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
 
-        .card-body {
+        .mosque-header {
+            background: linear-gradient(135deg, var(--dark-blue), var(--medium-blue));
+            color: white;
             padding: 1.5rem;
+            text-align: center;
         }
 
-        .card-title {
-            font-size: 1.2rem;
+        .mosque-header h3 {
+            font-size: 1.4rem;
+            color: var(--light-blue);
+            margin-bottom: 0.3rem;
+        }
+
+        .mosque-header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .mosque-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .program-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .program-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .program-item:last-child {
+            border-bottom: none;
+        }
+
+        .program-day {
+            background-color: var(--dark-blue);
+            color: var(--accent-gold);
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .program-details h4 {
+            font-size: 1rem;
             color: var(--dark-blue);
-            margin-bottom: 0.5rem;
         }
 
-        .card-meta {
+        .program-details p {
             font-size: 0.85rem;
             color: #6c757d;
-            margin-bottom: 1rem;
-            display: flex;
-            gap: 1rem;
-        }
-
-        /* ==================== ANKÜNDIGUNGEN / REGELN ==================== */
-        .alert-box {
-            background-color: #e8f4f8;
-            border-left: 5px solid var(--light-blue);
-            padding: 1.2rem;
-            border-radius: 4px;
-            margin-bottom: 2rem;
-        }
-
-        .alert-box h3 {
-            color: var(--dark-blue);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .rules-list {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .rules-list li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .rules-list li::before {
-            content: "\f054";
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: var(--light-blue);
-            font-size: 0.8rem;
-            top: 3px;
         }
 
         /* ==================== SCHIITISCHER KALENDER ==================== */
@@ -356,6 +349,7 @@
             font-size: 1rem;
             font-weight: 600;
             transition: background-color 0.3s;
+            text-align: center;
         }
 
         .btn:hover {
@@ -378,6 +372,55 @@
             display: flex;
             align-items: center;
             gap: 0.3rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            border-top: 4px solid var(--light-blue);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img-placeholder {
+            width: 100%;
+            height: 180px;
+            background-color: #e9ecef;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #6c757d;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            color: var(--dark-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-meta {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
         }
 
         /* ==================== FOOTER ==================== */
@@ -445,7 +488,7 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <i class="fa-solid font-awesome-logo-full fa-kaaba"></i>
+                <i class="fa-solid fa-kaaba"></i>
                 <div class="logo-text">
                     <h1>Ahlulbayt Zentrum</h1>
                     <p>Schiitische Moscheegemeinde Hessen</p>
@@ -464,7 +507,7 @@
         </nav>
     </header>
 
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION MIT KAABA BILD BACKGROUND -->
     <section class="hero">
         <div class="hero-content">
             <span class="badge-hessen">Region Hessen</span>
@@ -479,72 +522,69 @@
         <!-- ================= TAB 1: STARTSEITE / HAUPTMENÜ ================= -->
         <div id="home" class="tab-content active">
             
-            <!-- WICHTIGE BESUCHER-HINWEISE -->
-            <div class="alert-box">
-                <h3><i class="fas fa-exclamation-triangle" style="color: #d4af37;"></i> Wichtige Hinweise für Besucher</h3>
-                <p style="margin-bottom: 0.5rem;">Damit unsere Abläufe reibungslos funktionieren, bitten wir alle Geschwister, folgendes zu beachten:</p>
-                <ul class="rules-list">
-                    <li>Bitte parken Sie nur auf den ausgewiesenen Parkplätzen und nehmen Sie Rücksicht auf die Nachbarschaft.</li>
-                    <li>Mobiltelefone sind vor dem Betreten des Gebetsraums auf lautlos zu stellen.</li>
-                    <li>Bitte achten Sie auf die Einhaltung der Sauberkeit in den Wudu-Bereichen und Gebetsräumen.</li>
-                    <li>Kinder sind herzlich willkommen – bitte achten Sie darauf, dass während der Vorträge Ruhe bewahrt wird.</li>
-                </ul>
-            </div>
-
-            <h2 class="section-title">Aktuelle Programme & Veranstaltungen</h2>
+            <h2 class="section-title">Wähle deinen Standort / Moschee</h2>
+            <p style="text-align: center; color: #555; margin-bottom: 2rem;">Bitte wählen Sie Ihre bevorzugte Moscheegemeinde für detaillierte Informationen und Wochenprogramme:</p>
             
-            <!-- GRID FÜR PROGRAMME (Mit Bild-Platzhaltern) -->
-            <div class="grid">
+            <!-- MOSCHEE AUSWAHL AUF DER HAUPTSEITE -->
+            <div class="mosque-grid">
                 
-                <!-- Karte 1 -->
-                <div class="card">
-                    <!-- Platzhalter für dein eigenes Bild -->
-                    <div class="card-img-placeholder">
-                        <i class="fas fa-image"></i>
-                        <span>Hier eigenes Bild einfügen</span>
+                <!-- Moschee 1: Wiesbaden-Klarenthal -->
+                <div class="mosque-card">
+                    <div class="mosque-header">
+                        <h3><i class="fas fa-mosque"></i> Moschee Wiesbaden-Klarenthal</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Wiesbaden Klarenthal</p>
                     </div>
-                    <!-- Sobald du ein Bild hast, kannst du die Zeile oben ersetzen durch:
-                    <img src="dein-bild.jpg" alt="Programm" style="width:100%; height:180px; object-fit:cover;"> -->
-                    
-                    <div class="card-body">
-                        <span class="event-badge">Wöchentlich</span>
-                        <h3 class="card-title" style="margin-top:0.5rem;">Donnerstagabend Programm</h3>
-                        <div class="card-meta">
-                            <span><i class="far fa-clock"></i> Jeden Do. ab 19:00 Uhr</span>
+                    <div class="mosque-body">
+                        <div>
+                            <p style="font-weight: 600; color: var(--dark-blue); margin-bottom: 0.5rem;">Wöchentliche Programme & Kurse:</p>
+                            <ul class="program-list">
+                                <li class="program-item">
+                                    <span class="program-day">Donnerstag</span>
+                                    <div class="program-details">
+                                        <h4>Abendprogramm & Dua Kumayl</h4>
+                                        <p>Gemeinsames Gebet, Dua Rezitation und Vortrag.</p>
+                                    </div>
+                                </li>
+                                <li class="program-item">
+                                    <span class="program-day">Freitag</span>
+                                    <div class="program-details">
+                                        <h4>Quranstunde & Freitagsgebet</h4>
+                                        <p>Unterricht, Quranrezitation und Freitagsansprache.</p>
+                                    </div>
+                                </li>
+                                <li class="program-item">
+                                    <span class="program-day">Samstag</span>
+                                    <div class="program-details">
+                                        <h4>Quranstunde & Unterricht</h4>
+                                        <p>Vertiefender Quranunterricht für Kinder und Jugendliche.</p>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
-                        <p>Gemeinsames Rezitieren von Dua Kumayl, gefolgt von einem deutschsprachigen Vortrag und Abendgebet.</p>
+                        <button class="btn btn-light" style="width: 100%; margin-top: 1rem;">Moschee Klarenthal Auswählen</button>
                     </div>
                 </div>
 
-                <!-- Karte 2 -->
-                <div class="card">
-                    <div class="card-img-placeholder">
-                        <i class="fas fa-image"></i>
-                        <span>Hier eigenes Bild einfügen</span>
+                <!-- Moschee 2: Mainz-Kastel -->
+                <div class="mosque-card">
+                    <div class="mosque-header">
+                        <h3><i class="fas fa-mosque"></i> Moschee Mainz-Kastel</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Mainz-Kastel</p>
                     </div>
-                    <div class="card-body">
-                        <span class="event-badge">Freitag</span>
-                        <h3 class="card-title" style="margin-top:0.5rem;">Freitagsgebet (Salat al-Jumu'ah)</h3>
-                        <div class="card-meta">
-                            <span><i class="far fa-clock"></i> Fr. zur Dhuhur-Zeit</span>
+                    <div class="mosque-body">
+                        <div>
+                            <p style="font-weight: 600; color: var(--dark-blue); margin-bottom: 0.5rem;">Wöchentliche Programme:</p>
+                            <ul class="program-list">
+                                <li class="program-item">
+                                    <span class="program-day">Donnerstag</span>
+                                    <div class="program-details">
+                                        <h4>Donnerstags-Programm</h4>
+                                        <p>Glaubensabend mit Dua Kumayl und gemeinsamer Andacht.</p>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
-                        <p>Die Predigt (Khutbah) findet auf Deutsch und Arabisch statt. Alle Geschwister sind herzlich eingeladen.</p>
-                    </div>
-                </div>
-
-                <!-- Karte 3 -->
-                <div class="card">
-                    <div class="card-img-placeholder">
-                        <i class="fas fa-image"></i>
-                        <span>Hier eigenes Bild einfügen</span>
-                    </div>
-                    <div class="card-body">
-                        <span class="event-badge" style="background-color: var(--light-blue); color:white;">Jugend</span>
-                        <h3 class="card-title" style="margin-top:0.5rem;">Jugendkreis Hessen</h3>
-                        <div class="card-meta">
-                            <span><i class="far fa-clock"></i> Jeden 2. Samstag</span>
-                        </div>
-                        <p>Offene Fragerunden, Diskussionskreise über Glaubensfragen im Alltag und gemeinsame Aktivitäten.</p>
+                        <button class="btn btn-light" style="width: 100%; margin-top: 1rem;">Moschee Kastel Auswählen</button>
                     </div>
                 </div>
 
@@ -719,7 +759,7 @@
             </div>
             <div class="footer-column">
                 <h3>Kontakt & Anfahrt</h3>
-                <p><i class="fas fa-map-marker-alt"></i> Gebiet Hessen, Deutschland</p>
+                <p><i class="fas fa-map-marker-alt"></i> Wiesbaden & Mainz-Kastel, Deutschland</p>
                 <p><i class="fas fa-envelope"></i> kontakt@moschee-hessen.de</p>
             </div>
         </div>
@@ -742,7 +782,7 @@
                 
                 // Aktiven Button hervorheben
                 navButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.addClass ? button.classList.add('active') : button.className += ' active';
+                button.classList.add('active');
 
                 // Tab wechseln
                 const targetTab = button.getAttribute('data-tab');
@@ -771,7 +811,6 @@
         // Formular-Handling (Anonyme Frage)
         document.getElementById('anonymous-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            // Simulierter Erfolg beim Absenden
             document.getElementById('anonymous-form').reset();
             document.getElementById('form-success').style.display = 'block';
             setTimeout(() => {

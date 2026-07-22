@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schiitische Moscheegemeinde Hessen</title>
     
+    <!-- Supabase JS SDK Einbindung -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <style>
         /* ==================== GLOBAL STYLES & TYPOGRAPHY ==================== */
         :root {
@@ -37,7 +40,7 @@
             color: inherit;
         }
 
-        /* ==================== HEADER & SWIPEABLE/DRAGGABLE NAVIGATION ==================== */
+        /* ==================== HEADER & SWIPEABLE NAVIGATION ==================== */
         header {
             background-color: var(--dark-blue);
             color: #ffffff;
@@ -75,7 +78,6 @@
             letter-spacing: 1px;
         }
 
-        /* WISCHBARE & DRAGGABLE MENÜLEISTE */
         .nav-links {
             display: flex;
             list-style: none;
@@ -328,156 +330,13 @@
             font-weight: 500;
         }
 
-        .delete-btn {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: rgba(220, 38, 38, 0.85);
-            color: white;
-            border: none;
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.75rem;
-        }
-
-        /* ==================== WISSEN SEKTION ==================== */
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 0.8rem;
-            margin-bottom: 2rem;
-        }
-
-        .cat-btn {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            padding: 0.8rem;
-            text-align: center;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--dark-blue);
-            transition: all 0.2s;
-        }
-
-        .cat-btn:hover {
-            border-color: var(--dark-blue);
-        }
-
-        .cat-btn.active {
-            background-color: var(--dark-blue);
-            color: #ffffff;
-            border-color: var(--dark-blue);
-        }
-
-        .din-buttons-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 0.8rem;
-            margin-top: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .din-btn {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            padding: 0.8rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.88rem;
-            font-weight: 500;
-            color: var(--dark-blue);
-            text-align: center;
-            transition: all 0.2s;
-        }
-
-        .din-btn:hover {
-            border-color: var(--accent-gold);
-            background: #fdfbf7;
-        }
-
-        .knowledge-detail {
-            display: none;
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            padding: 1.8rem;
-            border-radius: 6px;
-        }
-
-        .knowledge-detail.active {
-            display: block;
-        }
-
-        .knowledge-detail h3 {
-            color: var(--dark-blue);
-            margin-bottom: 0.8rem;
-            font-size: 1.25rem;
-        }
-
-        /* ==================== BIOGRAFIEN ==================== */
-        .bio-accordion {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .bio-item {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .bio-header {
-            padding: 1.2rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #ffffff;
-            transition: background 0.2s;
-        }
-
-        .bio-header:hover {
-            background-color: #f1f5f9;
-        }
-
-        .bio-header h3 {
-            font-size: 1.1rem;
-            color: var(--dark-blue);
-            font-weight: 600;
-        }
-
-        .bio-content {
-            display: none;
-            padding: 1.5rem;
-            border-top: 1px solid var(--border-color);
-            background-color: #fafafa;
-            font-size: 0.95rem;
-            color: #334155;
-            line-height: 1.8;
-        }
-
-        .bio-item.active .bio-content {
-            display: block;
-        }
-
-        .bio-fact-box {
-            background: #ffffff;
-            border-left: 4px solid var(--accent-gold);
-            padding: 0.8rem 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.88rem;
-            color: var(--text-muted);
-        }
-
         /* ==================== FORMULAR & DISKUSSION ==================== */
         .form-box {
             background: #ffffff;
             border: 1px solid var(--border-color);
             padding: 1.5rem;
             border-radius: 6px;
+            margin-bottom: 2rem;
         }
 
         .form-group {
@@ -517,34 +376,6 @@
             font-weight: 500;
         }
 
-        .question-card {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            padding: 1.2rem;
-            margin-bottom: 1rem;
-            border-radius: 6px;
-        }
-
-        .author-meta {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 0.4rem;
-        }
-
-        .answers-container {
-            margin-top: 0.8rem;
-            padding-left: 0.8rem;
-            border-left: 2px solid var(--border-color);
-        }
-
-        .answer-item {
-            background: #f8fafc;
-            padding: 0.6rem;
-            border-radius: 4px;
-            font-size: 0.88rem;
-            margin-bottom: 0.4rem;
-        }
-
         /* ==================== FOOTER ==================== */
         footer {
             background-color: var(--dark-blue);
@@ -582,20 +413,19 @@
 </head>
 <body>
 
-    <!-- HEADER & WISCHBARES / DRAGGABLE MENÜ -->
+    <!-- HEADER -->
     <header>
         <nav class="navbar">
             <div class="logo-text">
                 <h1>Ahlulbayt Zentrum</h1>
                 <p>Moscheegemeinde Hessen</p>
             </div>
-            <!-- Wisch- & ziehbare Menüleiste -->
-            <ul class="nav-links">
-                <li><a href="#" class="nav-btn active" data-tab="home">Startseite</a></li>
-                <li><a href="#" class="nav-btn" data-tab="stories">Geschichte & Imame</a></li>
-                <li><a href="#" class="nav-btn" data-tab="knowledge">Wissen & Fiqh</a></li>
-                <li><a href="#" class="nav-btn" data-tab="discussion">Diskussion</a></li>
-                <li><a href="#" class="nav-btn" data-tab="ask">Anonyme Frage</a></li>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" class="nav-btn active" onclick="switchTab('home', event)">Startseite</a></li>
+                <li><a href="#" class="nav-btn" onclick="switchTab('stories', event)">Geschichte & Imame</a></li>
+                <li><a href="#" class="nav-btn" onclick="switchTab('knowledge', event)">Wissen & Fiqh</a></li>
+                <li><a href="#" class="nav-btn" onclick="switchTab('discussion', event)">Diskussion</a></li>
+                <li><a href="#" class="nav-btn" onclick="switchTab('ask', event)">Anonyme Frage</a></li>
             </ul>
         </nav>
     </header>
@@ -619,14 +449,13 @@
     <!-- MAIN CONTAINER -->
     <main class="container">
 
-        <!-- ================= TAB 1: STARTSEITE ================= -->
+        <!-- TAB 1: STARTSEITE -->
         <div id="home" class="tab-content active">
             <div class="section-header">
                 <h2 id="program-title">Wochenprogramm (Klarenthal)</h2>
                 <p>Unsere regelmäßigen Treffen und Gebete vor Ort.</p>
             </div>
 
-            <!-- PROGRAMM KLARENTHAL -->
             <div id="program-klarenthal" class="grid">
                 <div class="card">
                     <span class="card-tag">Donnerstag</span>
@@ -639,23 +468,22 @@
                     <p class="card-text">Zwei-sprachige Predigt (Deutsch/Arabisch) zur Dhuhur-Zeit mit anschließendem Gemeinschaftsgebet.</p>
                 </div>
                 <div class="card">
-                    <span class="card-tag">Wochenende</span>
-                    <h3 class="card-title">Unterricht & Diskussionsrunde</h3>
-                    <p class="card-text">Samstags Koranstunden für Kinder. Sonntags offene Bildungs- und Fragerunde.</p>
+                    <span class="card-tag">Samstag</span>
+                    <h3 class="card-title">Jugendtreff & Koranunterricht</h3>
+                    <p class="card-text">Offene Runde für Jugendliche, Austausch über alltägliche Themen und Korb- & Koranunterricht.</p>
                 </div>
             </div>
 
-            <!-- PROGRAMM MAINZ-KASTEL -->
             <div id="program-kastel" class="grid" style="display: none;">
                 <div class="card">
-                    <span class="card-tag">Donnerstag</span>
-                    <h3 class="card-title">Abendprogramm</h3>
-                    <p class="card-text">Gemeinsames Abendprogramm mit Bittgebeten und Austausch in Mainz-Kastel.</p>
+                    <span class="card-tag">Sonntag</span>
+                    <h3 class="card-title">Familien-Veranstaltung</h3>
+                    <p class="card-text">Gemeinsames Treffen für Familien, Islamunterricht für Kinder und anschließendes Teetrinken.</p>
                 </div>
                 <div class="card">
-                    <span class="card-tag">Samstag</span>
-                    <h3 class="card-title">Kinder-Koranstunde</h3>
-                    <p class="card-text">Spielerische Vermittlung islamischer Grundlagen und Koranunterricht ab 10:00 Uhr morgens.</p>
+                    <span class="card-tag">Mittwoch</span>
+                    <h3 class="card-title">Dua Tawasul</h3>
+                    <p class="card-text">Gemeinsames Bittgebet am Abend für Wohlbefinden und Stärkung der Gemeinschaft.</p>
                 </div>
             </div>
 
@@ -663,188 +491,117 @@
             <div class="media-section">
                 <div class="section-header">
                     <h2>Rückblick: Vergangene Veranstaltungen</h2>
-                    <p>Eindrücke, Bilder und Videos unserer bisherigen Treffen und Feierlichkeiten.</p>
+                    <p>Eindrücke, Bilder und Videos unserer bisherigen Treffen.</p>
                 </div>
 
-                <!-- MEDIEN RASTER -->
+                <!-- MEDIEN RASTER (LÄDT DYNAMISCH AUS SUPABASE) -->
                 <div class="media-grid" id="mediaGrid">
-                    <div class="media-card">
-                        <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=600&q=80" alt="Gemeinschaftsleben">
-                        <p>Gemeinsames Iftar im Monat Ramadan</p>
-                    </div>
-                    <div class="media-card">
-                        <video controls poster="https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=600&q=80">
-                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                            Dein Browser unterstützt dieses Video nicht.
-                        </video>
-                        <p>Vortrag & Recitation (Video-Ausschnitt)</p>
-                    </div>
+                    <p style="color:var(--text-muted);">Lade Medien aus der Cloud...</p>
                 </div>
 
-                <!-- MEDIEN UPLOAD BEREICH (JETZT DIREKT UNTER DEM VIDEO / RASTER) -->
+                <!-- UPLOAD BEREICH MIT PASSWORTSCHUTZ -->
                 <div class="upload-box">
-                    <h3>📷 Mediathek / Bilder & Videos hochladen</h3>
+                    <h3>🔒 Admin-Upload (Passwortgeschützt)</h3>
                     <div style="display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center;">
-                        <input type="file" id="mediaFileInput" accept="image/*,video/*" class="form-control" style="max-width: 280px; padding: 0.4rem;">
-                        <input type="text" id="mediaCaptionInput" class="form-control" placeholder="Beschreibung (z.B. Fest 2026)" style="max-width: 250px; padding: 0.5rem;">
-                        <button type="button" class="btn" onclick="uploadMedia()">Hochladen</button>
+                        <input type="password" id="adminPassword" class="form-control" placeholder="Admin-Passwort" style="max-width: 180px; padding: 0.4rem;">
+                        <input type="file" id="mediaFileInput" accept="image/*,video/*" class="form-control" style="max-width: 250px; padding: 0.4rem;">
+                        <input type="text" id="mediaCaptionInput" class="form-control" placeholder="Beschreibung (z.B. Fest 2026)" style="max-width: 200px; padding: 0.5rem;">
+                        <button type="button" id="uploadBtn" class="btn" onclick="uploadMediaWithSupabase()">Hochladen</button>
                     </div>
+                    <p id="uploadStatus" style="font-size: 0.85rem; margin-top: 0.5rem; font-weight: 500;"></p>
                 </div>
 
             </div>
         </div>
 
-        <!-- ================= TAB 2: GESCHICHTEN & IMAME ================= -->
+        <!-- TAB 2: GESCHICHTE & IMAME -->
         <div id="stories" class="tab-content">
             <div class="section-header">
-                <h2>Die 14 Infalliblen (Ahlulbayt)</h2>
-                <p>Umfassende historische Biografien des Propheten, Lady Fatima und der 12 Imame (a.s.). Klicke auf eine Person für vertiefte Details.</p>
+                <h2>Geschichte & Die 14 Unfehlbaren</h2>
+                <p>Lerne die Biografien und Lehren des Propheten und der Imame kennen.</p>
             </div>
-
-            <div class="bio-accordion">
-                <div class="bio-item">
-                    <div class="bio-header" onclick="toggleBio(this)">
-                        <h3>Prophet Muhammad <span style="font-size:0.85rem; color:var(--text-muted); font-weight:400;">(s.a.a.s.) — Das Siegel der Propheten</span></h3>
-                    </div>
-                    <div class="bio-content">
-                        <div class="bio-fact-box">
-                            <strong>Geburt:</strong> 570 n. Chr. in Mekka | <strong>Hinscheiden:</strong> 632 n. Chr. in Medina
-                        </div>
-                        <p>Prophet Muhammad (s.a.a.s.) verkündete den Islam und veränderte den Lauf der Weltgeschichte durch seine Botschaft von Frieden, Gerechtigkeit und Monotheismus.</p>
-                    </div>
+            <div class="grid">
+                <div class="card">
+                    <span class="card-tag">Prophet Muhammad (s.a.w.s.)</span>
+                    <h3 class="card-title">Der Siegel der Propheten</h3>
+                    <p class="card-text">Die Botschaft des Barmherzigen, die Vollendung der Moral und der Kuran als ewiges Wunder.</p>
                 </div>
-
-                <div class="bio-item">
-                    <div class="bio-header" onclick="toggleBio(this)">
-                        <h3>Fatima az-Zahra <span style="font-size:0.85rem; color:var(--text-muted); font-weight:400;">(s.a.) — Die Herrin aller Frauen</span></h3>
-                    </div>
-                    <div class="bio-content">
-                        <div class="bio-fact-box">
-                            <strong>Geburt:</strong> Mekka | <strong>Hinscheiden:</strong> 11 n. Hijra in Medina
-                        </div>
-                        <p>Lady Fatima (s.a.) verkörpert Gottesfurcht, Intellekt und soziale Verantwortung.</p>
-                    </div>
+                <div class="card">
+                    <span class="card-tag">Imam Ali (a.s.)</span>
+                    <h3 class="card-title">Der Tor zur Stadt des Wissens</h3>
+                    <p class="card-text">Gerechtigkeit, Mut und Weisheit. Bekannt für seine Reden und Briefe in Nahj al-Balagha.</p>
                 </div>
-
-                <div class="bio-item">
-                    <div class="bio-header" onclick="toggleBio(this)">
-                        <h3>1. Imam Ali ibn Abi Talib <span style="font-size:0.85rem; color:var(--text-muted); font-weight:400;">(a.s.) — Fürst der Gläubigen</span></h3>
-                    </div>
-                    <div class="bio-content">
-                        <div class="bio-fact-box">
-                            <strong>Geburt:</strong> In der Kaaba | <strong>Märtyrertum:</strong> 21. Ramadan 661 n. Chr.
-                        </div>
-                        <p>Imam Ali (a.s.) zeichnete sich durch seine absolute Gerechtigkeit, Unbeugsamkeit und tiefgründige Gelehrsamkeit aus.</p>
-                    </div>
+                <div class="card">
+                    <span class="card-tag">Fatima al-Zahra (s.a.)</span>
+                    <h3 class="card-title">Die Herrin der Frauen der Welten</h3>
+                    <p class="card-text">Das Vorbild an Standhaftigkeit, Gottesfurcht und Hingabe an die Wahrheit.</p>
                 </div>
             </div>
         </div>
 
-        <!-- ================= TAB 3: USUL AD-DIN & 10 FURU AD-DIN ================= -->
+        <!-- TAB 3: WISSEN & FIQH -->
         <div id="knowledge" class="tab-content">
             <div class="section-header">
-                <h2>Wissen & Lehre</h2>
-                <p>Wähle ein Hauptthema oder klicke direkt auf die Pfeiler und Zweige des Glaubens:</p>
+                <h2>Wissen & Fiqh</h2>
+                <p>Grundlagen des Glaubens und praktische Rechtsregeln für den Alltag.</p>
             </div>
-
-            <div class="category-grid">
-                <div class="cat-btn active" onclick="showKnowledgeTab('usul', this)">Usul ad-Din</div>
-                <div class="cat-btn" onclick="showKnowledgeTab('furu', this)">10 Furu' ad-Din</div>
-                <div class="cat-btn" onclick="showKnowledgeTab('fiqh', this)">Gebet & Fiqh</div>
-                <div class="cat-btn" onclick="showKnowledgeTab('ghadir', this)">Ghadir Khumm</div>
-            </div>
-
-            <div id="kn-usul" class="knowledge-detail active">
-                <h3>Usul ad-Din (Die 5 Grundpfeiler des Glaubens)</h3>
-                <div class="din-buttons-grid">
-                    <button class="din-btn" onclick="showDinDetail('Tawhid', 'Tawhid bezeichnet den reinen Monotheismus – den Glauben an die absolute Einheit Gottes.')">1. Tawhid</button>
-                    <button class="din-btn" onclick="showDinDetail('Adl', 'Adl ist der Glaube an die absolute Gerechtigkeit Gottes.')">2. Adl</button>
-                    <button class="din-btn" onclick="showDinDetail('Nubuwwah', 'Nubuwwah ist das Prophetentum.')">3. Nubuwwah</button>
-                    <button class="din-btn" onclick="showDinDetail('Imamah', 'Imamah ist die göttlich eingesetzte Führung nach dem Propheten durch die 12 Imame.')">4. Imamah</button>
-                    <button class="din-btn" onclick="showDinDetail('Miad', 'Mi\'ad ist der Glaube an den Tag des Gerichts.')">5. Mi'ad</button>
+            <div class="grid">
+                <div class="card">
+                    <span class="card-tag">Glaubenslehre</span>
+                    <h3 class="card-title">Usul ad-Din</h3>
+                    <p class="card-text">Tawhid (Einheit Gottes), Adl (Gerechtigkeit), Nabuwwah (Prophetentum), Imamah (Imamat) und Ma'ad (Auferstehung).</p>
                 </div>
-                <div id="dinInfoBox" style="background:#f8fafc; padding:1.2rem; border-left:4px solid var(--dark-blue); border-radius:4px; display:none;">
-                    <h4 id="dinInfoTitle" style="color:var(--dark-blue); margin-bottom:0.4rem;"></h4>
-                    <p id="dinInfoText" style="margin:0; color:#334155; font-size:0.92rem;"></p>
+                <div class="card">
+                    <span class="card-tag">Praxis</span>
+                    <h3 class="card-title">Furu ad-Din</h3>
+                    <p class="card-text">Gebet (Salat), Fasten (Sawm), Zakat, Khums, Hajj und das Gebieten des Guten.</p>
                 </div>
-            </div>
-
-            <div id="kn-furu" class="knowledge-detail">
-                <h3>10 Furu' ad-Din (Die Zweige der Praxis)</h3>
-                <div class="din-buttons-grid">
-                    <button class="din-btn" onclick="showDinDetail('Salat', 'Das tägliche Pflichtgebet.')">1. Salat</button>
-                    <button class="din-btn" onclick="showDinDetail('Sawm', 'Das Fasten im Monat Ramadan.')">2. Sawm</button>
-                    <button class="din-btn" onclick="showDinDetail('Hajj', 'Die Pilgerfahrt nach Mekka.')">3. Hajj</button>
-                    <button class="din-btn" onclick="showDinDetail('Zakat', 'Die Wohlfahrtsabgabe.')">4. Zakat</button>
-                    <button class="din-btn" onclick="showDinDetail('Khums', 'Die Fünftel-Abgabe auf Einkommensüberschuss.')">5. Khums</button>
-                    <button class="din-btn" onclick="showDinDetail('Jihad', 'Die Anstrengung auf dem Wege Gottes.')">6. Jihad</button>
-                    <button class="din-btn" onclick="showDinDetail('Amr bil-Ma\'ruf', 'Das Gebieten des Guten.')">7. Amr bil-Ma'ruf</button>
-                    <button class="din-btn" onclick="showDinDetail('Nahi \'an al-Munkar', 'Das Verbieten des Bösen.')">8. Nahi 'an al-Munkar</button>
-                    <button class="din-btn" onclick="showDinDetail('Tawalla', 'Die Liebe zur Ahlulbayt (a.s.).')">9. Tawalla</button>
-                    <button class="din-btn" onclick="showDinDetail('Tabarra', 'Die Distanzierung von Ungerechtigkeit.')">10. Tabarra</button>
-                </div>
-            </div>
-
-            <div id="kn-fiqh" class="knowledge-detail">
-                <h3>Gebet & Rituelle Reinheit (Fiqh)</h3>
-                <p>Das Gebet nach der schiitischen Rechtsschule (Ja'fari) basiert exakt auf den Überlieferungen der Ahlulbayt (a.s.).</p>
-            </div>
-
-            <div id="kn-ghadir" class="knowledge-detail">
-                <h3>Ereignis von Ghadir Khumm</h3>
-                <p>Am 18. Dhu al-Hijjah verkündete der Prophet Muhammad (s.a.a.s.): <em>„Wessen Schutzherr ich bin, dessen Schutzherr ist auch Ali.“</em></p>
             </div>
         </div>
 
-        <!-- ================= TAB 4: DISKUSSIONSRUNDE ================= -->
+        <!-- TAB 4: DISKUSSION -->
         <div id="discussion" class="tab-content">
             <div class="section-header">
-                <h2>Offene Diskussionsrunde</h2>
-                <p>Fragen stellen oder Antworten schreiben.</p>
+                <h2>Diskussionsforum</h2>
+                <p>Tausche dich mit der Gemeinde über aktuelle Fragen aus.</p>
             </div>
-
-            <div class="form-box" style="margin-bottom: 2rem;">
-                <h3 style="margin-bottom: 1rem; color:var(--dark-blue); font-size:1.1rem;">Frage einreichen</h3>
+            <div class="form-box">
                 <div class="form-group">
-                    <label>Name / Pseudonym (optional)</label>
-                    <input type="text" id="discName" class="form-control" placeholder="z. B. Ali oder Anonym">
+                    <label for="discName">Dein Name</label>
+                    <input type="text" id="discName" class="form-control" placeholder="z. B. Ali">
                 </div>
                 <div class="form-group">
-                    <label>Deine Frage</label>
-                    <textarea id="discText" class="form-control" placeholder="Worüber möchtest du sprechen?"></textarea>
+                    <label for="discMessage">Dein Beitrag</label>
+                    <textarea id="discMessage" class="form-control" placeholder="Schreibe deine Gedanken oder Diskussionsfragen..."></textarea>
                 </div>
-                <button type="button" class="btn" onclick="addQuestion()">Frage veröffentlichen</button>
+                <button type="button" class="btn" onclick="addDiscussion()">Beitrag veröffentlichen</button>
             </div>
-
-            <div id="discussionContainer"></div>
+            <div id="discussionList">
+                <div class="card" style="margin-bottom: 1rem;">
+                    <span class="card-tag">Beispielbeitrag</span>
+                    <h3 class="card-title">Willkommen im Forum!</h3>
+                    <p class="card-text">Hier können Themen zur nächsten Jugendrunde besprochen werden.</p>
+                </div>
+            </div>
         </div>
 
-        <!-- ================= TAB 5: ANONYME FRAGE ================= -->
+        <!-- TAB 5: ANONYME FRAGE -->
         <div id="ask" class="tab-content">
             <div class="section-header">
-                <h2>Anonyme Frage an den Prediger</h2>
-                <p>Deine vertrauliche Frage zu Fiqh, Glauben oder Lebensführung.</p>
+                <h2>Anonyme Frage stellen</h2>
+                <p>Hast du Fragen zum Glauben oder Alltag? Frage völlig anonym.</p>
             </div>
-
-            <div class="form-box" style="max-width: 600px; margin: 0 auto;">
-                <form id="anonForm">
-                    <div class="form-group">
-                        <label>Themenbereich</label>
-                        <select class="form-control">
-                            <option>Rechtslehre (Fiqh)</option>
-                            <option>Glaube & Philosophie</option>
-                            <option>Familie & Jugend</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Deine Frage</label>
-                        <textarea class="form-control" required placeholder="Schreibe hier deine vertrauliche Frage..."></textarea>
-                    </div>
-                    <button type="submit" class="btn" style="width: 100%;">Anonym Absenden</button>
-                </form>
-                <div id="anonSuccess" style="display:none; color: green; margin-top: 1rem; text-align: center; font-size: 0.9rem;">
-                    Deine Frage wurde anonym übermittelt.
+            <div class="form-box">
+                <div class="form-group">
+                    <label for="anonTopic">Thema / Kategorie</label>
+                    <input type="text" id="anonTopic" class="form-control" placeholder="z. B. Gebet, Fasten, Studium">
                 </div>
+                <div class="form-group">
+                    <label for="anonQuestion">Deine Frage</label>
+                    <textarea id="anonQuestion" class="form-control" placeholder="Deine vertrauliche Frage..."></textarea>
+                </div>
+                <button type="button" class="btn" onclick="submitAnonQuestion()">Frage anonym absenden</button>
+                <p id="anonStatus" style="margin-top: 0.8rem; font-size: 0.88rem; color: green;"></p>
             </div>
         </div>
 
@@ -859,232 +616,190 @@
             </div>
             <div class="footer-column">
                 <h3>Kontakt</h3>
-                <p id="footer-address">Otto-Wels-Straße 138, Wiesbaden-Klarenthal</p>
-                <p>Ansprechpartner: Amir Qayumi</p>
+                <p>Otto-Wels-Straße 138, Wiesbaden-Klarenthal</p>
                 <p>E-Mail: qayumiamir10@icloud.com</p>
-                <p>Tel: 017660847680</p>
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; 2026 Schiitische Moscheegemeinde Hessen. Erstellt von Amir Qayumi.
+            &copy; 2026 Schiitische Moscheegemeinde Hessen.
         </div>
     </footer>
 
-    <!-- LOGIK & SKRIPTE -->
+    <!-- SUPABASE LOGIK & SKRIPTE -->
     <script>
-        // 1. MENÜ-NAVIGATION & SHAKE-ANIMATION
-        const navButtons = document.querySelectorAll('.nav-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-        const locationBox = document.getElementById('location-box');
+        // ============================================================
+        // SUPABASE KONFIGURATION
+        // ============================================================
+        const SUPABASE_URL = "https://vidqarzfsnfnsrlymedh.supabase.co"; 
+        const SUPABASE_ANON_KEY = "sb_publishable_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZpZHFhcnpmc25mbnNybHltZWRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIwNDQ5ODIsImV4cCI6MjA1NzYyMDk4Mn0.551IeMvOIn7V2HkS48QhR3r9Jz8xW"; 
+        const ADMIN_PASSWORD = "Amirhossein.10"; 
 
-        navButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                // Shake-Animation
-                button.classList.add('shake');
-                setTimeout(() => button.classList.remove('shake'), 350);
+        // Supabase Client initialisieren
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-                // Tab Wechsel
-                navButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
+        // 1. NAVIGATION TAB SWITCHER
+        function switchTab(tabId, event) {
+            if (event) event.preventDefault();
+            
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
 
-                const targetTab = button.getAttribute('data-tab');
-                
-                tabContents.forEach(content => {
-                    content.classList.remove('active');
-                    if (content.id === targetTab) {
-                        content.classList.add('active');
-                    }
-                });
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => btn.classList.remove('active'));
 
-                // Header / Hero Texte steuern
-                if (targetTab === 'home') {
-                    locationBox.style.display = 'block';
-                    document.getElementById('hero-title').innerText = "Gemeinschaft & Verstand";
-                    document.getElementById('hero-subtitle').innerText = "Willkommen in unserer Gemeinde in Hessen.";
-                } else {
-                    locationBox.style.display = 'none';
-                    if (targetTab === 'stories') {
-                        document.getElementById('hero-title').innerText = "Geschichte & Biografien";
-                        document.getElementById('hero-subtitle').innerText = "Das Leben und Wirken der Reinen Familie (a.s.).";
-                    } else if (targetTab === 'knowledge') {
-                        document.getElementById('hero-title').innerText = "Wissen & Fiqh";
-                        document.getElementById('hero-subtitle').innerText = "Grundlagen der Praxis und Glaubenslehre.";
-                    } else if (targetTab === 'discussion') {
-                        document.getElementById('hero-title').innerText = "Diskussionsrunde";
-                        document.getElementById('hero-subtitle').innerText = "Offener Austausch für alle Fragen.";
-                    } else if (targetTab === 'ask') {
-                        document.getElementById('hero-title').innerText = "Anonyme Fragen";
-                        document.getElementById('hero-subtitle').innerText = "Vertraulicher Kontakt zum Prediger.";
-                    }
-                }
+            const selectedTab = document.getElementById(tabId);
+            if (selectedTab) selectedTab.classList.add('active');
 
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            });
-        });
-
-        // 2. DRAG TO SCROLL FOR MENU (Gedrückthalten & Ziehen)
-        const navContainer = document.querySelector('.nav-links');
-        let isMouseDown = false;
-        let startX, scrollLeft;
-
-        navContainer.addEventListener('mousedown', (e) => {
-            isMouseDown = true;
-            startX = e.pageX - navContainer.offsetLeft;
-            scrollLeft = navContainer.scrollLeft;
-        });
-
-        navContainer.addEventListener('mouseleave', () => {
-            isMouseDown = false;
-        });
-
-        navContainer.addEventListener('mouseup', () => {
-            isMouseDown = false;
-        });
-
-        navContainer.addEventListener('mousemove', (e) => {
-            if (!isMouseDown) return;
-            e.preventDefault();
-            const x = e.pageX - navContainer.offsetLeft;
-            const walk = (x - startX) * 2;
-            navContainer.scrollLeft = scrollLeft - walk;
-        });
-
-        // 3. MEDIEN UPLOAD & ENTFERNEN LOGIK
-        function uploadMedia() {
-            const fileInput = document.getElementById('mediaFileInput');
-            const captionInput = document.getElementById('mediaCaptionInput');
-            const mediaGrid = document.getElementById('mediaGrid');
-
-            if (!fileInput.files || !fileInput.files[0]) {
-                alert('Bitte wähle zuerst eine Datei aus.');
-                return;
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
             }
-
-            const file = fileInput.files[0];
-            const caption = captionInput.value.trim() || 'Veranstaltung';
-            const fileURL = URL.createObjectURL(file);
-
-            const card = document.createElement('div');
-            card.className = 'media-card';
-
-            const deleteBtn = `<button class="delete-btn" onclick="this.parentElement.remove()">Löschen</button>`;
-
-            if (file.type.startsWith('image/')) {
-                card.innerHTML = `${deleteBtn}<img src="${fileURL}" alt="${caption}"><p>${caption}</p>`;
-            } else if (file.type.startsWith('video/')) {
-                card.innerHTML = `${deleteBtn}<video controls src="${fileURL}"></video><p>${caption}</p>`;
-            } else {
-                alert('Bitte wähle eine Bild- oder Videodatei.');
-                return;
-            }
-
-            mediaGrid.prepend(card);
-
-            fileInput.value = '';
-            captionInput.value = '';
         }
 
-        // 4. WISSENSBEREICH
-        function showKnowledgeTab(id, btn) {
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.knowledge-detail').forEach(d => d.classList.remove('active'));
-
-            btn.classList.add('active');
-            document.getElementById('kn-' + id).classList.add('active');
-            document.getElementById('dinInfoBox').style.display = 'none';
-        }
-
-        function showDinDetail(title, description) {
-            const infoBox = document.getElementById('dinInfoBox');
-            document.getElementById('dinInfoTitle').innerText = title;
-            document.getElementById('dinInfoText').innerText = description;
-            infoBox.style.display = 'block';
-        }
-
-        // STANDORT SELEKTOR
-        function selectMosque(key) {
+        // 2. STANDORT SELEKTOR (WIESBADEN / KASTEL)
+        function selectMosque(location) {
             const btnKlarenthal = document.getElementById('btn-klarenthal');
             const btnKastel = document.getElementById('btn-kastel');
             const progKlarenthal = document.getElementById('program-klarenthal');
             const progKastel = document.getElementById('program-kastel');
+            const progTitle = document.getElementById('program-title');
 
-            if (key === 'klarenthal') {
+            if (location === 'klarenthal') {
                 btnKlarenthal.classList.add('active');
                 btnKastel.classList.remove('active');
                 progKlarenthal.style.display = 'grid';
                 progKastel.style.display = 'none';
+                progTitle.innerText = 'Wochenprogramm (Klarenthal)';
             } else {
                 btnKastel.classList.add('active');
                 btnKlarenthal.classList.remove('active');
-                progKastel.style.display = 'grid';
                 progKlarenthal.style.display = 'none';
+                progKastel.style.display = 'grid';
+                progTitle.innerText = 'Wochenprogramm (Mainz-Kastel)';
             }
         }
 
-        // AKKORDEON LOGIK
-        function toggleBio(header) {
-            header.parentElement.classList.toggle('active');
-        }
+        // 3. MEDIEN AUS SUPABASE CLOUD LADEN
+        async function loadStoredMedia() {
+            const mediaGrid = document.getElementById('mediaGrid');
+            
+            const { data, error } = await supabase.storage.from('media').list('', { limit: 100, sortBy: { column: 'created_at', order: 'desc' } });
 
-        // DISKUSSIONS BOARD
-        let discussions = [
-            { id: 1, author: "Ali", text: "Wann beginnt der Vortrag am Donnerstagabend?", answers: ["Amir Qayumi: Der Vortrag beginnt um 19:00 Uhr."] }
-        ];
+            if (error) {
+                console.error("Fehler beim Laden:", error);
+                mediaGrid.innerHTML = "<p>Fehler beim Laden der Medien. Bitte erstelle den Bucket 'media' in Supabase.</p>";
+                return;
+            }
 
-        function renderDiscussions() {
-            const container = document.getElementById('discussionContainer');
-            container.innerHTML = '';
-            discussions.forEach(d => {
-                const answersHTML = d.answers.map(a => `<div class="answer-item">${a}</div>`).join('');
-                container.innerHTML += `
-                    <div class="question-card">
-                        <div class="author-meta">Frage von <span class="author-name">${d.author}</span></div>
-                        <div style="font-size:1.05rem; font-weight:500; margin-bottom:0.8rem;">${d.text}</div>
-                        <div class="answers-container">${answersHTML}</div>
-                        <div style="margin-top:1rem; display:flex; gap:0.5rem;">
-                            <input type="text" id="ans-input-${d.id}" class="form-control" placeholder="Antworten..." style="padding:0.4rem; font-size:0.85rem;">
-                            <button class="btn" style="padding:0.4rem 0.8rem; font-size:0.85rem;" onclick="addAnswer(${d.id})">Antworten</button>
-                        </div>
-                    </div>
-                `;
+            if (!data || data.length === 0) {
+                mediaGrid.innerHTML = "<p>Noch keine Medien vorhanden.</p>";
+                return;
+            }
+
+            mediaGrid.innerHTML = ""; 
+
+            data.forEach(item => {
+                const { data: publicUrlData } = supabase.storage.from('media').getPublicUrl(item.name);
+                const fileURL = publicUrlData.publicUrl;
+
+                const card = document.createElement('div');
+                card.className = 'media-card';
+
+                const isVideo = item.name.endsWith('.mp4') || item.name.endsWith('.mov') || item.name.endsWith('.webm');
+
+                if (isVideo) {
+                    card.innerHTML = `<video controls src="${fileURL}"></video><p>Veranstaltung</p>`;
+                } else {
+                    card.innerHTML = `<img src="${fileURL}" alt="Event"><p>Veranstaltung</p>`;
+                }
+
+                mediaGrid.appendChild(card);
             });
         }
 
-        function addQuestion() {
-            const name = document.getElementById('discName').value.trim() || "Anonym";
-            const text = document.getElementById('discText').value.trim();
-            if (!text) return;
+        // 4. SUPABASE UPLOAD MIT PASSWORTSCHUTZ
+        async function uploadMediaWithSupabase() {
+            const passwordInput = document.getElementById('adminPassword').value;
+            const fileInput = document.getElementById('mediaFileInput');
+            const statusText = document.getElementById('uploadStatus');
+            const uploadBtn = document.getElementById('uploadBtn');
 
-            discussions.unshift({ id: Date.now(), author: name, text: text, answers: [] });
-            document.getElementById('discName').value = '';
-            document.getElementById('discText').value = '';
-            renderDiscussions();
-        }
+            if (passwordInput !== ADMIN_PASSWORD) {
+                statusText.style.color = "red";
+                statusText.innerText = "❌ Falsches Passwort! Upload verweigert.";
+                return;
+            }
 
-        function addAnswer(id) {
-            const input = document.getElementById(`ans-input-${id}`);
-            const text = input.value.trim();
-            if (!text) return;
+            if (!fileInput.files || !fileInput.files[0]) {
+                statusText.style.color = "red";
+                statusText.innerText = "⚠️ Bitte wähle eine Datei aus.";
+                return;
+            }
 
-            const item = discussions.find(d => d.id === id);
-            if (item) {
-                item.answers.push(`Antwort: ${text}`);
-                renderDiscussions();
+            const file = fileInput.files[0];
+            const fileName = `${Date.now()}_${file.name}`; 
+
+            statusText.style.color = "blue";
+            statusText.innerText = "⏳ Lade hoch... Bitte warten.";
+            uploadBtn.disabled = true;
+
+            const { data, error } = await supabase.storage.from('media').upload(fileName, file);
+
+            uploadBtn.disabled = false;
+
+            if (error) {
+                statusText.style.color = "red";
+                statusText.innerText = "❌ Upload fehlgeschlagen: " + error.message;
+            } else {
+                statusText.style.color = "green";
+                statusText.innerText = "✅ Erfolgreich hochgeladen und dauerhaft gespeichert!";
+                fileInput.value = "";
+                document.getElementById('adminPassword').value = "";
+                
+                loadStoredMedia();
             }
         }
 
-        // ANONYME FRAGE
-        document.getElementById('anonForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            this.reset();
-            const success = document.getElementById('anonSuccess');
-            success.style.display = 'block';
-            setTimeout(() => success.style.display = 'none', 4000);
-        });
+        // 5. DISKUSSIONS-FORMULAR HINZUFÜGEN
+        function addDiscussion() {
+            const name = document.getElementById('discName').value.trim();
+            const message = document.getElementById('discMessage').value.trim();
+            const list = document.getElementById('discussionList');
 
-        renderDiscussions();
+            if (!name || !message) {
+                alert("Bitte fülle beide Felder aus.");
+                return;
+            }
+
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.style.marginBottom = '1rem';
+            card.innerHTML = `<span class="card-tag">Beitrag von ${name}</span><p class="card-text">${message}</p>`;
+
+            list.prepend(card);
+            document.getElementById('discName').value = '';
+            document.getElementById('discMessage').value = '';
+        }
+
+        // 6. ANONYME FRAGE ABSENDEN
+        function submitAnonQuestion() {
+            const topic = document.getElementById('anonTopic').value.trim();
+            const question = document.getElementById('anonQuestion').value.trim();
+            const status = document.getElementById('anonStatus');
+
+            if (!question) {
+                alert("Bitte gebe eine Frage ein.");
+                return;
+            }
+
+            status.innerText = "✅ Deine Frage wurde anonym übermittelt!";
+            document.getElementById('anonTopic').value = '';
+            document.getElementById('anonQuestion').value = '';
+
+            setTimeout(() => { status.innerText = ''; }, 4000);
+        }
+
+        // beim Laden der Seite initial ausführen
+        window.addEventListener('DOMContentLoaded', loadStoredMedia);
     </script>
 </body>
 </html>

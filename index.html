@@ -159,51 +159,6 @@
             color: #94a3b8;
         }
 
-        .mosque-selector-box {
-            margin-top: 1.8rem;
-            padding-top: 1.2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mosque-selector-box h3 {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent-gold);
-            margin-bottom: 0.8rem;
-            font-weight: 600;
-        }
-
-        .mosque-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-
-        .mosque-btn {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            padding: 0.5rem 1.2rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .mosque-btn:hover {
-            border-color: var(--light-blue);
-            color: var(--light-blue);
-        }
-
-        .mosque-btn.active {
-            background-color: #ffffff;
-            color: var(--dark-blue);
-            border-color: #ffffff;
-            font-weight: 600;
-        }
-
         /* ==================== MAIN CONTAINER & SECTIONS ==================== */
         .container {
             max-width: 1000px;
@@ -234,49 +189,6 @@
         .section-header p {
             color: var(--text-muted);
             font-size: 0.9rem;
-        }
-
-        /* ==================== RASTER / GRID & KARTEN ==================== */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card {
-            background-color: #ffffff;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 1.5rem;
-            transition: border-color 0.2s ease, transform 0.2s ease;
-        }
-
-        .card:hover {
-            border-color: var(--medium-blue);
-            transform: translateY(-2px);
-        }
-
-        .card-tag {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent-gold);
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-            display: block;
-        }
-
-        .card-title {
-            font-size: 1.15rem;
-            color: var(--dark-blue);
-            margin-bottom: 0.4rem;
-            font-weight: 600;
-        }
-
-        .card-text {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.6;
         }
 
         /* ==================== EVENT MEDIA GALERIE & UPLOAD ==================== */
@@ -331,26 +243,6 @@
         }
 
         /* ==================== FORMULAR & DISKUSSION ==================== */
-        .form-box {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            padding: 1.5rem;
-            border-radius: 6px;
-            margin-bottom: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.4rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--dark-blue);
-        }
-
         .form-control {
             width: 100%;
             padding: 0.75rem;
@@ -358,11 +250,6 @@
             border-radius: 4px;
             font-size: 0.95rem;
             background: #ffffff;
-        }
-
-        textarea.form-control {
-            min-height: 100px;
-            resize: vertical;
         }
 
         .btn {
@@ -420,12 +307,12 @@
                 <h1>Ahlulbayt Zentrum</h1>
                 <p>Moscheegemeinde Hessen</p>
             </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#" class="nav-btn active" onclick="switchTab('home', event)">Startseite</a></li>
-                <li><a href="#" class="nav-btn" onclick="switchTab('stories', event)">Geschichte & Imame</a></li>
-                <li><a href="#" class="nav-btn" onclick="switchTab('knowledge', event)">Wissen & Fiqh</a></li>
-                <li><a href="#" class="nav-btn" onclick="switchTab('discussion', event)">Diskussion</a></li>
-                <li><a href="#" class="nav-btn" onclick="switchTab('ask', event)">Anonyme Frage</a></li>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-btn active" data-tab="home">Startseite</a></li>
+                <li><a href="#" class="nav-btn" data-tab="stories">Geschichte & Imame</a></li>
+                <li><a href="#" class="nav-btn" data-tab="knowledge">Wissen & Fiqh</a></li>
+                <li><a href="#" class="nav-btn" data-tab="discussion">Diskussion</a></li>
+                <li><a href="#" class="nav-btn" data-tab="ask">Anonyme Frage</a></li>
             </ul>
         </nav>
     </header>
@@ -435,14 +322,6 @@
         <div class="hero-content">
             <h2 id="hero-title">Gemeinschaft & Verstand</h2>
             <p id="hero-subtitle">Willkommen in unserer Gemeinde in Hessen.</p>
-
-            <div class="mosque-selector-box" id="location-box">
-                <h3>Standort wählen:</h3>
-                <div class="mosque-buttons">
-                    <button class="mosque-btn active" id="btn-klarenthal" onclick="selectMosque('klarenthal')">Wiesbaden-Klarenthal</button>
-                    <button class="mosque-btn" id="btn-kastel" onclick="selectMosque('kastel')">Mainz-Kastel</button>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -452,39 +331,8 @@
         <!-- TAB 1: STARTSEITE -->
         <div id="home" class="tab-content active">
             <div class="section-header">
-                <h2 id="program-title">Wochenprogramm (Klarenthal)</h2>
+                <h2>Wochenprogramm</h2>
                 <p>Unsere regelmäßigen Treffen und Gebete vor Ort.</p>
-            </div>
-
-            <div id="program-klarenthal" class="grid">
-                <div class="card">
-                    <span class="card-tag">Donnerstag</span>
-                    <h3 class="card-title">Dua Kumayl & Vortrag</h3>
-                    <p class="card-text">Gemeinsames Bittgebet, gefolgt von einem deutschsprachigen Vortrag und Abendgebet ab 19:00 Uhr.</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag">Freitag</span>
-                    <h3 class="card-title">Freitagsgebet</h3>
-                    <p class="card-text">Zwei-sprachige Predigt (Deutsch/Arabisch) zur Dhuhur-Zeit mit anschließendem Gemeinschaftsgebet.</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag">Samstag</span>
-                    <h3 class="card-title">Jugendtreff & Koranunterricht</h3>
-                    <p class="card-text">Offene Runde für Jugendliche, Austausch über alltägliche Themen und Korb- & Koranunterricht.</p>
-                </div>
-            </div>
-
-            <div id="program-kastel" class="grid" style="display: none;">
-                <div class="card">
-                    <span class="card-tag">Sonntag</span>
-                    <h3 class="card-title">Familien-Veranstaltung</h3>
-                    <p class="card-text">Gemeinsames Treffen für Familien, Islamunterricht für Kinder und anschließendes Teetrinken.</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag">Mittwoch</span>
-                    <h3 class="card-title">Dua Tawasul</h3>
-                    <p class="card-text">Gemeinsames Bittgebet am Abend für Wohlbefinden und Stärkung der Gemeinschaft.</p>
-                </div>
             </div>
 
             <!-- EVENT-MEDIEN GALERIE -->
@@ -514,97 +362,6 @@
             </div>
         </div>
 
-        <!-- TAB 2: GESCHICHTE & IMAME -->
-        <div id="stories" class="tab-content">
-            <div class="section-header">
-                <h2>Geschichte & Die 14 Unfehlbaren</h2>
-                <p>Lerne die Biografien und Lehren des Propheten und der Imame kennen.</p>
-            </div>
-            <div class="grid">
-                <div class="card">
-                    <span class="card-tag">Prophet Muhammad (s.a.w.s.)</span>
-                    <h3 class="card-title">Der Siegel der Propheten</h3>
-                    <p class="card-text">Die Botschaft des Barmherzigen, die Vollendung der Moral und der Kuran als ewiges Wunder.</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag">Imam Ali (a.s.)</span>
-                    <h3 class="card-title">Der Tor zur Stadt des Wissens</h3>
-                    <p class="card-text">Gerechtigkeit, Mut und Weisheit. Bekannt für seine Reden und Briefe in Nahj al-Balagha.</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag">Fatima al-Zahra (s.a.)</span>
-                    <h3 class="card-title">Die Herrin der Frauen der Welten</h3>
-                    <p class="card-text">Das Vorbild an Standhaftigkeit, Gottesfurcht und Hingabe an die Wahrheit.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 3: WISSEN & FIQH -->
-        <div id="knowledge" class="tab-content">
-            <div class="section-header">
-                <h2>Wissen & Fiqh</h2>
-                <p>Grundlagen des Glaubens und praktische Rechtsregeln für den Alltag.</p>
-            </div>
-            <div class="grid">
-                <div class="card">
-                    <span class="card-tag">Glaubenslehre</span>
-                    <h3 class="card-title">Usul ad-Din</h3>
-                    <p class="card-text">Tawhid (Einheit Gottes), Adl (Gerechtigkeit), Nabuwwah (Prophetentum), Imamah (Imamat) und Ma'ad (Auferstehung).</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag">Praxis</span>
-                    <h3 class="card-title">Furu ad-Din</h3>
-                    <p class="card-text">Gebet (Salat), Fasten (Sawm), Zakat, Khums, Hajj und das Gebieten des Guten.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 4: DISKUSSION -->
-        <div id="discussion" class="tab-content">
-            <div class="section-header">
-                <h2>Diskussionsforum</h2>
-                <p>Tausche dich mit der Gemeinde über aktuelle Fragen aus.</p>
-            </div>
-            <div class="form-box">
-                <div class="form-group">
-                    <label for="discName">Dein Name</label>
-                    <input type="text" id="discName" class="form-control" placeholder="z. B. Ali">
-                </div>
-                <div class="form-group">
-                    <label for="discMessage">Dein Beitrag</label>
-                    <textarea id="discMessage" class="form-control" placeholder="Schreibe deine Gedanken oder Diskussionsfragen..."></textarea>
-                </div>
-                <button type="button" class="btn" onclick="addDiscussion()">Beitrag veröffentlichen</button>
-            </div>
-            <div id="discussionList">
-                <div class="card" style="margin-bottom: 1rem;">
-                    <span class="card-tag">Beispielbeitrag</span>
-                    <h3 class="card-title">Willkommen im Forum!</h3>
-                    <p class="card-text">Hier können Themen zur nächsten Jugendrunde besprochen werden.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 5: ANONYME FRAGE -->
-        <div id="ask" class="tab-content">
-            <div class="section-header">
-                <h2>Anonyme Frage stellen</h2>
-                <p>Hast du Fragen zum Glauben oder Alltag? Frage völlig anonym.</p>
-            </div>
-            <div class="form-box">
-                <div class="form-group">
-                    <label for="anonTopic">Thema / Kategorie</label>
-                    <input type="text" id="anonTopic" class="form-control" placeholder="z. B. Gebet, Fasten, Studium">
-                </div>
-                <div class="form-group">
-                    <label for="anonQuestion">Deine Frage</label>
-                    <textarea id="anonQuestion" class="form-control" placeholder="Deine vertrauliche Frage..."></textarea>
-                </div>
-                <button type="button" class="btn" onclick="submitAnonQuestion()">Frage anonym absenden</button>
-                <p id="anonStatus" style="margin-top: 0.8rem; font-size: 0.88rem; color: green;"></p>
-            </div>
-        </div>
-
     </main>
 
     <!-- FOOTER -->
@@ -625,10 +382,10 @@
         </div>
     </footer>
 
-    <!-- SUPABASE LOGIK & SKRIPTE -->
+    <!-- SUPABASE LOGIK & UPLOAD SYSTEM -->
     <script>
         // ============================================================
-        // SUPABASE KONFIGURATION
+        // SUPABASE KONFIGURATION (DEINE ZUGEWIESENEN SCHLÜSSEL)
         // ============================================================
         const SUPABASE_URL = "https://vidqarzfsnfnsrlymedh.supabase.co"; 
         const SUPABASE_ANON_KEY = "sb_publishable_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZpZHFhcnpmc25mbnNybHltZWRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIwNDQ5ODIsImV4cCI6MjA1NzYyMDk4Mn0.551IeMvOIn7V2HkS48QhR3r9Jz8xW"; 
@@ -637,51 +394,11 @@
         // Supabase Client initialisieren
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // 1. NAVIGATION TAB SWITCHER
-        function switchTab(tabId, event) {
-            if (event) event.preventDefault();
-            
-            const tabs = document.querySelectorAll('.tab-content');
-            tabs.forEach(tab => tab.classList.remove('active'));
-
-            const navBtns = document.querySelectorAll('.nav-btn');
-            navBtns.forEach(btn => btn.classList.remove('active'));
-
-            const selectedTab = document.getElementById(tabId);
-            if (selectedTab) selectedTab.classList.add('active');
-
-            if (event && event.currentTarget) {
-                event.currentTarget.classList.add('active');
-            }
-        }
-
-        // 2. STANDORT SELEKTOR (WIESBADEN / KASTEL)
-        function selectMosque(location) {
-            const btnKlarenthal = document.getElementById('btn-klarenthal');
-            const btnKastel = document.getElementById('btn-kastel');
-            const progKlarenthal = document.getElementById('program-klarenthal');
-            const progKastel = document.getElementById('program-kastel');
-            const progTitle = document.getElementById('program-title');
-
-            if (location === 'klarenthal') {
-                btnKlarenthal.classList.add('active');
-                btnKastel.classList.remove('active');
-                progKlarenthal.style.display = 'grid';
-                progKastel.style.display = 'none';
-                progTitle.innerText = 'Wochenprogramm (Klarenthal)';
-            } else {
-                btnKastel.classList.add('active');
-                btnKlarenthal.classList.remove('active');
-                progKlarenthal.style.display = 'none';
-                progKastel.style.display = 'grid';
-                progTitle.innerText = 'Wochenprogramm (Mainz-Kastel)';
-            }
-        }
-
-        // 3. MEDIEN AUS SUPABASE CLOUD LADEN
+        // 1. GELADENE MEDIEN BEIM START DER SEITE ANZEIGEN
         async function loadStoredMedia() {
             const mediaGrid = document.getElementById('mediaGrid');
             
+            // Dateien aus dem Supabase Bucket 'media' auflisten
             const { data, error } = await supabase.storage.from('media').list('', { limit: 100, sortBy: { column: 'created_at', order: 'desc' } });
 
             if (error) {
@@ -695,15 +412,17 @@
                 return;
             }
 
-            mediaGrid.innerHTML = ""; 
+            mediaGrid.innerHTML = ""; // Container leeren
 
             data.forEach(item => {
+                // Öffentliche URL abrufen
                 const { data: publicUrlData } = supabase.storage.from('media').getPublicUrl(item.name);
                 const fileURL = publicUrlData.publicUrl;
 
                 const card = document.createElement('div');
                 card.className = 'media-card';
 
+                // Prüfen ob Bild oder Video
                 const isVideo = item.name.endsWith('.mp4') || item.name.endsWith('.mov') || item.name.endsWith('.webm');
 
                 if (isVideo) {
@@ -716,13 +435,14 @@
             });
         }
 
-        // 4. SUPABASE UPLOAD MIT PASSWORTSCHUTZ
+        // 2. SECURE UPLOAD FUNCTION
         async function uploadMediaWithSupabase() {
             const passwordInput = document.getElementById('adminPassword').value;
             const fileInput = document.getElementById('mediaFileInput');
             const statusText = document.getElementById('uploadStatus');
             const uploadBtn = document.getElementById('uploadBtn');
 
+            // Passwort-Überprüfung
             if (passwordInput !== ADMIN_PASSWORD) {
                 statusText.style.color = "red";
                 statusText.innerText = "❌ Falsches Passwort! Upload verweigert.";
@@ -736,12 +456,13 @@
             }
 
             const file = fileInput.files[0];
-            const fileName = `${Date.now()}_${file.name}`; 
+            const fileName = `${Date.now()}_${file.name}`; // Eindeutiger Dateiname mit Zeitstempel
 
             statusText.style.color = "blue";
             statusText.innerText = "⏳ Lade hoch... Bitte warten.";
             uploadBtn.disabled = true;
 
+            // Datei in Supabase Storage hochladen
             const { data, error } = await supabase.storage.from('media').upload(fileName, file);
 
             uploadBtn.disabled = false;
@@ -755,50 +476,12 @@
                 fileInput.value = "";
                 document.getElementById('adminPassword').value = "";
                 
+                // Galerie sofort aktualisieren
                 loadStoredMedia();
             }
         }
 
-        // 5. DISKUSSIONS-FORMULAR HINZUFÜGEN
-        function addDiscussion() {
-            const name = document.getElementById('discName').value.trim();
-            const message = document.getElementById('discMessage').value.trim();
-            const list = document.getElementById('discussionList');
-
-            if (!name || !message) {
-                alert("Bitte fülle beide Felder aus.");
-                return;
-            }
-
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.style.marginBottom = '1rem';
-            card.innerHTML = `<span class="card-tag">Beitrag von ${name}</span><p class="card-text">${message}</p>`;
-
-            list.prepend(card);
-            document.getElementById('discName').value = '';
-            document.getElementById('discMessage').value = '';
-        }
-
-        // 6. ANONYME FRAGE ABSENDEN
-        function submitAnonQuestion() {
-            const topic = document.getElementById('anonTopic').value.trim();
-            const question = document.getElementById('anonQuestion').value.trim();
-            const status = document.getElementById('anonStatus');
-
-            if (!question) {
-                alert("Bitte gebe eine Frage ein.");
-                return;
-            }
-
-            status.innerText = "✅ Deine Frage wurde anonym übermittelt!";
-            document.getElementById('anonTopic').value = '';
-            document.getElementById('anonQuestion').value = '';
-
-            setTimeout(() => { status.innerText = ''; }, 4000);
-        }
-
-        // beim Laden der Seite initial ausführen
+        // Beim Laden der Seite Medien abrufen
         window.addEventListener('DOMContentLoaded', loadStoredMedia);
     </script>
 </body>

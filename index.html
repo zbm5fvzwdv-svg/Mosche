@@ -4,33 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schiitische Moscheegemeinde Hessen</title>
-    <!-- FontAwesome für Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* ==================== GLOBAL STYLES ==================== */
+        /* ==================== GLOBAL STYLES & TYPOGRAPHY ==================== */
         :root {
             --dark-blue: #0d1b2a;
             --medium-blue: #1b263b;
             --light-blue: #48cae4;
-            --accent-gold: #d4af37;
-            --text-light: #f8f9fa;
-            --text-dark: #212529;
-            --bg-light: #f4f6f9;
-            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --accent-gold: #c5a059;
+            --border-color: #e2e8f0;
+            --bg-light: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
             background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
+            color: var(--text-main);
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
         }
 
         a {
@@ -40,199 +39,132 @@
 
         /* ==================== HEADER & NAVIGATION ==================== */
         header {
-            background: linear-gradient(135deg, var(--dark-blue), var(--medium-blue));
-            color: var(--text-light);
+            background-color: var(--dark-blue);
+            color: #ffffff;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo i {
-            font-size: 2rem;
-            color: var(--light-blue);
-        }
-
         .logo-text h1 {
-            font-size: 1.4rem;
-            color: var(--text-light);
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .logo-text p {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--light-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 1rem;
+            gap: 0.5rem;
         }
 
         .nav-links a {
-            color: var(--text-light);
+            color: #cbd5e1;
+            font-size: 0.9rem;
             font-weight: 500;
-            transition: color 0.3s;
-            padding: 0.5rem 0.8rem;
+            padding: 0.5rem 1rem;
             border-radius: 4px;
+            transition: all 0.2s ease;
         }
 
         .nav-links a:hover, .nav-links a.active {
-            color: var(--light-blue);
-            background-color: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.08);
         }
 
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-light);
-        }
-
-        /* ==================== HERO SECTION ==================== */
+        /* ==================== HERO & STANDORT-SELEKTOR ==================== */
         .hero {
-            position: relative;
-            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #0d1b2a 100%);
-            color: var(--text-light);
-            padding: 4rem 2rem;
+            background-color: var(--dark-blue);
+            color: #ffffff;
+            padding: 3.5rem 2rem;
             text-align: center;
-            overflow: hidden;
-            box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 450px;
-            height: 450px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
-            pointer-events: none;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
-        .mosque-icon-wrapper {
-            margin: 10px 0 20px 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .mosque-icon-wrapper svg {
-            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
-        }
-
         .hero h2 {
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-            color: var(--light-blue);
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
         }
 
         .hero p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            opacity: 0.95;
+            font-size: 1rem;
+            color: #94a3b8;
         }
 
-        .badge-hessen {
-            display: inline-block;
-            background-color: var(--accent-gold);
-            color: var(--dark-blue);
-            padding: 0.4rem 1.2rem;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
-        }
-
-        /* MOSCHEE SELECTION STYLES */
+        /* Standort-Kasten nur auf der Startseite */
         .mosque-selector-box {
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-top: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .mosque-selector-box h3 {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             color: var(--accent-gold);
+            margin-bottom: 1rem;
+            font-weight: 600;
         }
 
         .mosque-buttons {
             display: flex;
             justify-content: center;
             gap: 1rem;
-            flex-wrap: wrap;
         }
 
         .mosque-btn {
-            background-color: transparent;
-            border: 2px solid var(--light-blue);
-            color: var(--text-light);
-            padding: 0.7rem 1.5rem;
-            border-radius: 30px;
-            font-weight: bold;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 0.6rem 1.4rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1rem;
+            transition: all 0.2s ease;
         }
 
-        .mosque-btn:hover, .mosque-btn.active {
-            background-color: var(--light-blue);
+        .mosque-btn:hover {
+            border-color: var(--light-blue);
+            color: var(--light-blue);
+        }
+
+        .mosque-btn.active {
+            background-color: #ffffff;
             color: var(--dark-blue);
-            box-shadow: 0 4px 12px rgba(72, 202, 228, 0.4);
+            border-color: #ffffff;
+            font-weight: 600;
         }
 
         /* ==================== MAIN CONTAINER & SECTIONS ==================== */
         .container {
-            max-width: 1200px;
-            margin: 2rem auto;
+            max-width: 1000px;
+            margin: 3rem auto;
             padding: 0 1.5rem;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 1.8rem;
-            color: var(--dark-blue);
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background-color: var(--light-blue);
-            margin: 0.5rem auto 0;
-            border-radius: 2px;
         }
 
         .tab-content {
@@ -243,246 +175,216 @@
             display: block;
         }
 
-        /* ==================== CARDS & GRID ==================== */
+        .section-header {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 1.75rem;
+            color: var(--dark-blue);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* ==================== RASTER / GRID & KARTEN ==================== */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
 
         .card {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            border-top: 4px solid var(--light-blue);
-            transition: transform 0.3s;
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.8rem;
+            transition: border-color 0.2s ease, transform 0.2s ease;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            border-color: var(--medium-blue);
+            transform: translateY(-2px);
         }
 
-        .card-img-placeholder {
-            width: 100%;
-            height: 180px;
-            background-color: #e9ecef;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #6c757d;
-            border-bottom: 1px solid #dee2e6;
-        }
-
-        .card-img-placeholder i {
-            font-size: 2.5rem;
+        .card-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-gold);
+            font-weight: 600;
             margin-bottom: 0.5rem;
-        }
-
-        .card-body {
-            padding: 1.5rem;
+            display: block;
         }
 
         .card-title {
             font-size: 1.2rem;
             color: var(--dark-blue);
             margin-bottom: 0.5rem;
+            font-weight: 600;
         }
 
-        .card-meta {
-            font-size: 0.85rem;
-            color: #6c757d;
-            margin-bottom: 1rem;
-            display: flex;
+        .card-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ==================== INTERAKTIVES KATEGORIEN-RASTER (WISSEN) ==================== */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
-        }
-
-        /* ==================== ANKÜNDIGUNGEN / REGELN ==================== */
-        .alert-box {
-            background-color: #e8f4f8;
-            border-left: 5px solid var(--light-blue);
-            padding: 1.2rem;
-            border-radius: 4px;
             margin-bottom: 2rem;
         }
 
-        .alert-box h3 {
+        .cat-btn {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            padding: 1.2rem;
+            text-align: center;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
             color: var(--dark-blue);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            transition: all 0.2s;
         }
 
-        .rules-list {
-            list-style-type: none;
-            padding-left: 0;
+        .cat-btn:hover {
+            border-color: var(--dark-blue);
         }
 
-        .rules-list li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
+        .cat-btn.active {
+            background-color: var(--dark-blue);
+            color: #ffffff;
+            border-color: var(--dark-blue);
         }
 
-        .rules-list li::before {
-            content: "\f054";
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: var(--light-blue);
-            font-size: 0.8rem;
-            top: 3px;
+        .knowledge-detail {
+            display: none;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            padding: 2.2rem;
+            border-radius: 6px;
         }
 
-        /* ==================== ACCORDION / INTERAKTIVE BIOGRAFIEN ==================== */
+        .knowledge-detail.active {
+            display: block;
+        }
+
+        .knowledge-detail h3 {
+            color: var(--dark-blue);
+            margin-bottom: 1.2rem;
+            font-size: 1.4rem;
+        }
+
+        .knowledge-detail p {
+            margin-bottom: 1rem;
+            color: #334155;
+        }
+
+        /* ==================== AUSFÜHRLICHE BIOGRAFIEN (AKKORDEON) ==================== */
         .bio-accordion {
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            max-width: 900px;
-            margin: 0 auto;
         }
 
         .bio-item {
-            background: white;
-            border-radius: 8px;
-            box-shadow: var(--card-shadow);
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             overflow: hidden;
-            border: 1px solid #e9ecef;
         }
 
         .bio-header {
-            background-color: white;
             padding: 1.2rem 1.5rem;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background-color 0.3s;
-            user-select: none;
+            background: #ffffff;
+            transition: background 0.2s;
         }
 
         .bio-header:hover {
-            background-color: #f8f9fa;
+            background-color: #f1f5f9;
         }
 
         .bio-header h3 {
+            font-size: 1.15rem;
             color: var(--dark-blue);
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            flex-wrap: wrap;
+            font-weight: 600;
         }
 
-        .bio-header .badge-tag {
-            background-color: var(--accent-gold);
-            color: var(--dark-blue);
-            font-size: 0.8rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 12px;
-            font-weight: bold;
-        }
-
-        .bio-header .toggle-icon {
-            color: var(--light-blue);
-            font-size: 1.2rem;
-            transition: transform 0.3s;
-        }
-
-        .bio-item.active .bio-header {
-            background-color: #e8f4f8;
-            border-bottom: 2px solid var(--light-blue);
-        }
-
-        .bio-item.active .toggle-icon {
-            transform: rotate(180deg);
+        .bio-header .bio-subtitle {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-left: 0.5rem;
         }
 
         .bio-content {
             display: none;
-            padding: 1.5rem;
-            background-color: #ffffff;
-            color: #333;
-            line-height: 1.7;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            background-color: #fafafa;
+            font-size: 0.96rem;
+            color: #334155;
+            line-height: 1.85;
+        }
+
+        .bio-content p {
+            margin-bottom: 1.2rem;
+        }
+
+        .bio-content p:last-child {
+            margin-bottom: 0;
         }
 
         .bio-item.active .bio-content {
             display: block;
         }
 
-        .bio-content p {
-            margin-bottom: 1rem;
+        .bio-item.active .bio-header {
+            background-color: #f1f5f9;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .bio-fact-box {
-            background-color: #f8f9fa;
+            background: #ffffff;
             border-left: 4px solid var(--accent-gold);
-            padding: 1rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
 
         .bio-fact-box strong {
             color: var(--dark-blue);
         }
 
-        /* ==================== SCHIITISCHER KALENDER ==================== */
-        .calendar-container {
-            background-color: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: var(--card-shadow);
-        }
-
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            background-color: var(--dark-blue);
-            color: white;
-            padding: 1rem;
-            border-radius: 6px;
-        }
-
-        .event-badge {
-            background-color: var(--accent-gold);
+        .bio-section-title {
+            font-weight: 600;
             color: var(--dark-blue);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: bold;
+            margin-top: 1.2rem;
+            margin-bottom: 0.4rem;
+            display: block;
+            font-size: 1.05rem;
         }
 
-        .event-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .event-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background-color: #f8f9fa;
-            border-left: 4px solid var(--accent-gold);
-            border-radius: 4px;
-        }
-
-        /* ==================== FORMULAR & DISKUSSIONSRUNDE ==================== */
-        .form-container {
-            background-color: white;
+        /* ==================== FORMULAR & DISKUSSION ==================== */
+        .form-box {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: var(--card-shadow);
-            max-width: 800px;
-            margin: 0 auto;
+            border-radius: 6px;
         }
 
         .form-group {
@@ -491,126 +393,94 @@
 
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: var(--dark-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .form-control {
             width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ced4da;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
             border-radius: 4px;
-            font-size: 1rem;
-            background-color: #f8f9fa;
+            font-size: 0.95rem;
+            background: #ffffff;
         }
 
         .form-control:focus {
             outline: none;
-            border-color: var(--light-blue);
-            background-color: #ffffff;
+            border-color: var(--dark-blue);
         }
 
         textarea.form-control {
+            min-height: 110px;
             resize: vertical;
-            min-height: 100px;
         }
 
         .btn {
-            display: inline-block;
             background-color: var(--dark-blue);
-            color: white;
-            padding: 0.8rem 1.5rem;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: background-color 0.3s;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.2s;
         }
 
         .btn:hover {
             background-color: var(--medium-blue);
         }
 
-        .btn-light {
-            background-color: var(--light-blue);
-            color: var(--dark-blue);
-        }
-
-        .btn-light:hover {
-            background-color: #3ab8d2;
-        }
-
-        .privacy-note {
-            font-size: 0.85rem;
-            color: #6c757d;
-            margin-top: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
         .question-card {
-            background: white;
-            border-left: 4px solid var(--light-blue);
+            background: #ffffff;
+            border: 1px solid var(--border-color);
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             border-radius: 6px;
-            box-shadow: var(--card-shadow);
         }
 
-        .author-info {
-            font-size: 0.85rem;
-            color: #6c757d;
+        .author-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
             margin-bottom: 0.5rem;
         }
 
         .author-name {
             color: var(--dark-blue);
-            font-weight: bold;
-        }
-
-        .question-text {
-            font-size: 1.1rem;
             font-weight: 600;
-            color: var(--dark-blue);
-            margin-bottom: 1rem;
         }
 
-        .answers-list {
+        .answers-container {
             margin-top: 1rem;
             padding-left: 1rem;
-            border-left: 2px solid #e9ecef;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
+            border-left: 2px solid var(--border-color);
         }
 
-        .answer-card {
-            background: #f8f9fa;
-            padding: 0.8rem 1rem;
+        .answer-item {
+            background: #f8fafc;
+            padding: 0.8rem;
             border-radius: 4px;
-            font-size: 0.95rem;
-            border: 1px solid #e9ecef;
-        }
-
-        .reply-box {
-            margin-top: 1.2rem;
-            padding-top: 1rem;
-            border-top: 1px dashed #dee2e6;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
         }
 
         /* ==================== FOOTER ==================== */
         footer {
             background-color: var(--dark-blue);
-            color: var(--text-light);
-            padding: 3rem 1.5rem 1rem;
-            margin-top: 4rem;
+            color: #cbd5e1;
+            padding: 3rem 1.5rem 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
         }
 
         .footer-content {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -619,655 +489,510 @@
         }
 
         .footer-column h3 {
-            color: var(--light-blue);
+            color: #ffffff;
+            font-size: 1rem;
             margin-bottom: 1rem;
+            font-weight: 600;
         }
 
         .footer-bottom {
             text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: #adb5bd;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.8rem;
+            color: #64748b;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+        @media (max-width: 600px) {
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+            .navbar {
                 flex-direction: column;
-                width: 100%;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                background-color: var(--dark-blue);
-                padding: 1rem;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .event-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
+                gap: 1rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- HEADER & NAVIGATION -->
+    <!-- HEADER & SAUBERE NAVIGATION -->
     <header>
         <nav class="navbar">
-            <div class="logo">
-                <i class="fa-solid fa-kaaba"></i>
-                <div class="logo-text">
-                    <h1>Ahlulbayt Zentrum</h1>
-                    <p>Schiitische Moscheegemeinde Hessen</p>
-                </div>
+            <div class="logo-text">
+                <h1>Ahlulbayt Zentrum</h1>
+                <p>Moscheegemeinde Hessen</p>
             </div>
-            <div class="menu-toggle" id="mobile-menu">
-                <i class="fas fa-bars"></i>
-            </div>
-            <ul class="nav-links" id="nav-links">
+            <ul class="nav-links">
                 <li><a href="#" class="nav-btn active" data-tab="home">Startseite</a></li>
-                <li><a href="#" class="nav-btn" data-tab="kids-stories">Geschichten & Lernen</a></li>
-                <li><a href="#" class="nav-btn" data-tab="discussion">Diskussionsrunde</a></li>
-                <li><a href="#" class="nav-btn" data-tab="calendar">Hijri Kalender</a></li>
-                <li><a href="#" class="nav-btn" data-tab="learn">Lernen & Bücher</a></li>
-                <li><a href="#" class="nav-btn" data-tab="media">Mediathek</a></li>
+                <li><a href="#" class="nav-btn" data-tab="stories">Geschichte & Imame</a></li>
+                <li><a href="#" class="nav-btn" data-tab="knowledge">Wissen & Fiqh</a></li>
+                <li><a href="#" class="nav-btn" data-tab="discussion">Diskussion</a></li>
                 <li><a href="#" class="nav-btn" data-tab="ask">Anonyme Frage</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- HERO SECTION MIT MOSCHEE-AUSWAHL -->
+    <!-- HERO SECTION -->
     <section class="hero">
         <div class="hero-content">
-            <span class="badge-hessen">Region Hessen</span>
-            
-            <div class="mosque-icon-wrapper">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 3v2"/>
-                    <path d="M12 5a7 7 0 0 0-7 7v7h14v-7a7 7 0 0 0-7-7z"/>
-                    <path d="M9 19v-4a3 3 0 0 1 6 0v4"/>
-                    <path d="M4 19h16"/>
-                </svg>
-            </div>
+            <h2 id="hero-title">Gemeinschaft & Verstand</h2>
+            <p id="hero-subtitle">Willkommen in unserer Gemeinde in Hessen.</p>
 
-            <h2>Willkommen in unserer Gemeinde</h2>
-            <p>Wählen Sie Ihre Moschee aus, um das passende Wochenprogramm anzuzeigen:</p>
-
-            <!-- MOSCHEE AUSWAHL BUTTONS -->
-            <div class="mosque-selector-box">
-                <h3><i class="fas fa-mosque"></i> Bitte wähle deine Moschee:</h3>
+            <!-- Standort-Kasten ausschließlich auf der Startseite sichtbar -->
+            <div class="mosque-selector-box" id="location-box">
+                <h3>Standort wählen:</h3>
                 <div class="mosque-buttons">
-                    <button class="mosque-btn active" id="btn-klarenthal" onclick="selectMosque('klarenthal')">
-                        <i class="fas fa-map-marker-alt"></i> Klarenthal
-                    </button>
-                    <button class="mosque-btn" id="btn-kastel" onclick="selectMosque('kastel')">
-                        <i class="fas fa-map-marker-alt"></i> Mainz-Kastel
-                    </button>
+                    <button class="mosque-btn active" id="btn-klarenthal" onclick="selectMosque('klarenthal')">Wiesbaden-Klarenthal</button>
+                    <button class="mosque-btn" id="btn-kastel" onclick="selectMosque('kastel')">Mainz-Kastel</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- MAIN CONTENT AREA -->
+    <!-- MAIN CONTAINER -->
     <main class="container">
 
-        <!-- ================= TAB 1: STARTSEITE / HAUPTMENÜ ================= -->
+        <!-- ================= TAB 1: STARTSEITE ================= -->
         <div id="home" class="tab-content active">
-            
-            <!-- WICHTIGE BESUCHER-HINWEISE -->
-            <div class="alert-box">
-                <h3><i class="fas fa-exclamation-triangle" style="color: #d4af37;"></i> Wichtige Hinweise für Besucher</h3>
-                <p style="margin-bottom: 0.5rem;">Damit unsere Abläufe reibungslos funktionieren, bitten wir alle Geschwister, folgendes zu beachten:</p>
-                <ul class="rules-list">
-                    <li>Bitte parken Sie nur auf den ausgewiesenen Parkplätzen und nehmen Sie Rücksicht auf die Nachbarschaft.</li>
-                    <li>Mobiltelefone sind vor dem Betreten des Gebetsraums auf lautlos zu stellen.</li>
-                    <li>Bitte achten Sie auf die Einhaltung der Sauberkeit in den Wudu-Bereichen und Gebetsräumen.</li>
-                    <li>Kinder sind herzlich willkommen – bitte achten Sie darauf, dass während der Vorträge Ruhe bewahrt wird.</li>
-                </ul>
+            <div class="section-header">
+                <h2 id="program-title">Wochenprogramm (Klarenthal)</h2>
+                <p>Unsere regelmäßigen Treffen und Gebete vor Ort.</p>
             </div>
 
-            <!-- DYNAMISCHER TITEL JE NACH GEWÄHLTER MOSCHEE -->
-            <h2 class="section-title" id="program-title">Programm für Klarenthal</h2>
-            
             <!-- PROGRAMM KLARENTHAL -->
             <div id="program-klarenthal" class="grid">
-                
                 <div class="card">
-                    <div class="card-img-placeholder">
-                        <i class="fas fa-moon"></i>
-                        <span>Donnerstag Abend</span>
-                    </div>
-                    <div class="card-body">
-                        <span class="event-badge">Wöchentlich</span>
-                        <h3 class="card-title" style="margin-top:0.5rem;">Donnerstagabend Programm</h3>
-                        <div class="card-meta">
-                            <span><i class="far fa-clock"></i> Jeden Do. um 19:00 Uhr</span>
-                        </div>
-                        <p>Gemeinsames Rezitieren von Dua Kumayl, gefolgt von einem deutschsprachigen Vortrag und Abendgebet.</p>
-                    </div>
+                    <span class="card-tag">Donnerstag</span>
+                    <h3 class="card-title">Dua Kumayl & Vortrag</h3>
+                    <p class="card-text">Gemeinsames Bittgebet, gefolgt von einem deutschsprachigen Vortrag und Abendgebet ab 19:00 Uhr.</p>
                 </div>
-
                 <div class="card">
-                    <div class="card-img-placeholder">
-                        <i class="fas fa-kaaba"></i>
-                        <span>Freitagsgebet</span>
-                    </div>
-                    <div class="card-body">
-                        <span class="event-badge">Freitag</span>
-                        <h3 class="card-title" style="margin-top:0.5rem;">Freitagsgebet (Salat al-Jumu'ah)</h3>
-                        <div class="card-meta">
-                            <span><i class="far fa-clock"></i> Fr. zur Dhuhur-Zeit</span>
-                        </div>
-                        <p>Die Predigt (Khutbah) findet auf Deutsch und Arabisch statt. Alle Geschwister sind herzlich eingeladen.</p>
-                    </div>
+                    <span class="card-tag">Freitag</span>
+                    <h3 class="card-title">Freitagsgebet</h3>
+                    <p class="card-text">Zwei-sprachige Predigt (Deutsch/Arabisch) zur Dhuhur-Zeit mit anschließendem Gemeinschaftsgebet.</p>
                 </div>
-
                 <div class="card">
-                    <div class="card-img-placeholder">
-                        <i class="fas fa-book-open"></i>
-                        <span>Samstag</span>
-                    </div>
-                    <div class="card-body">
-                        <span class="event-badge" style="background-color: var(--light-blue); color:white;">Kinder & Jugend</span>
-                        <h3 class="card-title" style="margin-top:0.5rem;">Koranstunde</h3>
-                        <div class="card-meta">
-                            <span><i class="far fa-clock"></i> Jeden Samstag</span>
-                        </div>
-                        <p>Koranunterricht für Kinder und Jugendliche mit schiitischem Lehrplan.</p>
-                    </div>
+                    <span class="card-tag">Wochenende</span>
+                    <h3 class="card-title">Unterricht & Diskussionsrunde</h3>
+                    <p class="card-text">Samstags Koranstunden für Kinder. Sonntags offene Bildungs- und Fragerunde mit dem Doktor.</p>
                 </div>
-
-                <div class="card">
-                    <div class="card-img-placeholder">
-                        <i class="fas fa-user-graduate"></i>
-                        <span>Sonntag</span>
-                    </div>
-                    <div class="card-body">
-                        <span class="event-badge" style="background-color: #2a9d8f; color:white;">Diskussion</span>
-                        <h3 class="card-title" style="margin-top:0.5rem;">Diskussionsrunde mit Doktor</h3>
-                        <div class="card-meta">
-                            <span><i class="far fa-clock"></i> Jeden Sonntag</span>
-                        </div>
-                        <p>Spannende Diskussions- und Fragerunde zu vertiefenden religiösen und gesellschaftlichen Themen mit dem Doktor.</p>
-                    </div>
-                </div>
-
             </div>
 
-            <!-- PROGRAMM MAINZ-KASTEL (Standardmäßig ausgeblendet) -->
+            <!-- PROGRAMM MAINZ-KASTEL -->
             <div id="program-kastel" class="grid" style="display: none;">
-                
                 <div class="card">
-                    <div class="card-img-placeholder">
-                        <i class="fas fa-moon"></i>
-                        <span>Donnerstag Abend</span>
-                    </div>
-                    <div class="card-body">
-                        <span class="event-badge">Wöchentlich</span>
-                        <h3 class="card-title" style="margin-top:0.5rem;">Donnerstagabend Programm</h3>
-                        <div class="card-meta">
-                            <span><i class="far fa-clock"></i> Jeden Donnerstag</span>
-                        </div>
-                        <p>Gemeinsames Abendprogramm mit Bittgebeten (Dua) und Vortrag in Mainz-Kastel.</p>
-                    </div>
+                    <span class="card-tag">Donnerstag</span>
+                    <h3 class="card-title">Abendprogramm</h3>
+                    <p class="card-text">Gemeinsames Abendprogramm mit Bittgebeten und Austausch in Mainz-Kastel.</p>
                 </div>
-
                 <div class="card">
-                    <div class="card-img-placeholder">
-                        <i class="fas fa-child"></i>
-                        <span>Samstag Morgen</span>
-                    </div>
-                    <div class="card-body">
-                        <span class="event-badge" style="background-color: var(--light-blue); color:white;">Kinder</span>
-                        <h3 class="card-title" style="margin-top:0.5rem;">Kinder-Koranstunde</h3>
-                        <div class="card-meta">
-                            <span><i class="far fa-clock"></i> Jeden Samstag ab 10:00 Uhr</span>
-                        </div>
-                        <p>Spielerische Koranstunde und islamische Grundlagen speziell für unsere Kinder ab 10:00 Uhr morgens.</p>
-                    </div>
+                    <span class="card-tag">Samstag</span>
+                    <h3 class="card-title">Kinder-Koranstunde</h3>
+                    <p class="card-text">Spielerische Vermittlung islamischer Grundlagen und Koranunterricht ab 10:00 Uhr morgens.</p>
                 </div>
-
             </div>
-
         </div>
 
-        <!-- ================= TAB 2: GESCHICHTEN & LERNEN (PROPHET & DIE 12 IMAME) ================= -->
-        <div id="kids-stories" class="tab-content">
-            <h2 class="section-title">Geschichten & Biografien der Ahlulbayt (a.s.)</h2>
-            <p style="text-align: center; margin-bottom: 2rem; color: #555;">
-                Klicke auf den Namen einer Person, um ihre vollständige Lebensgeschichte verständlich für Kinder und Jugendliche zu lesen!
-            </p>
+        <!-- ================= TAB 2: AUSFÜHRLICHE GESCHICHTEN & IMAME ================= -->
+        <div id="stories" class="tab-content">
+            <div class="section-header">
+                <h2>Die 14 Infalliblen (Ahlulbayt)</h2>
+                <p>Umfassende historische Biografien des Propheten, Lady Fatima und der 12 Imame (a.s.). Klicke auf eine Person für vertiefte Details.</p>
+            </div>
 
             <div class="bio-accordion">
 
                 <!-- PROPHET MUHAMMAD (S.A.A.S.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
-                        <h3><i class="fas fa-star" style="color:var(--accent-gold);"></i> Prophet Muhammad (s.a.a.s.) <span class="badge-tag">Siegel der Propheten</span></h3>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
+                        <h3>Prophet Muhammad <span class="bio-subtitle">(s.a.a.s.) — Das Siegel der Propheten</span></h3>
                     </div>
                     <div class="bio-content">
                         <div class="bio-fact-box">
-                            <strong>Geburt:</strong> In Mekka (Jahr des Elefanten)<br>
-                            <strong>Titel:</strong> Al-Amin (Der Vertrauenswürdige), As-Sadiq (Der Wahrhaftige)<br>
-                            <strong>Besonderheit:</strong> Der allerletzte Prophet Allahs und Überbringer des Heiligen Korans.
+                            <strong>Geburt:</strong> 570 n. Chr. (Jahr des Elefanten) in Mekka | <strong>Hinscheiden:</strong> 632 n. Chr. in Medina<br>
+                            <strong>Bekannte Titel:</strong> Al-Amin (Der Vertrauenswürdige), As-Sadiq (Der Wahrhaftige), Habibullah (Geliebter Gottes).
                         </div>
-                        <p><strong>Kindheit und Jugend:</strong> Prophet Muhammad (s.a.a.s.) wuchs als Waisenkind in Mekka auf. Schon als junger Mann war er bei allen Menschen dafür bekannt, dass er niemals log und immer ehrlich war. Deshalb nannten die Menschen ihn "Al-Amin" (den Vertrauenswürdigen).</p>
-                        <p><strong>Die erste Offenbarung:</strong> Im Alter von 40 Jahren zog er sich oft in die Höhle Hira zurück, um über Gott nachzudenken. Eines Tages erschien ihm der Engel Jibrail (Gabriel) und brachte ihm die ersten Verse des Korans. Damit begann seine Mission als Prophet Allahs.</p>
-                        <p><strong>Die Auswanderung (Hijrah):</strong> Die Götzendiener in Mekka behandelten die Muslime sehr schlecht. Deshalb wanderte der Prophet mit den Muslimen nach Medina aus. Dort gründete er eine Gemeinschaft voller Geschwisterlichkeit, Liebe und Gerechtigkeit.</p>
-                        <p><strong>Ghadir Khumm:</strong> Auf seiner letzten Pilgerfahrt nahm der Prophet die Hand von Imam Ali (a.s.) und sagte vor tausenden Muslimen: <em>„Wessen Herrn ich bin, dessen Herr ist auch Ali.“</em> Er lehrte uns, dem Koran und seiner reinen Familie (Ahlulbayt) zu folgen.</p>
+                        <span class="bio-section-title">Kindheit und Jugend:</span>
+                        <p>Prophet Muhammad (s.a.a.s.) wurde in Mekka im edlen Stamm der Quraisch geboren. Sein Vater Abdullah verstarb noch vor seiner Geburt, und seine Mutter Amina ging dahin, als er gerade sechs Jahre alt war. Aufgewachsen unter der Fürsorge seines Großvaters Abdul-Muttalib und später seines verlässlichen Onkels Abu Talib, zeichnete er sich schon in jungen Jahren durch exzellenten Charakter, Lauterkeit und unerschütterliche Wahrhaftigkeit aus. Die Bewohner Mekkas nannten ihn ehrfurchtsvoll <em>Al-Amin</em>.</p>
+                        
+                        <span class="bio-section-title">Die Offenbarung und die meckanische Phase:</span>
+                        <p>Im Alter von 40 Jahren zog sich Muhammad regelmäßig zur Meditation in die Höhle Hira auf dem Berg al-Nur zurück. Dort erschien ihm der Engel Jibrail (Gabriel) und übermittelte die ersten Worte des Heiligen Korans: <em>„Lies im Namen deines Herrn...“</em>. In den ersten 13 Jahren der Verkündigung erlitten er und seine wenigen Gefährten schwere Verfolgung, Isolation und Boikotte durch die meckanische Elite.</p>
+
+                        <span class="bio-section-title">Die Auswanderung (Hijrah) und der Staat von Medina:</span>
+                        <p>622 n. Chr. folgte die Auswanderung nach Medina (Yathrib). Dort begründete der Prophet die Charta von Medina – eine der ersten Verfassungen der Welt, die Religionsfreiheit, gesellschaftlichen Frieden und Bündnisse zwischen verschiedenen Stämmen garantierte. Er vereinte die verfeindeten Stämme der Auswanderer (Muhajirun) und Helfer (Ansar) zu einer brüderlichen Gemeinschaft.</p>
+
+                        <span class="bio-section-title">Das Ereignis von Ghadir Khumm und das Vermächtnis:</span>
+                        <p>Auf dem Rückweg von seiner letzten Wallfahrt (Hajjat al-Wida) im Jahr 632 n. Chr. versammelte der Prophet bei der Oase Ghadir Khumm zehntausende Muslime. Er hielt eine historische Ansprache, hob den Arm von Ali ibn Abi Talib (a.s.) und verkündete: <em>„Wessen Herr (Mawla) ich bin, dessen Herr ist auch Ali.“</em> Er hinterließ der Menschheit zwei unzertrennliche Säulen: den Koran und seine reine Familie (Ahlulbayt).</p>
+                    </div>
+                </div>
+
+                <!-- FATIMA AZ-ZAHRA (S.A.) -->
+                <div class="bio-item">
+                    <div class="bio-header" onclick="toggleBio(this)">
+                        <h3>Fatima az-Zahra <span class="bio-subtitle">(s.a.) — Die Herrin aller Frauen</span></h3>
+                    </div>
+                    <div class="bio-content">
+                        <div class="bio-fact-box">
+                            <strong>Geburt:</strong> Mekka | <strong>Hinscheiden:</strong> 11 n. Hijra in Medina<br>
+                            <strong>Bekannte Titel:</strong> Sayyidat Nisa al-Alamin (Herrin der Frauen der Welten), Az-Zahra (Die Leuchtende), Ummu Abiha.
+                        </div>
+                        <span class="bio-section-title">Leben an der Seite des Propheten:</span>
+                        <p>Lady Fatima (s.a.) ist die geliebte Tochter des Propheten Muhammad (s.a.a.s.) und Lady Khadijas. Nach dem Tod ihrer Mutter stand sie ihrem Vater in schwersten Zeiten der Verfolgung unterstützend bei. Der Prophet nannte sie ehrfurchtsvoll <em>"Ummu Abiha"</em> (Mutter ihres Vaters) für ihre tiefe Fürsorge und spirituelle Bindung.</p>
+
+                        <span class="bio-section-title">Ehe und Familie:</span>
+                        <p>Ihre Ehe mit Imam Ali ibn Abi Talib (a.s.) gilt im Islam als das Vorbild einer perfekten spirituellen Partnerschaft. Aus dieser Ehe gingen Imam Hassan, Imam Hussein, Lady Zaynab und Lady Umm Kulthum hervor – die Wurzeln der reinen Nachkommenschaft des Propheten.</p>
+
+                        <span class="bio-section-title">Standhaftigkeit und Erbe:</span>
+                        <p>Lady Fatima verkörpert Gottesfurcht, Intellekt und soziale Verantwortung. Nach dem Ableben des Propheten stand sie aufrechten Mutes für das göttliche Recht des Imamats ein. Ihre berühmte Rede (Khutba al-Fadakiyya) bleibt ein zeitloses Zeugnis für Gerechtigkeit, Wahrheit und rechtliche Argumentation im Islam.</p>
                     </div>
                 </div>
 
                 <!-- 1. IMAM ALI (A.S.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
-                        <h3><i class="fas fa-shield-halved" style="color:#2a9d8f;"></i> 1. Imam Ali ibn Abi Talib (a.s.) <span class="badge-tag">Amir al-Mu'minin</span></h3>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
+                        <h3>1. Imam Ali ibn Abi Talib <span class="bio-subtitle">(a.s.) — Fürst der Gläubigen</span></h3>
                     </div>
                     <div class="bio-content">
                         <div class="bio-fact-box">
-                            <strong>Geburt:</strong> In der Heiligen Kaaba in Mekka<br>
-                            <strong>Titel:</strong> Asadullah (Löwe Gottes), Fürst der Gläubigen
+                            <strong>Geburt:</strong> 13. Rajab, im Inneren der Heiligen Kaaba in Mekka | <strong>Märtyrertum:</strong> 21. Ramadan 661 n. Chr. in Kufa<br>
+                            <strong>Hauptwerk:</strong> Nahj al-Balagha (Pfad der Wohlredsamkeit).
                         </div>
-                        <p>Imam Ali (a.s.) ist als einziger Mensch direkt im Inneren der heiligen Kaaba geboren worden. Er wuchs im Hause des Propheten Muhammad (s.a.a.s.) auf und war der erste Mann, der den Islam annahm.</p>
-                        <p>Er war berühmt für seinen unglaublichen Mut in den Schlachten, sein tiefes Wissen und seine Nächstenliebe. Nachts trug er heimlich Essen zu den armen Waisenkindern, ohne dass sie wussten, wer er war. Der Prophet sagte über ihn: „Ich bin die Stadt des Wissens und Ali ist ihr Tor.“</p>
+                        <span class="bio-section-title">Einzigartige Geburt und Erziehung:</span>
+                        <p>Imam Ali (a.s.) ist das einzige menschliche Wesen, das im Inneren der heiligen Kaaba in Mekka geboren wurde. Er wuchs von klein auf im Hause des Propheten auf, erlernte das Wissen der Offenbarung aus erster Hand und war der erste Mann, der den Islam annahm.</p>
+
+                        <span class="bio-section-title">Tapferkeit, Wissen und Justiz:</span>
+                        <p>Er war der unerschütterliche Beschützer des Islam in Schlachten wie Badr, Uhud, Khaybar und Khandaq. Doch über seine militärische Stärke hinaus war er berühmt für sein profundes Wissen, seine absolute Gerechtigkeit und seine unübertroffene Eloquenz. Seine Predigten, Briefe und Weisheiten sind im Werk <em>Nahj al-Balagha</em> verewigt.</p>
+
+                        <span class="bio-section-title">Kalifat und Märtyrertum:</span>
+                        <p>Nach dem Tod des dritten Kalifen übernahm Imam Ali das Kalifat auf dringenden Wunsch des Volkes. Während seiner fünfjährigen Regierungszeit setzte er strikte soziale Gerechtigkeit durch, schützte die Staatskasse vor Korruption und verteidigte die Armen. Er wurde während des Frühgebets in der Moschee von Kufa vom Attentäter Ibn Muljam mit einem vergifteten Schwert tödlich verwundet.</p>
                     </div>
                 </div>
 
                 <!-- 2. IMAM HASSAN (A.S.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
-                        <h3><i class="fas fa-handshake" style="color:#48cae4;"></i> 2. Imam Hassan al-Mujtaba (a.s.) <span class="badge-tag">Der Großzügige</span></h3>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
+                        <h3>2. Imam Hassan al-Mujtaba <span class="bio-subtitle">(a.s.) — Der Großzügige</span></h3>
                     </div>
                     <div class="bio-content">
                         <div class="bio-fact-box">
-                            <strong>Geburt:</strong> Medina<br>
-                            <strong>Eigenschaft:</strong> Der Friedensstifter und Beschützer der Muslime
+                            <strong>Geburt:</strong> 3. n. Hijra in Medina | <strong>Märtyrertum:</strong> 50 n. Hijra in Medina (durch Gift)<br>
+                            <strong>Bekannte Titel:</strong> Al-Mujtaba (Der Auserwählte), Karim Ahl al-Bayt (Der Großzügige der Ahlulbayt).
                         </div>
-                        <p>Imam Hassan (a.s.) war der älteste Enkel des Propheten. Der Prophet liebte ihn und seinen Bruder Hussein über alles und nannte sie "die Führer der Jugendlichen im Paradies".</p>
-                        <p>Imam Hassan war bekannt für seine extreme Großzügigkeit; er spendete mehrmals sein gesamtes Vermögen an die Armen. Um das Leben der Muslime zu schützen und Blutvergießen zu verhindern, schloss er einen klugen Friedensvertrag ab.</p>
+                        <span class="bio-section-title">Persönlichkeit und Charakter:</span>
+                        <p>Imam Hassan (a.s.) war der älteste Enkel des Propheten Muhammad (s.a.a.s.). Er glich dem Propheten in Äußerlichkeit und Charakter am stärksten. Bekannt für seine legendäre Großzügigkeit, teilte er dreimal in seinem Leben sein gesamtes Vermögen mit den Armen und Hilfsbedürftigen.</p>
+
+                        <span class="bio-section-title">Der Friedensvertrag:</span>
+                        <p>Nach dem Märtyrertum seines Vaters Imam Ali übernahm Imam Hassan die Führung der Muslime. Um einen drohenden Bürgerkrieg abzuwenden, der die verbleibende Schar der wahrhaftigen Gläubigen vernichtet hätte, schloss er einen strategischen Friedensvertrag mit Muawiya. Dieser Vertrag legte Bedingungen fest, die später das unislamische Verhalten des Regimes offenlegten und die Grundlagen für den Erhalt des wahren Glaubens sicherten.</p>
                     </div>
                 </div>
 
                 <!-- 3. IMAM HUSSEIN (A.S.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
-                        <h3><i class="fas fa-heart" style="color:#e63946;"></i> 3. Imam Hussein (a.s.) <span class="badge-tag">Sayyid al-Shuhada</span></h3>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
+                        <h3>3. Imam Hussein <span class="bio-subtitle">(a.s.) — Sayyid al-Shuhada (Herr der Märtyrer)</span></h3>
                     </div>
                     <div class="bio-content">
                         <div class="bio-fact-box">
-                            <strong>Ereignis:</strong> Die Tragödie von Kerbela (Ashura)<br>
-                            <strong>Botschaft:</strong> Niemals Ungerechtigkeit akzeptieren
+                            <strong>Geburt:</strong> 4. n. Hijra in Medina | <strong>Märtyrertum:</strong> 10. Muharram 61 n. Hijra (680 n. Chr.) in Kerbela<br>
+                            <strong>Ereignis:</strong> Die Epoche von Ashura | <strong>Botschaft:</strong> „Niemals Erniedrigung!“ (Hayhat minna adh-Dhilla).
                         </div>
-                        <p>Imam Hussein (a.s.) stand auf, als der ungerechte Herrscher Yazid versuchte, den Islam zu zerstören. Am Tag von Ashura (10. Muharram) kämpfte Imam Hussein mit 72 treuen Gefährten in Kerbela für Wahrheit und Freiheit.</p>
-                        <p>Obwohl er und seine Familie in der Wüste Durst litten, gab er niemals nach. Bis heute erinnern wir uns an Kerbela, um zu lernen, immer mutig für das Gute einzustehen.</p>
+                        <span class="bio-section-title">Der Aufstand gegen die Tyrannei:</span>
+                        <p>Als der umayyadische Herrscher Yazid I. die Führung beanspruchte und forderte, dass Imam Hussein ihm den Treueeid leistet, weigerte sich der Imam entschieden. Yazids Herrschaft widersprach allen moralischen und religiösen Grundsätzen des Islam. Imam Hussein erklärte: <em>„Ich bin nicht für Unruhe oder Machtgelüste aufgestanden, sondern um die Gemeinschaft meines Großvaters zu reformieren.“</em></p>
+
+                        <span class="bio-section-title">Die Tragödie von Kerbela:</span>
+                        <p>Am 10. Muharram (Ashura) 61 n. Hijra wurden Imam Hussein, seine Familie und 72 treue Gefährte in den Wüstenebenen von Kerbela von einer zehntausendfach überlegenen Armee kesselartig umzingelt und vom Wasser abgeschnitten. Trotz unvorstellbaren Leids gaben sie ihren Glauben nicht auf. Das historische Opfer von Imam Hussein rettete die Essenz des Islam vor dem endgültigen Verfall und dient bis heute als weltweites Symbol gegen Unterdrückung.</p>
                     </div>
                 </div>
 
                 <!-- 4. IMAM SAJJAD (A.S.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
-                        <h3><i class="fas fa-pray" style="color:#0d1b2a;"></i> 4. Imam Ali ibn al-Hussein (a.s.) <span class="badge-tag">Zayn al-Abidin</span></h3>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
+                        <h3>4. Imam Ali ibn al-Hussein <span class="bio-subtitle">(a.s.) — Zain al-Abidin</span></h3>
                     </div>
                     <div class="bio-content">
                         <div class="bio-fact-box">
-                            <strong>Titel:</strong> Schmuck der Anbetenden<br>
-                            <strong>Vermächtnis:</strong> Das Gebetsbuch "Al-Sahifa al-Sajjadiyya"
+                            <strong>Geburt:</strong> 38 n. Hijra in Medina | <strong>Märtyrertum:</strong> 95 n. Hijra in Medina<br>
+                            <strong>Bekannte Titel:</strong> Zain al-Abidin (Schmuck der Anbetenden), Sajjad (Der sich intensiv Niederwerfende)<br>
+                            <strong>Hauptwerk:</strong> Al-Sahifa al-Sajjadiyya (Das Psalter der Ahlulbayt).
                         </div>
-                        <p>Imam Sajjad (a.s.) erlebte Kerbela als junger Mann, war aber schwer krank und konnte nicht kämpfen. Danach verbreitete er die wahre Botschaft des Islam durch wunderschöne Bittgebete.</p>
-                        <p>Seine Gebete lehren uns, wie man zu Allah spricht, wie man dankbar ist und wie man gute Manieren gegenüber den Eltern und Mitmenschen zeigt.</p>
+                        <span class="bio-section-title">Nach Kerbela und Zeugnis:</span>
+                        <p>Imam Sajjad (a.s.) überlebte die Tragödie von Kerbela, da er an jenem Tag schwer krank war. Zusammen mit seiner Tante Lady Zaynab (s.a.) übernahm er die Aufgabe, die Ummah über die Gräueltaten des Regimes aufzuklären. Seine mutigen Reden im Palast von Kufa und Damaskus brachten die Diktatur ins Wanken.</p>
+
+                        <span class="bio-section-title">Widerstand durch Anbetung und Wissen:</span>
+                        <p>In einer Ära extremer politischer Repression wählte Imam Sajjad das Gebet, die Tränen und die Bildung als Mittel des gesellschaftlichen Widerstands. Seine gesammelten Bittgebete in <em>Al-Sahifa al-Sajjadiyya</em> sind ein Meisterwerk der islamischen Mystik, Philosophie und Menschenrechtsethik (z.B. Risalat al-Huquq – Traktat über die Rechte).</p>
                     </div>
                 </div>
 
                 <!-- 5. IMAM BAQIR (A.S.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
-                        <h3><i class="fas fa-book" style="color:#2a9d8f;"></i> 5. Imam Muhammad al-Baqir (a.s.) <span class="badge-tag">Baqir al-Uloom</span></h3>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
+                        <h3>5. Imam Muhammad al-Baqir <span class="bio-subtitle">(a.s.) — Baqir al-Uloom</span></h3>
                     </div>
                     <div class="bio-content">
                         <div class="bio-fact-box">
-                            <strong>Titel:</strong> Der das Wissen spaltet/öffnete
+                            <strong>Geburt:</strong> 57 n. Hijra in Medina | <strong>Märtyrertum:</strong> 114 n. Hijra in Medina<br>
+                            <strong>Bedeutung des Titels:</strong> Baqir al-Uloom (Der das Wissen eröffnet / spaltet).
                         </div>
-                        <p>Imam Baqir (a.s.) öffnete die Türen der Wissenschaft und Religion. Er unterrichtete hunderte Schüler in Koran, Mathematik, Medizin und Ethik und gründete die große islamische Universität.</p>
+                        <span class="bio-section-title">Wissenschaftlicher Aufbruch:</span>
+                        <p>Imam Baqir (a.s.) erlebte als Kleinkind die Tragödie von Kerbela. In seiner Amtszeit nutzte er den geschichtlichen Übergang und die Erschütterung der Umayyaden-Dynastie, um eine beispiellose wissenschaftliche Renaissance einzuleiten.</p>
+
+                        <span class="bio-section-title">Gründung der universitären Bewegung:</span>
+                        <p>Er begründete in Medina die akademischen Grundlagen für Koranexegese (Tafsir), Jurisprudenz (Fiqh), Theologie (Kalam) und Naturwissenschaften. Er legte das Fundament, auf dem später Tausende Gelehrte ausgebildet wurden.</p>
                     </div>
                 </div>
 
                 <!-- 6. IMAM SADIQ (A.S.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
-                        <h3><i class="fas fa-graduation-cap" style="color:#d4af37;"></i> 6. Imam Ja'far al-Sadiq (a.s.) <span class="badge-tag">As-Sadiq</span></h3>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
+                        <h3>6. Imam Ja'far al-Sadiq <span class="bio-subtitle">(a.s.) — As-Sadiq (Der Wahrhaftige)</span></h3>
                     </div>
                     <div class="bio-content">
                         <div class="bio-fact-box">
-                            <strong>Titel:</strong> Der Wahrhaftige<br>
-                            <strong>Bedeutung:</strong> Gründer der schiitischen Rechtsschule (Ja'fari)
+                            <strong>Geburt:</strong> 83 n. Hijra in Medina | <strong>Märtyrertum:</strong> 148 n. Hijra in Medina<br>
+                            <strong>Bedeutung:</strong> Namensgeber der Ja'faritischen Rechtsschule (Fiqh Ja'fari).
                         </div>
-                        <p>Imam Sadiq (a.s.) bildete über 4000 Gelehrte aus, darunter nicht nur Religionsgelehrte, sondern auch Pionier-Wissenschaftler wie Jabir ibn Hayyan (Vater der Chemie). Er lehrte Logik, Gerechtigkeit und Liebe.</p>
+                        <span class="bio-section-title">Die Blütezeit des Wissens:</span>
+                        <p>Unter der Führung von Imam Ja'far al-Sadiq (a.s.) erlebte die wissenschaftliche Tradition der Ahlulbayt ihren Höhepunkt. Über 4.000 Gelehrte, Juristen, Philosophen und Naturwissenschaftler studierten in seinen Lehrkreisen in Medina.</p>
+
+                        <span class="bio-section-title">Einfluss auf die Wissenschaftswelt:</span>
+                        <p>Zu seinen Schülern gehörten nicht nur bedeutende islamische Denker, sondern auch Wegbereiter der Naturwissenschaften wie Jabir ibn Hayyan (Geber), der Vater der modernen Chemie. Imam Sadiq systematisiere die schiitische Rechtsprechung und betonte stets den Vorrang des Verstandes (Aql) im Glauben.</p>
                     </div>
                 </div>
 
                 <!-- 7. IMAM KAZIM (A.S.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
-                        <h3><i class="fas fa-feather" style="color:#48cae4;"></i> 7. Imam Musa al-Kazim (a.s.) <span class="badge-tag">Al-Kazim</span></h3>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
+                        <h3>7. Imam Musa al-Kazim <span class="bio-subtitle">(a.s.) — Al-Kazim</span></h3>
                     </div>
                     <div class="bio-content">
                         <div class="bio-fact-box">
-                            <strong>Titel:</strong> Der seine Wut Zügelnde
+                            <strong>Geburt:</strong> 128 n. Hijra in Abwa | <strong>Märtyrertum:</strong> 183 n. Hijra in Bagdad<br>
+                            <strong>Bedeutung des Titels:</strong> Al-Kazim (Der seine Wut Beherrschende / Geduldige).
                         </div>
-                        <p>Imam Kazim (a.s.) verbrachte viele Jahre seines Lebens zu Unrecht im Gefängnis. Trotz der harten Umstände verlor er nie sein Lächeln, betete stundenlang und begegnete selbst seinen Feinden mit Sanftmut.</p>
+                        <span class="bio-section-title">Geduld unter Tyrannei:</span>
+                        <p>Imam Musa al-Kazim (a.s.) lebte in einer Ära schwerer Verfolgung durch die abbasidischen Kalifen, insbesondere unter Harun al-Raschid. Große Teile seines Lebens verbrachte der Imam in dunklen Verliesen und Isolationshaft.</p>
+
+                        <span class="bio-section-title">Spirituelle Standhaftigkeit:</span>
+                        <p>Trotz der jahrelangen harten Gefängnisbedingungen verwandelte der Imam seine Zelle in einen Ort der intensiven Gottesanbetung und des Gebets. Selbst seine Gefängniswärter waren oft von seiner Sanftmut, Güte und geistigen Erhabenheit tief gerührt. Er erlitt schließlich das Märtyrertum durch Vergiftung auf Befehl Harun al-Raschids.</p>
                     </div>
                 </div>
 
                 <!-- 8. IMAM REZA (A.S.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
-                        <h3><i class="fas fa-sun" style="color:#d4af37;"></i> 8. Imam Ali al-Reza (a.s.) <span class="badge-tag">Sonne von Khorasan</span></h3>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
+                        <h3>8. Imam Ali al-Reza <span class="bio-subtitle">(a.s.) — Die Sonne von Khorasan</span></h3>
                     </div>
                     <div class="bio-content">
                         <div class="bio-fact-box">
-                            <strong>Schrein:</strong> Mashhad (Iran)
+                            <strong>Geburt:</strong> 148 n. Hijra in Medina | <strong>Märtyrertum:</strong> 203 n. Hijra in Mashhad (Iran)<br>
+                            <strong>Ruhestätte:</strong> Heiliger Schrein in Mashhad.
                         </div>
-                        <p>Imam Reza (a.s.) war bekannt für seine großen Debatten mit Gelehrten aus aller Welt (Christen, Juden, Philosophen). Er beantwortete alle Fragen mit Logik und Respekt. Er wird auch als Beschützer der Hilflosen geliebt.</p>
+                        <span class="bio-section-title">Erzwungene Nachfolge und Reisen:</span>
+                        <p>Der abbasidische Kalif al-Ma'mun zwang Imam Reza (a.s.), von Medina nach Merv (im heutigen Turkmenistan/Iran) zu reisen, und ernannte ihn aus rein politischem Kalkül zum Thronfolger, um die rebellierende Bevölkerung zu beruhigen. Der Imam nahm den Titel nur unter der Bedingung an, sich nicht in politische Alltagsentscheidungen einzumischen.</p>
+
+                        <span class="bio-section-title">Interreligiöse Disputationen:</span>
+                        <p>Al-Ma'mun veranstaltete gigantische Debattenforen, in denen Imam Reza auf Führungspersönlichkeiten des Judentums, Christentums, Zoroastrismus sowie auf gnostische Philosophen traf. Durch tiefgründige Logik, Kenntnis der fremden Heiligen Schriften und absoluten Respekt überzeugte der Imam seine Gesprächspartner und hinterließ ein unvergängliches Erbe des interreligiösen Dialogs.</p>
                     </div>
                 </div>
 
                 <!-- 9. IMAM JAWAD (A.S.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
-                        <h3><i class="fas fa-lightbulb" style="color:#2a9d8f;"></i> 9. Imam Muhammad al-Jawad (a.s.) <span class="badge-tag">Al-Jawad</span></h3>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
+                        <h3>9. Imam Muhammad al-Jawad <span class="bio-subtitle">(a.s.) — Al-Jawad (Der Freigiebige)</span></h3>
                     </div>
                     <div class="bio-content">
                         <div class="bio-fact-box">
-                            <strong>Besonderheit:</strong> Wurde bereits im Kindesalter Imam
+                            <strong>Geburt:</strong> 195 n. Hijra in Medina | <strong>Märtyrertum:</strong> 220 n. Hijra in Bagdad<br>
+                            <strong>Besonderheit:</strong> Übernahme des Imamats im Kindesalter (ca. 8 Jahre).
                         </div>
-                        <p>Imam Jawad (a.s.) übernahm das Imamat schon in sehr jungen Jahren. Trotz seines jungen Alters beeindruckte er die gelehrtesten Männer des Reiches mit seinem unerschöpflichen Wissen.</p>
+                        <span class="bio-section-title">Göttlich verliehenes Wissen:</span>
+                        <p>Imam Jawad (a.s.) übernahm das Imamat bereits in sehr jungen Jahren nach dem Märtyrertum seines Vaters. Dies führte zu Erstaunen und Zweifeln bei vielen Zeitgenossen. Bei großen öffentlichen Gelehrtenversammlungen in Bagdad beantwortete der junge Imam jedoch hunderte hochkomplexe juristische und theologische Fragen spielend und bewies sein von Gott verliehenes Wissen (Ilm Ladunni).</p>
+
+                        <span class="bio-section-title">Kurzes, wirkungsvolles Leben:</span>
+                        <p>Trotz strenger Überwachung durch den abbasidischen Hof setzte er sich energisch für die Rechte der Armen ein und stärkte das gelehrte Netzwerk der schiitischen Gemeinschaft, bevor er im jungen Alter von nur 25 Jahren vergiftet wurde.</p>
                     </div>
                 </div>
 
                 <!-- 10. IMAM HADI (A.S.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
-                        <h3><i class="fas fa-compass" style="color:#0d1b2a;"></i> 10. Imam Ali al-Hadi (a.s.) <span class="badge-tag">Al-Hadi</span></h3>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
+                        <h3>10. Imam Ali al-Hadi <span class="bio-subtitle">(a.s.) — Al-Hadi (Der Rechtleitende)</span></h3>
                     </div>
                     <div class="bio-content">
                         <div class="bio-fact-box">
-                            <strong>Titel:</strong> Der Reines Führende
+                            <strong>Geburt:</strong> 212 n. Hijra nahe Medina | <strong>Märtyrertum:</strong> 254 n. Hijra in Samarra<br>
+                            <strong>Wichtiges Erbe:</strong> Verfassung der Ziyarat al-Jami'a al-Kabira.
                         </div>
-                        <p>Imam Hadi (a.s.) verfasste die berühmte "Ziyarat al-Jami'a al-Kabira", welche die hohe Stellung der Ahlulbayt beschreibt. Er führte die Muslime streng bewacht aus der Stadt Samarra.</p>
+                        <span class="bio-section-title">Verbannung nach Samarra:</span>
+                        <p>Imam Ali al-Hadi (a.s.) wurde vom abbasidischen Kalifen al-Mutawakkil gewaltsam von Medina in die Garnisonsstadt Samarra umgesiedelt, um ihn unter ständige militärische Kontrolle zu stellen. Trotz dieser Isolation gelang es ihm, die Gemeinschaft zu leiten.</p>
+
+                        <span class="bio-section-title">Das Netz der Stellvertreter (Wukala):</span>
+                        <p>Er baute ein weltweites, im Verborgenen arbeitendes Netzwerk von Stellvertretern auf, um Gebote, rechtliche Antworten und Spenden sicher zu übermitteln. Zudem hinterließ er die <em>Ziyarat al-Jami'a al-Kabira</em>, ein Meisterwerk über die spirituelle Stellung der Ahlulbayt.</p>
                     </div>
                 </div>
 
                 <!-- 11. IMAM ASKARI (A.S.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
-                        <h3><i class="fas fa-fort-awesome" style="color:#48cae4;"></i> 11. Imam Hassan al-Askari (a.s.) <span class="badge-tag">Al-Askari</span></h3>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
+                        <h3>11. Imam Hassan al-Askari <span class="bio-subtitle">(a.s.) — Al-Askari</span></h3>
                     </div>
                     <div class="bio-content">
                         <div class="bio-fact-box">
-                            <strong>Bedeutung:</strong> Vater des verheißenen Erlösers
+                            <strong>Geburt:</strong> 232 n. Hijra in Medina | <strong>Märtyrertum:</strong> 260 n. Hijra in Samarra<br>
+                            <strong>Hintergrund:</strong> Leben unter reinem Hausarrest in der Militärstadt Samarra.
                         </div>
-                        <p>Imam Askari (a.s.) lebte unter strenger militärischer Überwachung. Er bereitete die Muslime darauf vor, wie sie ihren Glauben aufrechterhalten können, wenn der 12. Imam in die Verborgenheit geht.</p>
+                        <span class="bio-section-title">Vorbereitung auf die Verborgenheit:</span>
+                        <p>Imam Hassan al-Askari (a.s.) verbrachte fast sein gesamtes Leben unter strengem Hausarrest im Militärlager von Samarra (daher der Name *Al-Askari*). Die Herrscher versuchten mit allen Mitteln, die Geburt seines vorhergesagten Sohnes – des Erlösers – zu verhindern.</p>
+
+                        <span class="bio-section-title">Brücke zur Zukunft:</span>
+                        <p>Seine zentrale Aufgabe bestand darin, die Gläubigen Schritt für Schritt darauf vorzubereiten, ihren Imam nicht mehr direkt physisch konsultieren zu können, sondern sich an verlässliche, gerechte Gelehrte zu wenden.</p>
                     </div>
                 </div>
 
                 <!-- 12. IMAM MAHDI (A.J.F.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
-                        <h3><i class="fas fa-globe" style="color:var(--accent-gold);"></i> 12. Imam Muhammad al-Mahdi (a.j.f.) <span class="badge-tag">Al-Muntazar (Der Erwartete)</span></h3>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
+                        <h3>12. Imam Muhammad al-Mahdi <span class="bio-subtitle">(a.j.f.) — Al-Muntazar (Der Erwartete)</span></h3>
                     </div>
                     <div class="bio-content">
                         <div class="bio-fact-box">
-                            <strong>Status:</strong> Der lebende Imam in der Verborgenheit (Ghaybah)<br>
-                            <strong>Zukunft:</strong> Er wird erscheinen, um die Welt mit Frieden und Gerechtigkeit zu füllen.
+                            <strong>Geburt:</strong> 15. Sha'ban 255 n. Hijra in Samarra | <strong>Status:</strong> Gegenwärtiger Imam in der Verborgenheit (Ghaybah)<br>
+                            <strong>Zukunft:</strong> Welterlöser, der Gerechtigkeit und Frieden bringen wird.
                         </div>
-                        <p>Imam Mahdi (a.j.f.) ist unser 12. Imam. Er ist durch Allahs Wunder am Leben, aber für unsere Augen verborgen. Wir beten jeden Tag für sein Erscheinen. Wenn er zurückkehrt, wird er zusammen mit Prophet Isa (Jesus) Ungerechtigkeit und Armut auf der ganzen Welt beenden.</p>
+                        <span class="bio-section-title">Die Geburt und die Verborgenheit:</span>
+                        <p>Imam Muhammad al-Mahdi (a.j.f.) wurde im Verborgenen in Samarra geboren. Nach dem Märtyrertum seines Vaters trat auf göttlichen Befehl die kleine Verborgenheit (*Ghaybat al-Sughra*) ein, während der er über vier gewählte Stellvertreter mit der Ummah kommunizierte. Seit 329 n. Hijra befindet er sich in der großen Verborgenheit (*Ghaybat al-Kubra*).</p>
+
+                        <span class="bio-section-title">Die Hoffnung der Menschheit:</span>
+                        <p>Der Glauben an den Mahdi ist die Hoffnung auf das schlussendliche Siegen der Wahrheit über das Unrecht. Muslime weltweit beten für sein baldiges Erscheinen. Bei seiner Wiederkehr wird er gemeinsam mit Prophet Isa (Jesus, a.s.) die Welt von Tyrannei, Ausbeutung und Armut befreien und ein Zeitalter der universellen Gerechtigkeit etablieren.</p>
                     </div>
                 </div>
 
             </div>
         </div>
 
-        <!-- ================= TAB 3: DISKUSSIONSRUNDE ================= -->
+        <!-- ================= TAB 3: NUTZERAUSWAHL WISSEN & FIQH ================= -->
+        <div id="knowledge" class="tab-content">
+            <div class="section-header">
+                <h2>Wissen & Lehre</h2>
+                <p>Wähle ein Thema aus dem Raster, um die Details anzuzeigen:</p>
+            </div>
+
+            <!-- Interaktives Auswahl-Raster -->
+            <div class="category-grid">
+                <div class="cat-btn active" onclick="showKnowledge('fiqh', this)">Gebet & Fiqh</div>
+                <div class="cat-btn" onclick="showKnowledge('ghadir', this)">Ghadir Khumm</div>
+                <div class="cat-btn" onclick="showKnowledge('muharram', this)">Muharram & Ashura</div>
+            </div>
+
+            <!-- Detail-Inhalte -->
+            <div id="kn-fiqh" class="knowledge-detail active">
+                <h3>Gebet & Rituelle Reinheit (Fiqh)</h3>
+                <p>Nach der schiitischen Rechtsschule (Ja'fari) basiert das Gebet exakt auf den Praxis-Überlieferungen des Propheten (s.a.a.s.) und seiner Ahlulbayt (a.s.).</p>
+                <p><strong>Das Wudu (Waschung):</strong> Das Wudu beinhaltet das Waschen des Gesichts und der Arme von den Ellenbogen bis zu den Fingerspitzen (von oben nach unten). Anschließend erfolgt das Streichen (*Mas'h*) mit den feuchten Händen über den vorderen Kopfbereich und den Fußrücken – ohne erneutes Befeuchten der Hände.</p>
+                <p><strong>Das Zusammenlegen der Gebete:</strong> Es ist nach der schiitischen Jurisprudenz vollkommen zulässig, Mittags- (Dhuhur) und Nachmittagsgebete (Asr) sowie Abend- (Maghrib) und Nachtgebete (Isha) direkt hintereinander in einem Zeitfenster zu verrichten.</p>
+                <p><strong>Die Niederwerfung (Sujud):</strong> Die Niederwerfung erfolgt ausschließlich auf natürlicher Erde, Stein oder nicht-essbaren, aus der Erde wachsenden Materialien (wie Holz oder der Gebetsstein *Turbah/Mohr* aus Kerbela-Erde).</p>
+            </div>
+
+            <div id="kn-ghadir" class="knowledge-detail">
+                <h3>Ereignis von Ghadir Khumm</h3>
+                <p>Am 18. Dhu al-Hijjah des Jahres 10 n. Hijra (632 n. Chr.) versammelte der Prophet Muhammad (s.a.a.s.) auf dem Rückweg von seiner Abschiedswallfahrt über 100.000 Muslime an der Oase Ghadir Khumm.</p>
+                <p>Er hielt eine wegweisende Predigt, hob die Hand von Imam Ali ibn Abi Talib (a.s.) vor der gesamten Menge und sprach die berühmten Worte: <em>„Wessen Schutzherr (Mawla) ich bin, dessen Schutzherr ist auch Ali.“</em></p>
+                <p>Direkt im Anschluss wurde der Koranvers (Sure 5, Vers 3) offenbart: <em>„Heute habe Ich eure Religion vervollständigt und Meine Gnade an euch vollendet...“</em>. Dieses Ereignis markiert die Einsetzung der göttlichen Führung (Imamat).</p>
+            </div>
+
+            <div id="kn-muharram" class="knowledge-detail">
+                <h3>Muharram & Die Philosophie von Ashura</h3>
+                <p>Der Monat Muharram ist der erste Monat des islamischen Mondkalenders. Für Muslime weltweit ist er eine Zeit des Innehaltens, des Gedenkens und der Trauer um die Märtyrer von Kerbela.</p>
+                <p>Imam Hussein (a.s.) zog nicht in den Kampf für politische Macht oder Reichtum, sondern um das Gewissen der Menschheit wachzurütteln. Seine Bewegung zeigte, dass moralische Prinzipien und menschliche Würde niemals für weltliche Kompromisse aufgegeben werden dürfen.</p>
+                <p>Ashura ist daher keine historische Episode der Vergangenheit, sondern eine zeitlose Schule für Zivilcourage, Gerechtigkeit, Nächstenliebe und Standhaftigkeit gegen Unterdrückung.</p>
+            </div>
+        </div>
+
+        <!-- ================= TAB 4: DISKUSSIONSRUNDE ================= -->
         <div id="discussion" class="tab-content">
-            <h2 class="section-title">Offene Diskussionsrunde</h2>
-            
-            <div class="form-container">
-                <p style="text-align:center; margin-bottom: 1.5rem; color:#6c757d;">
-                    Stellen Sie eine Frage an die Gemeinde oder antworten Sie auf Fragen anderer – <strong>ohne Anmeldung oder Account!</strong>
-                </p>
+            <div class="section-header">
+                <h2>Offene Diskussionsrunde</h2>
+                <p>Fragen stellen oder Antworten schreiben – unkompliziert und ohne Registrierung.</p>
+            </div>
 
-                <!-- Neue Frage stellen -->
-                <div style="margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 2px solid #e9ecef;">
-                    <h3 style="color:var(--dark-blue); margin-bottom: 1rem;"><i class="fas fa-pen"></i> Neue Frage stellen</h3>
-                    <div class="form-group">
-                        <label>Ihr Name oder Pseudonym (optional)</label>
-                        <input type="text" id="discName" class="form-control" placeholder="z.B. Ali oder Anonym">
-                    </div>
-                    <div class="form-group">
-                        <label>Ihre Frage</label>
-                        <textarea id="discText" class="form-control" placeholder="Schreiben Sie hier Ihre Frage..."></textarea>
-                    </div>
-                    <button type="button" class="btn" onclick="addDiscussionQuestion()">Frage veröffentlichen</button>
+            <div class="form-box" style="margin-bottom: 2rem;">
+                <h3 style="margin-bottom: 1rem; color:var(--dark-blue);">Frage einreichen</h3>
+                <div class="form-group">
+                    <label>Name / Pseudonym (optional)</label>
+                    <input type="text" id="discName" class="form-control" placeholder="z. B. Ali oder Anonym">
                 </div>
+                <div class="form-group">
+                    <label>Deine Frage</label>
+                    <textarea id="discText" class="form-control" placeholder="Worüber möchtest du sprechen?"></textarea>
+                </div>
+                <button type="button" class="btn" onclick="addQuestion()">Frage veröffentlichen</button>
+            </div>
 
-                <!-- Fragen-Liste -->
-                <h3 style="color:var(--dark-blue); margin-bottom: 1rem;"><i class="fas fa-comments"></i> Aktuelle Diskussionen</h3>
-                <div id="discussionContainer">
-                    <!-- Wird dynamisch mit JavaScript gefüllt -->
-                </div>
+            <div id="discussionContainer">
+                <!-- Dynamische Inhalte -->
             </div>
         </div>
 
-        <!-- ================= TAB 4: ARABISCHER / SCHIITISCHER KALENDER ================= -->
-        <div id="calendar" class="tab-content">
-            <h2 class="section-title">Islamischer Kalender (Hijri)</h2>
-            <div class="calendar-container">
-                <div class="calendar-header">
-                    <div>
-                        <h2>Schiitische Gedenktage & Ereignisse</h2>
-                        <p style="font-size:0.9rem; color:var(--light-blue);">Wichtige Tage im islamischen Mondkalender</p>
-                    </div>
-                    <i class="fas fa-moon fa-2x" style="color: var(--accent-gold);"></i>
-                </div>
-
-                <div class="event-list">
-                    <div class="event-item">
-                        <div>
-                            <strong>10. Muharram (Ashura)</strong>
-                            <p style="font-size:0.9rem; color:#555;">Märtyrertum von Imam Hussain (a.s.) in Kerbala</p>
-                        </div>
-                        <span class="event-badge">Trauertag / Gedenken</span>
-                    </div>
-
-                    <div class="event-item">
-                        <div>
-                            <strong>20. Safar (Arbaeen)</strong>
-                            <p style="font-size:0.9rem; color:#555;">40. Tag nach Ashura – Gedenken an die Rückkehr der Ahlulbayt nach Kerbala</p>
-                        </div>
-                        <span class="event-badge">Trauertag / Gedenken</span>
-                    </div>
-
-                    <div class="event-item">
-                        <div>
-                            <strong>17. Rabi' al-Awwal</strong>
-                            <p style="font-size:0.9rem; color:#555;">Geburtstag des Propheten Muhammad (s.a.a.s.) & Imam Ja'far al-Sadiq (a.s.)</p>
-                        </div>
-                        <span class="event-badge" style="background-color:#2a9d8f; color:white;">Festtag</span>
-                    </div>
-
-                    <div class="event-item">
-                        <div>
-                            <strong>13. Rajab</strong>
-                            <p style="font-size:0.9rem; color:#555;">Geburtstag von Amir al-Mu'minin Imam Ali ibn Abi Talib (a.s.) in der Kaaba</p>
-                        </div>
-                        <span class="event-badge" style="background-color:#2a9d8f; color:white;">Festtag</span>
-                    </div>
-
-                    <div class="event-item">
-                        <div>
-                            <strong>18. Dhu al-Hijjah (Eid al-Ghadir)</strong>
-                            <p style="font-size:0.9rem; color:#555;">Ernennung von Imam Ali (a.s.) zum Nachfolger durch den Propheten (s.a.a.s.)</p>
-                        </div>
-                        <span class="event-badge" style="background-color:#2a9d8f; color:white;">Größter Festtag</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= TAB 5: LERNEN & BÜCHER ================= -->
-        <div id="learn" class="tab-content">
-            <h2 class="section-title">Wissen & Schriften</h2>
-            
-            <div class="grid" style="margin-bottom: 2rem;">
-                <div class="card">
-                    <div class="card-body">
-                        <i class="fas fa-hands-wash fa-2x" style="color:var(--light-blue); margin-bottom:1rem;"></i>
-                        <h3 class="card-title">Gebet & Wudu lernen</h3>
-                        <p>Schritt-für-Schritt-Anleitung für das rituelle Gebet und die Waschungen nach schiitischer Rechtssprechung (Fiqh).</p>
-                        <br>
-                        <a href="#" class="btn btn-light" style="font-size:0.85rem;">Anleitung öffnen</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-body">
-                        <i class="fas fa-book-quran fa-2x" style="color:var(--light-blue); margin-bottom:1rem;"></i>
-                        <h3 class="card-title">Bibliothek & Bücher</h3>
-                        <p>Zugriff auf wichtige Werke wie Nahj al-Balagha, Al-Sahifa al-Sajjadiyya und Koranübersetzungen.</p>
-                        <br>
-                        <a href="#" class="btn btn-light" style="font-size:0.85rem;">Bücher durchstöbern</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= TAB 6: MEDIATHEK / RÜCKBLICK ================= -->
-        <div id="media" class="tab-content">
-            <h2 class="section-title">Mediathek & Rückblick</h2>
-            <p style="text-align:center; margin-bottom: 2rem;">Hier finden Sie Aufzeichnungen von Vorträgen, Fotos und Berichte, falls Sie an einer Veranstaltung nicht teilnehmen konnten.</p>
-
-            <div class="grid">
-                <div class="card">
-                    <div class="card-img-placeholder" style="background-color:#000; color:white;">
-                        <i class="fas fa-play-circle fa-3x"></i>
-                        <span style="margin-top:0.5rem;">Video-Aufzeichnung</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Vortrag: Die Philosophie von Ashura</h3>
-                        <div class="card-meta">
-                            <span><i class="far fa-calendar"></i> Muharram 1448</span>
-                        </div>
-                        <p>Ein ausführlicher Vortrag über die zeitlosen Lehren von Imam Hussain (a.s.) auf Deutsch.</p>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-img-placeholder">
-                        <i class="fas fa-camera"></i>
-                        <span>Bildergalerie vom Programm</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Eindrücke vom Ghadir-Fest</h3>
-                        <div class="card-meta">
-                            <span><i class="far fa-image"></i> 12 Fotos</span>
-                        </div>
-                        <p>Bilder und Zusammenfassung unserer Feierlichkeiten zum Tag von Eid al-Ghadir.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= TAB 7: ANONYME FRAGEN AN DEN PREDIGER ================= -->
+        <!-- ================= TAB 5: ANONYME FRAGE ================= -->
         <div id="ask" class="tab-content">
-            <h2 class="section-title">Fragen im Herzen?</h2>
-            
-            <div class="form-container">
-                <p style="margin-bottom: 1.5rem; text-align:center;">
-                    Hier können Sie Ihre Fragen zu Glaubensthemen, Lebensführung oder Fiqh direkt und <strong>vollständig anonym</strong> an unseren Gelehrten / Prediger stellen.
-                </p>
+            <div class="section-header">
+                <h2>Anonyme Frage an den Prediger</h2>
+                <p>Deine vertrauliche Frage zu Fiqh, Glauben oder Lebensführung.</p>
+            </div>
 
-                <form id="anonymous-form">
+            <div class="form-box" style="max-width: 600px; margin: 0 auto;">
+                <form id="anonForm">
                     <div class="form-group">
-                        <label for="topic">Kategorie / Thema</label>
-                        <select id="topic" class="form-control">
-                            <option value="allgemein">Allgemeine Glaubensfrage</option>
-                            <option value="fiqh">Rechtslehre (Fiqh)</option>
-                            <option value="familie">Familie & Jugend</option>
-                            <option value="ethik">Ethik & Moral (Akhlaq)</option>
+                        <label>Themenbereich</label>
+                        <select class="form-control">
+                            <option>Rechtslehre (Fiqh)</option>
+                            <option>Glaube & Philosophie</option>
+                            <option>Familie & Jugend</option>
                         </select>
                     </div>
-
                     <div class="form-group">
-                        <label for="question">Ihre Frage</label>
-                        <textarea id="question" class="form-control" placeholder="Schreiben Sie hier Ihre Frage ganz unbesorgt..." required></textarea>
+                        <label>Deine Frage</label>
+                        <textarea class="form-control" required placeholder="Schreibe hier deine vertrauliche Frage..."></textarea>
                     </div>
-
-                    <p class="privacy-note">
-                        <i class="fas fa-lock"></i> Ihre Frage wird vertraulich behandelt. Es werden keinerlei IP-Adressen oder persönliche Daten gespeichert.
-                    </p>
-                    <br>
-                    <button type="submit" class="btn" style="width:100%;">Anonym absenden</button>
+                    <button type="submit" class="btn" style="width: 100%;">Anonym Absenden</button>
                 </form>
-                
-                <div id="form-success" style="display:none; text-align:center; color:green; margin-top:1rem; font-weight:bold;">
-                    <i class="fas fa-check-circle"></i> Ihre Frage wurde anonym weitergeleitet. Vielen Dank!
+                <div id="anonSuccess" style="display:none; color: green; margin-top: 1rem; text-align: center; font-size: 0.9rem;">
+                    Deine Frage wurde anonym übermittelt.
                 </div>
             </div>
         </div>
 
     </main>
 
-    <!-- FOOTER MIT DEINEM NAMEN UND KONTAKTDATEN -->
+    <!-- FOOTER -->
     <footer>
         <div class="footer-content">
             <div class="footer-column">
                 <h3>Ahlulbayt Zentrum Hessen</h3>
-                <p>Ein Treffpunkt für alle Muslime zur Stärkung der Gemeinschaft, Weiterbildung und Andacht.</p>
+                <p>Ein Ort der Besinnung, Bildung und Gemeinschaft.</p>
             </div>
             <div class="footer-column">
-                <h3>Kontakt & Anfahrt</h3>
-                <p id="footer-address"><i class="fas fa-map-marker-alt"></i> Otto-Wels-Straße 138 (Klarenthal)</p>
-                <p><i class="fas fa-user"></i> Ansprechpartner: Amir Qayumi</p>
-                <p><i class="fas fa-envelope"></i> qayumiamir10@icloud.com</p>
-                <p><i class="fas fa-phone"></i> 017660847680</p>
+                <h3>Kontakt</h3>
+                <p id="footer-address">Otto-Wels-Straße 138, Wiesbaden-Klarenthal</p>
+                <p>Ansprechpartner: Amir Qayumi</p>
+                <p>E-Mail: qayumiamir10@icloud.com</p>
+                <p>Tel: 017660847680</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Schiitische Moscheegemeinde Hessen. Erstellt von Amir Qayumi. Alle Rechte vorbehalten.</p>
+            &copy; 2026 Schiitische Moscheegemeinde Hessen. Erstellt von Amir Qayumi.
         </div>
     </footer>
 
-    <!-- JAVASCRIPT FÜR DIE INTERAKTION & LOGIK -->
+    <!-- LOGIK & SKRIPTE -->
     <script>
-        // NAVIGATION ZWISCHEN DEN TABS
+        // TAB-NAVIGATION & HEADER-STEUERUNG
         const navButtons = document.querySelectorAll('.nav-btn');
         const tabContents = document.querySelectorAll('.tab-content');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = document.getElementById('nav-links');
+        const locationBox = document.getElementById('location-box');
+        const heroTitle = document.getElementById('hero-title');
+        const heroSubtitle = document.getElementById('hero-subtitle');
 
         navButtons.forEach(button => {
             button.addEventListener('click', (e) => {
@@ -1277,6 +1002,7 @@
                 button.classList.add('active');
 
                 const targetTab = button.getAttribute('data-tab');
+                
                 tabContents.forEach(content => {
                     content.classList.remove('active');
                     if (content.id === targetTab) {
@@ -1284,21 +1010,34 @@
                     }
                 });
 
-                if (navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
+                // Standort-Kasten NUR auf der Startseite anzeigen
+                if (targetTab === 'home') {
+                    locationBox.style.display = 'block';
+                    heroTitle.innerText = "Gemeinschaft & Verstand";
+                    heroSubtitle.innerText = "Willkommen in unserer Gemeinde in Hessen.";
+                } else {
+                    locationBox.style.display = 'none';
+                    if (targetTab === 'stories') {
+                        heroTitle.innerText = "Geschichte & Biografien";
+                        heroSubtitle.innerText = "Das Leben und Wirken der Reinen Familie (a.s.).";
+                    } else if (targetTab === 'knowledge') {
+                        heroTitle.innerText = "Wissen & Fiqh";
+                        heroSubtitle.innerText = "Grundlagen der Praxis und Glaubenslehre.";
+                    } else if (targetTab === 'discussion') {
+                        heroTitle.innerText = "Diskussionsrunde";
+                        heroSubtitle.innerText = "Offener Austausch für alle Fragen.";
+                    } else if (targetTab === 'ask') {
+                        heroTitle.innerText = "Anonyme Fragen";
+                        heroSubtitle.innerText = "Vertraulicher Kontakt zum Prediger.";
+                    }
                 }
 
                 window.scrollTo({top: 0, behavior: 'smooth'});
             });
         });
 
-        // MOBILE MENU TOGGLE
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // LOGIK FÜR DIE SELEKTION DER MOSCHEE
-        function selectMosque(mosqueKey) {
+        // STANDORT-SELEKTOR LOGIK
+        function selectMosque(key) {
             const btnKlarenthal = document.getElementById('btn-klarenthal');
             const btnKastel = document.getElementById('btn-kastel');
             const progKlarenthal = document.getElementById('program-klarenthal');
@@ -1306,131 +1045,108 @@
             const progTitle = document.getElementById('program-title');
             const footerAddress = document.getElementById('footer-address');
 
-            if (mosqueKey === 'klarenthal') {
+            if (key === 'klarenthal') {
                 btnKlarenthal.classList.add('active');
                 btnKastel.classList.remove('active');
                 progKlarenthal.style.display = 'grid';
                 progKastel.style.display = 'none';
-                progTitle.innerText = "Programm für Moschee Klarenthal";
-                footerAddress.innerHTML = `<i class="fas fa-map-marker-alt"></i> Otto-Wels-Straße 138, Klarenthal`;
-            } else if (mosqueKey === 'kastel') {
+                progTitle.innerText = "Wochenprogramm (Klarenthal)";
+                footerAddress.innerText = "Otto-Wels-Straße 138, Wiesbaden-Klarenthal";
+            } else {
                 btnKastel.classList.add('active');
                 btnKlarenthal.classList.remove('active');
                 progKastel.style.display = 'grid';
                 progKlarenthal.style.display = 'none';
-                progTitle.innerText = "Programm für Moschee Mainz-Kastel";
-                footerAddress.innerHTML = `<i class="fas fa-map-marker-alt"></i> Mainz-Kastel`;
+                progTitle.innerText = "Wochenprogramm (Mainz-Kastel)";
+                footerAddress.innerText = "Mainz-Kastel";
             }
         }
 
-        // ACCORDION LOGIK FÜR DIE BIOGRAFIEN (KLICK-EFFEKT)
-        function toggleBio(headerElem) {
-            const item = headerElem.parentElement;
+        // AKKORDEON LOGIK FOR BIOGRAFIEN
+        function toggleBio(header) {
+            const item = header.parentElement;
             item.classList.toggle('active');
         }
 
-        // FORMULAR ANONYME FRAGE
-        document.getElementById('anonymous-form').addEventListener('submit', function(e) {
+        // WISSEN-SEKTION RASTER SELEKTOR
+        function showKnowledge(id, btn) {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.knowledge-detail').forEach(d => d.classList.remove('active'));
+
+            btn.classList.add('active');
+            document.getElementById('kn-' + id).classList.add('active');
+        }
+
+        // ANONYME FRAGE FORMULAR
+        document.getElementById('anonForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            document.getElementById('anonymous-form').reset();
-            document.getElementById('form-success').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('form-success').style.display = 'none';
-            }, 5000);
+            this.reset();
+            const success = document.getElementById('anonSuccess');
+            success.style.display = 'block';
+            setTimeout(() => success.style.display = 'none', 4000);
         });
 
-        // LOGIK FÜR DIE DISKUSSIONSRUNDE
-        let discussionQuestions = [
+        // DISKUSSIONS-BOARD LOGIK
+        let discussions = [
             {
                 id: 1,
                 author: "Ali",
-                text: "Wann beginnt am Donnerstagabend genau das Programm in Klarenthal?",
-                answers: [
-                    { author: "Amir Qayumi", text: "Das Programm startet in Klarenthal pünktlich um 19:00 Uhr." }
-                ]
+                text: "Wann beginnt der Vortrag am Donnerstagabend?",
+                answers: ["Amir Qayumi: Der Vortrag beginnt pünktlich um 19:00 Uhr."]
             }
         ];
 
-        function addDiscussionQuestion() {
-            const nameInput = document.getElementById('discName').value.trim();
-            const textInput = document.getElementById('discText').value.trim();
-
-            if (!textInput) {
-                alert("Bitte geben Sie eine Frage ein!");
-                return;
-            }
-
-            const newQ = {
-                id: Date.now(),
-                author: nameInput !== "" ? nameInput : "Anonym",
-                text: textInput,
-                answers: []
-            };
-
-            discussionQuestions.unshift(newQ);
-            document.getElementById('discName').value = '';
-            document.getElementById('discText').value = '';
-            renderDiscussion();
-        }
-
-        function addDiscussionAnswer(qId) {
-            const authorInput = document.getElementById(`reply-author-${qId}`).value.trim();
-            const textInput = document.getElementById(`reply-text-${qId}`).value.trim();
-
-            if (!textInput) {
-                alert("Bitte geben Sie eine Antwort ein!");
-                return;
-            }
-
-            const question = discussionQuestions.find(q => q.id === qId);
-            if (question) {
-                question.answers.push({
-                    author: authorInput !== "" ? authorInput : "Anonym",
-                    text: textInput
-                });
-                renderDiscussion();
-            }
-        }
-
-        function renderDiscussion() {
+        function renderDiscussions() {
             const container = document.getElementById('discussionContainer');
-            if (!container) return;
-            
             container.innerHTML = '';
 
-            discussionQuestions.forEach(q => {
-                const answersHTML = q.answers.map(a => `
-                    <div class="answer-card">
-                        <strong class="author-name">${a.author}:</strong> ${a.text}
-                    </div>
-                `).join('');
-
+            discussions.forEach(d => {
+                const answersHTML = d.answers.map(a => `<div class="answer-item">${a}</div>`).join('');
                 container.innerHTML += `
                     <div class="question-card">
-                        <div class="author-info">Gefragt von <span class="author-name">${q.author}</span></div>
-                        <div class="question-text">${q.text}</div>
-                        
-                        <div class="answers-list">
-                            ${answersHTML}
-                        </div>
-
-                        <div class="reply-box">
-                            <div class="form-group" style="margin-bottom:0.5rem;">
-                                <input type="text" id="reply-author-${q.id}" class="form-control" placeholder="Dein Name (optional)" style="padding:0.5rem; font-size:0.85rem;">
-                            </div>
-                            <div class="form-group" style="margin-bottom:0.5rem;">
-                                <textarea id="reply-text-${q.id}" class="form-control" placeholder="Antwort schreiben..." rows="2" style="padding:0.5rem; font-size:0.85rem;"></textarea>
-                            </div>
-                            <button type="button" class="btn btn-light" onclick="addDiscussionAnswer(${q.id})" style="padding:0.4rem 0.8rem; font-size:0.85rem;">Antworten</button>
+                        <div class="author-meta">Frage von <span class="author-name">${d.author}</span></div>
+                        <div style="font-size:1.05rem; font-weight:500; margin-bottom:0.8rem;">${d.text}</div>
+                        <div class="answers-container">${answersHTML}</div>
+                        <div style="margin-top:1rem; display:flex; gap:0.5rem;">
+                            <input type="text" id="ans-input-${d.id}" class="form-control" placeholder="Antworten..." style="padding:0.4rem; font-size:0.85rem;">
+                            <button class="btn" style="padding:0.4rem 0.8rem; font-size:0.85rem;" onclick="addAnswer(${d.id})">Antworten</button>
                         </div>
                     </div>
                 `;
             });
         }
 
-        // INITIALES LADEN DER DISKUSSIONSBEITRÄGE
-        renderDiscussion();
+        function addQuestion() {
+            const name = document.getElementById('discName').value.trim() || "Anonym";
+            const text = document.getElementById('discText').value.trim();
+
+            if (!text) return;
+
+            discussions.unshift({
+                id: Date.now(),
+                author: name,
+                text: text,
+                answers: []
+            });
+
+            document.getElementById('discName').value = '';
+            document.getElementById('discText').value = '';
+            renderDiscussions();
+        }
+
+        function addAnswer(id) {
+            const input = document.getElementById(`ans-input-${id}`);
+            const text = input.value.trim();
+            if (!text) return;
+
+            const item = discussions.find(d => d.id === id);
+            if (item) {
+                item.answers.push(`Nutzer: ${text}`);
+                renderDiscussions();
+            }
+        }
+
+        renderDiscussions();
     </script>
 </body>
 </html>
-

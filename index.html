@@ -289,7 +289,7 @@
             border: 1px dashed var(--accent-gold);
             padding: 1.5rem;
             border-radius: 6px;
-            margin-bottom: 2rem;
+            margin-top: 2rem;
         }
 
         .upload-box h3 {
@@ -659,21 +659,11 @@
                 </div>
             </div>
 
-            <!-- EVENT-MEDIEN GALERIE MIT UPLOAD-FUNKTION -->
+            <!-- EVENT-MEDIEN GALERIE -->
             <div class="media-section">
                 <div class="section-header">
                     <h2>Rückblick: Vergangene Veranstaltungen</h2>
                     <p>Eindrücke, Bilder und Videos unserer bisherigen Treffen und Feierlichkeiten.</p>
-                </div>
-
-                <!-- MEDIEN UPLOAD BEREICH -->
-                <div class="upload-box">
-                    <h3>📷 Medien verwalten (Neues Bild oder Video hochladen)</h3>
-                    <div style="display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center;">
-                        <input type="file" id="mediaFileInput" accept="image/*,video/*" class="form-control" style="max-width: 280px; padding: 0.4rem;">
-                        <input type="text" id="mediaCaptionInput" class="form-control" placeholder="Beschreibung (z.B. Fest 2026)" style="max-width: 250px; padding: 0.5rem;">
-                        <button type="button" class="btn" onclick="uploadMedia()">Hochladen</button>
-                    </div>
                 </div>
 
                 <!-- MEDIEN RASTER -->
@@ -690,6 +680,17 @@
                         <p>Vortrag & Recitation (Video-Ausschnitt)</p>
                     </div>
                 </div>
+
+                <!-- MEDIEN UPLOAD BEREICH (JETZT DIREKT UNTER DEM VIDEO / RASTER) -->
+                <div class="upload-box">
+                    <h3>📷 Mediathek / Bilder & Videos hochladen</h3>
+                    <div style="display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center;">
+                        <input type="file" id="mediaFileInput" accept="image/*,video/*" class="form-control" style="max-width: 280px; padding: 0.4rem;">
+                        <input type="text" id="mediaCaptionInput" class="form-control" placeholder="Beschreibung (z.B. Fest 2026)" style="max-width: 250px; padding: 0.5rem;">
+                        <button type="button" class="btn" onclick="uploadMedia()">Hochladen</button>
+                    </div>
+                </div>
+
             </div>
         </div>
 

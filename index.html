@@ -37,7 +37,7 @@
             color: inherit;
         }
 
-        /* ==================== HEADER & SWIPEABLE NAVIGATION ==================== */
+        /* ==================== HEADER & SWIPEABLE/DRAGGABLE NAVIGATION ==================== */
         header {
             background-color: var(--dark-blue);
             color: #ffffff;
@@ -49,9 +49,9 @@
 
         .navbar {
             display: flex;
-            flex-direction: column; /* Auf Mobilgeräten Logo über dem Menü */
+            flex-direction: column;
             align-items: center;
-            padding: 1rem 1.5rem;
+            padding: 1rem 0;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
@@ -75,19 +75,25 @@
             letter-spacing: 1px;
         }
 
-        /* HORIZONTAL SCROLLBAR / WISCHBARES MENÜ */
+        /* PERFEKT DRAGGABLE / WISCHBARES MENÜ */
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 0.5rem;
+            gap: 0.6rem;
             width: 100%;
-            overflow-x: auto; /* Aktiviert das Wischen nach links/rechts */
-            white-space: nowrap; /* Verhindert Zeilenumbruch */
-            padding: 0.4rem 0.2rem;
-            -webkit-overflow-scrolling: touch; /* Flüssiges Wischen auf iOS/iPhone */
+            overflow-x: auto;
+            padding: 0.5rem 1.2rem;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-x;
+            cursor: grab;
+            user-select: none;
         }
 
-        /* Versteckt die unschöne Scrollleiste, lässt Wischen aber aktiv */
+        .nav-links:active {
+            cursor: grabbing;
+        }
+
+        /* Versteckt die Scrollleiste */
         .nav-links::-webkit-scrollbar {
             display: none;
         }
@@ -100,30 +106,31 @@
             color: #cbd5e1;
             font-size: 0.9rem;
             font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: all 0.2s ease;
+            padding: 0.6rem 1.1rem;
+            border-radius: 6px;
+            transition: background-color 0.2s ease, color 0.2s ease;
             display: inline-block;
-            flex-shrink: 0; /* Verhindert Quetschen der Buttons */
+            flex-shrink: 0;
+            white-space: nowrap; /* Garantiert einzeilige Menüpunkte */
         }
 
         .nav-links a:hover, .nav-links a.active {
             color: #ffffff;
-            background-color: rgba(255, 255, 255, 0.12);
+            background-color: rgba(255, 255, 255, 0.15);
         }
 
         /* SHAKE ANIMATION FÜR MENÜ-BUTTONS */
         @keyframes shakeHorizontal {
             0% { transform: translateX(0); }
-            20% { transform: translateX(-6px); }
-            40% { transform: translateX(6px); }
-            60% { transform: translateX(-4px); }
-            80% { transform: translateX(4px); }
+            20% { transform: translateX(-5px); }
+            40% { transform: translateX(5px); }
+            60% { transform: translateX(-3px); }
+            80% { transform: translateX(3px); }
             100% { transform: translateX(0); }
         }
 
         .shake {
-            animation: shakeHorizontal 0.4s ease-in-out;
+            animation: shakeHorizontal 0.35s ease-in-out;
         }
 
         /* ==================== HERO & STANDORT-SELEKTOR ==================== */
@@ -308,7 +315,7 @@
             font-weight: 500;
         }
 
-        /* ==================== INTERAKTIVES KATEGORIEN-RASTER (WISSEN) ==================== */
+        /* ==================== WISSEN SEKTION ==================== */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -549,14 +556,14 @@
 </head>
 <body>
 
-    <!-- HEADER & WISCHBARES MENÜ -->
+    <!-- HEADER & WISCHBARES / DRAGGABLE MENÜ -->
     <header>
         <nav class="navbar">
             <div class="logo-text">
                 <h1>Ahlulbayt Zentrum</h1>
                 <p>Moscheegemeinde Hessen</p>
             </div>
-            <!-- Wischbare Menüleiste -->
+            <!-- Wisch- & ziehbare Menüleiste -->
             <ul class="nav-links">
                 <li><a href="#" class="nav-btn active" data-tab="home">Startseite</a></li>
                 <li><a href="#" class="nav-btn" data-tab="stories">Geschichte & Imame</a></li>
@@ -626,21 +633,18 @@
                 </div>
             </div>
 
-            <!-- EVENT-MEDIEN GALERIE (NUR VOM ADMIN BEARBElTBAR) -->
+            <!-- EVENT-MEDIEN GALERIE (EXKLUSIV ADMIN) -->
             <div class="media-section">
                 <div class="section-header">
                     <h2>Rückblick: Vergangene Veranstaltungen</h2>
                     <p>Eindrücke, Bilder und Videos unserer bisherigen Treffen und Feierlichkeiten.</p>
                 </div>
 
-                <!-- Medien-Galerie Container -->
                 <div class="media-grid">
-                    <!-- Bild-Beispiel -->
                     <div class="media-card">
                         <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=600&q=80" alt="Gemeinschaftsleben">
                         <p>Gemeinsames Iftar im Monat Ramadan</p>
                     </div>
-                    <!-- Video-Beispiel -->
                     <div class="media-card">
                         <video controls poster="https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=600&q=80">
                             <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
@@ -648,12 +652,6 @@
                         </video>
                         <p>Vortrag & Recitation (Video-Ausschnitt)</p>
                     </div>
-                    <!-- HIER KANNST DU NEUE BILDER/VIDEOS EINTRAGEN:
-                    <div class="media-card">
-                        <img src="dein-bild.jpg" alt="Beschreibung">
-                        <p>Titel des Bildes</p>
-                    </div> 
-                    -->
                 </div>
             </div>
         </div>
@@ -666,7 +664,6 @@
             </div>
 
             <div class="bio-accordion">
-                <!-- PROPHET MUHAMMAD (S.A.A.S.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
                         <h3>Prophet Muhammad <span style="font-size:0.85rem; color:var(--text-muted); font-weight:400;">(s.a.a.s.) — Das Siegel der Propheten</span></h3>
@@ -675,11 +672,10 @@
                         <div class="bio-fact-box">
                             <strong>Geburt:</strong> 570 n. Chr. in Mekka | <strong>Hinscheiden:</strong> 632 n. Chr. in Medina
                         </div>
-                        <p>Prophet Muhammad (s.a.a.s.) verkündete den Islam und veränderte den Lauf der Weltgeschichte durch seine Botschaft von Frieden, Gerechtigkeit und Monotheismus. Er hinterließ den Heiligen Koran und seine reine Familie (Ahlulbayt).</p>
+                        <p>Prophet Muhammad (s.a.a.s.) verkündete den Islam und veränderte den Lauf der Weltgeschichte durch seine Botschaft von Frieden, Gerechtigkeit und Monotheismus.</p>
                     </div>
                 </div>
 
-                <!-- FATIMA AZ-ZAHRA (S.A.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
                         <h3>Fatima az-Zahra <span style="font-size:0.85rem; color:var(--text-muted); font-weight:400;">(s.a.) — Die Herrin aller Frauen</span></h3>
@@ -688,11 +684,10 @@
                         <div class="bio-fact-box">
                             <strong>Geburt:</strong> Mekka | <strong>Hinscheiden:</strong> 11 n. Hijra in Medina
                         </div>
-                        <p>Lady Fatima (s.a.) verkörpert Gottesfurcht, Intellekt und soziale Verantwortung. Sie steht als zeitloses Vorbild für Standhaftigkeit und Gerechtigkeit.</p>
+                        <p>Lady Fatima (s.a.) verkörpert Gottesfurcht, Intellekt und soziale Verantwortung.</p>
                     </div>
                 </div>
 
-                <!-- 1. IMAM ALI (A.S.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
                         <h3>1. Imam Ali ibn Abi Talib <span style="font-size:0.85rem; color:var(--text-muted); font-weight:400;">(a.s.) — Fürst der Gläubigen</span></h3>
@@ -701,7 +696,7 @@
                         <div class="bio-fact-box">
                             <strong>Geburt:</strong> In der Kaaba | <strong>Märtyrertum:</strong> 21. Ramadan 661 n. Chr.
                         </div>
-                        <p>Imam Ali (a.s.) zeichnete sich durch seine absolute Gerechtigkeit, Unbeugsamkeit und tiefgründige Gelehrsamkeit aus. Seine Predigten sind im Werk <em>Nahj al-Balagha</em> überliefert.</p>
+                        <p>Imam Ali (a.s.) zeichnete sich durch seine absolute Gerechtigkeit, Unbeugsamkeit und tiefgründige Gelehrsamkeit aus.</p>
                     </div>
                 </div>
             </div>
@@ -714,7 +709,6 @@
                 <p>Wähle ein Hauptthema oder klicke direkt auf die Pfeiler und Zweige des Glaubens:</p>
             </div>
 
-            <!-- Interaktives Auswahl-Raster Hauptkategorien -->
             <div class="category-grid">
                 <div class="cat-btn active" onclick="showKnowledgeTab('usul', this)">Usul ad-Din</div>
                 <div class="cat-btn" onclick="showKnowledgeTab('furu', this)">10 Furu' ad-Din</div>
@@ -722,55 +716,45 @@
                 <div class="cat-btn" onclick="showKnowledgeTab('ghadir', this)">Ghadir Khumm</div>
             </div>
 
-            <!-- SEKTION: USUL AD-DIN -->
             <div id="kn-usul" class="knowledge-detail active">
                 <h3>Usul ad-Din (Die 5 Grundpfeiler des Glaubens)</h3>
-                <p style="margin-bottom:1rem; font-size:0.9rem;">Klicke auf einen der Grundpfeiler, um mehr darüber zu erfahren:</p>
-
                 <div class="din-buttons-grid">
-                    <button class="din-btn" onclick="showDinDetail('Tawhid', 'Tawhid bezeichnet den reinen Monotheismus – den Glauben an die absolute Einheit, Einzigartigkeit und Unteilbarkeit Gottes.')">1. Tawhid</button>
-                    <button class="din-btn" onclick="showDinDetail('Adl', 'Adl ist der Glaube an die absolute Gerechtigkeit Gottes. Gott fügt niemandem Unrecht zu und handelt stets voller Weisheit.')">2. Adl</button>
-                    <button class="din-btn" onclick="showDinDetail('Nubuwwah', 'Nubuwwah ist das Prophetentum. Gott entsandte 124.000 Propheten zur Rechtleitung der Menschheit, besiegelt durch Prophet Muhammad (s.a.a.s.).')">3. Nubuwwah</button>
-                    <button class="din-btn" onclick="showDinDetail('Imamah', 'Imamah ist die göttlich eingesetzte Führung nach dem Propheten durch die 12 Imame der Ahlulbayt (a.s.) zur Bewahrung der islamischen Lehre.')">4. Imamah</button>
-                    <button class="din-btn" onclick="showDinDetail('Miad', 'Mi\'ad ist der Glaube an den Tag des Gerichts und das Jenseits, an dem jeder Mensch für seine Taten Verantwortung übernimmt.')">5. Mi'ad</button>
+                    <button class="din-btn" onclick="showDinDetail('Tawhid', 'Tawhid bezeichnet den reinen Monotheismus – den Glauben an die absolute Einheit Gottes.')">1. Tawhid</button>
+                    <button class="din-btn" onclick="showDinDetail('Adl', 'Adl ist der Glaube an die absolute Gerechtigkeit Gottes.')">2. Adl</button>
+                    <button class="din-btn" onclick="showDinDetail('Nubuwwah', 'Nubuwwah ist das Prophetentum.')">3. Nubuwwah</button>
+                    <button class="din-btn" onclick="showDinDetail('Imamah', 'Imamah ist die göttlich eingesetzte Führung nach dem Propheten durch die 12 Imame.')">4. Imamah</button>
+                    <button class="din-btn" onclick="showDinDetail('Miad', 'Mi\'ad ist der Glaube an den Tag des Gerichts.')">5. Mi'ad</button>
                 </div>
-
                 <div id="dinInfoBox" style="background:#f8fafc; padding:1.2rem; border-left:4px solid var(--dark-blue); border-radius:4px; display:none;">
                     <h4 id="dinInfoTitle" style="color:var(--dark-blue); margin-bottom:0.4rem;"></h4>
                     <p id="dinInfoText" style="margin:0; color:#334155; font-size:0.92rem;"></p>
                 </div>
             </div>
 
-            <!-- SEKTION: 10 FURU AD-DIN -->
             <div id="kn-furu" class="knowledge-detail">
                 <h3>10 Furu' ad-Din (Die Zweige der Praxis)</h3>
-                <p style="margin-bottom:1rem; font-size:0.9rem;">Klicke auf eine der Pflichten, um die Erklärung anzuzeigen:</p>
-
                 <div class="din-buttons-grid">
-                    <button class="din-btn" onclick="showDinDetail('Salat (Das Gebet)', 'Das tägliche Gebet ist die fundamentale Verbindung zwischen dem Schöpfer und dem Menschen. Es wird fünfmal am Tag verrichtet.')">1. Salat</button>
-                    <button class="din-btn" onclick="showDinDetail('Sawm (Das Fasten)', 'Das Fasten im heiligen Monat Ramadan stärkt die Selbstbeherrschung, Mitgefühl für Bedürftige und die Gottesfurcht.')">2. Sawm</button>
-                    <button class="din-btn" onclick="showDinDetail('Hajj (Die Pilgerfahrt)', 'Die einmalige Pflicht im Leben für jeden finanziell und körperlich fähigen Muslim, die heilige Kaaba in Mekka zu besuchen.')">3. Hajj</button>
-                    <button class="din-btn" onclick="showDinDetail('Zakat (Almosenabgabe)', 'Die Entrichtung der Pflichtabgabe auf bestimmte landwirtschaftliche Güter und Viehbestände zur Unterstützung Armer.')">4. Zakat</button>
-                    <button class="din-btn" onclick="showDinDetail('Khums (Fünftel-Abgabe)', 'Die Abgabe von einem Fünftel des jährlichen Netto-Einkommensüberschusses für soziale und religiöse Zwecke.')">5. Khums</button>
-                    <button class="din-btn" onclick="showDinDetail('Jihad (Spiritueller Kampf)', 'Das Anstrengen auf dem Wege Gottes – primär der innere Kampf gegen eigene Egoismen (Jihad al-Nafs) und die Verteidigung des Glaubens.')">6. Jihad</button>
-                    <button class="din-btn" onclick="showDinDetail('Amr bil-Ma\'ruf', 'Das Gebieten des Guten: Die aktive Ermutigung der Mitmenschen zu edlem, gerechtem und moralischem Handeln.')">7. Amr bil-Ma'ruf</button>
-                    <button class="din-btn" onclick="showDinDetail('Nahi \'an al-Munkar', 'Das Verbieten des Bösen: Das friedliche Einschreiten und Abraten von Ungerechtigkeit, Sünden und Unmoral.')">8. Nahi 'an al-Munkar</button>
-                    <button class="din-btn" onclick="showDinDetail('Tawalla', 'Die Liebe und Zuneigung zu Prophet Muhammad (s.a.a.s.), seiner reinen Familie (Ahlulbayt) und den Gerechten.')">9. Tawalla</button>
-                    <button class="din-btn" onclick="showDinDetail('Tabarra', 'Die Distanzierung und Losagung von Unterdrückern, Tyrannen und den Feinden der Wahrheit und Gerechtigkeit.')">10. Tabarra</button>
+                    <button class="din-btn" onclick="showDinDetail('Salat', 'Das tägliche Pflichtgebet.')">1. Salat</button>
+                    <button class="din-btn" onclick="showDinDetail('Sawm', 'Das Fasten im Monat Ramadan.')">2. Sawm</button>
+                    <button class="din-btn" onclick="showDinDetail('Hajj', 'Die Pilgerfahrt nach Mekka.')">3. Hajj</button>
+                    <button class="din-btn" onclick="showDinDetail('Zakat', 'Die Wohlfahrtsabgabe.')">4. Zakat</button>
+                    <button class="din-btn" onclick="showDinDetail('Khums', 'Die Fünftel-Abgabe auf Einkommensüberschuss.')">5. Khums</button>
+                    <button class="din-btn" onclick="showDinDetail('Jihad', 'Die Anstrengung auf dem Wege Gottes.')">6. Jihad</button>
+                    <button class="din-btn" onclick="showDinDetail('Amr bil-Ma\'ruf', 'Das Gebieten des Guten.')">7. Amr bil-Ma'ruf</button>
+                    <button class="din-btn" onclick="showDinDetail('Nahi \'an al-Munkar', 'Das Verbieten des Bösen.')">8. Nahi 'an al-Munkar</button>
+                    <button class="din-btn" onclick="showDinDetail('Tawalla', 'Die Liebe zur Ahlulbayt (a.s.).')">9. Tawalla</button>
+                    <button class="din-btn" onclick="showDinDetail('Tabarra', 'Die Distanzierung von Ungerechtigkeit.')">10. Tabarra</button>
                 </div>
             </div>
 
-            <!-- SEKTION: FIQH -->
             <div id="kn-fiqh" class="knowledge-detail">
                 <h3>Gebet & Rituelle Reinheit (Fiqh)</h3>
-                <p>Das Gebet nach der schiitischen Rechtsschule (Ja'fari) basiert exakt auf den Praxis-Überlieferungen des Propheten (s.a.a.s.) und seiner Ahlulbayt (a.s.).</p>
-                <p style="margin-top:0.5rem;"><strong>Die Niederwerfung (Sujud):</strong> Die Niederwerfung erfolgt ausschließlich auf natürlicher Erde, Stein oder nicht-essbarem Holz (z.B. auf einem Gebetsstein/Turbah aus Kerbela-Erde).</p>
+                <p>Das Gebet nach der schiitischen Rechtsschule (Ja'fari) basiert exakt auf den Überlieferungen der Ahlulbayt (a.s.).</p>
             </div>
 
-            <!-- SEKTION: GHADIR KHUMM -->
             <div id="kn-ghadir" class="knowledge-detail">
                 <h3>Ereignis von Ghadir Khumm</h3>
-                <p>Am 18. Dhu al-Hijjah verkündete der Prophet Muhammad (s.a.a.s.) vor über 100.000 Muslimen: <em>„Wessen Schutzherr (Mawla) ich bin, dessen Schutzherr ist auch Ali.“</em></p>
+                <p>Am 18. Dhu al-Hijjah verkündete der Prophet Muhammad (s.a.a.s.): <em>„Wessen Schutzherr ich bin, dessen Schutzherr ist auch Ali.“</em></p>
             </div>
         </div>
 
@@ -778,7 +762,7 @@
         <div id="discussion" class="tab-content">
             <div class="section-header">
                 <h2>Offene Diskussionsrunde</h2>
-                <p>Fragen stellen oder Antworten schreiben – unkompliziert und ohne Registrierung.</p>
+                <p>Fragen stellen oder Antworten schreiben.</p>
             </div>
 
             <div class="form-box" style="margin-bottom: 2rem;">
@@ -859,9 +843,9 @@
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 
-                // Shake-Animation hinzufügen
+                // Shake-Animation
                 button.classList.add('shake');
-                setTimeout(() => button.classList.remove('shake'), 400);
+                setTimeout(() => button.classList.remove('shake'), 350);
 
                 // Tab Wechsel
                 navButtons.forEach(btn => btn.classList.remove('active'));
@@ -902,7 +886,34 @@
             });
         });
 
-        // 2. WISSENSBEREICH (USUL & FURU AD-DIN SELEKTOREN)
+        // 2. DRAG TO SCROLL FOR MENU (Gedrückthalten & Ziehen)
+        const navContainer = document.querySelector('.nav-links');
+        let isMouseDown = false;
+        let startX, scrollLeft;
+
+        navContainer.addEventListener('mousedown', (e) => {
+            isMouseDown = true;
+            startX = e.pageX - navContainer.offsetLeft;
+            scrollLeft = navContainer.scrollLeft;
+        });
+
+        navContainer.addEventListener('mouseleave', () => {
+            isMouseDown = false;
+        });
+
+        navContainer.addEventListener('mouseup', () => {
+            isMouseDown = false;
+        });
+
+        navContainer.addEventListener('mousemove', (e) => {
+            if (!isMouseDown) return;
+            e.preventDefault();
+            const x = e.pageX - navContainer.offsetLeft;
+            const walk = (x - startX) * 2;
+            navContainer.scrollLeft = scrollLeft - walk;
+        });
+
+        // 3. WISSENSBEREICH
         function showKnowledgeTab(id, btn) {
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.knowledge-detail').forEach(d => d.classList.remove('active'));

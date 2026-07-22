@@ -337,6 +337,100 @@
             top: 3px;
         }
 
+        /* ==================== ACCORDION / INTERAKTIVE BIOGRAFIEN ==================== */
+        .bio-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .bio-item {
+            background: white;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+        }
+
+        .bio-header {
+            background-color: white;
+            padding: 1.2rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+            user-select: none;
+        }
+
+        .bio-header:hover {
+            background-color: #f8f9fa;
+        }
+
+        .bio-header h3 {
+            color: var(--dark-blue);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .bio-header .badge-tag {
+            background-color: var(--accent-gold);
+            color: var(--dark-blue);
+            font-size: 0.8rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-weight: bold;
+        }
+
+        .bio-header .toggle-icon {
+            color: var(--light-blue);
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .bio-item.active .bio-header {
+            background-color: #e8f4f8;
+            border-bottom: 2px solid var(--light-blue);
+        }
+
+        .bio-item.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .bio-content {
+            display: none;
+            padding: 1.5rem;
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        .bio-item.active .bio-content {
+            display: block;
+        }
+
+        .bio-content p {
+            margin-bottom: 1rem;
+        }
+
+        .bio-fact-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--accent-gold);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .bio-fact-box strong {
+            color: var(--dark-blue);
+        }
+
         /* ==================== SCHIITISCHER KALENDER ==================== */
         .calendar-container {
             background-color: white;
@@ -457,26 +551,13 @@
             gap: 0.3rem;
         }
 
-        /* STYLES FÜR DIE DISKUSSIONSRUNDE & KINDER-GESCHICHTEN */
-        .question-card, .story-card {
+        .question-card {
             background: white;
             border-left: 4px solid var(--light-blue);
             padding: 1.5rem;
             margin-bottom: 1.5rem;
             border-radius: 6px;
             box-shadow: var(--card-shadow);
-        }
-
-        .story-card {
-            border-left: 4px solid var(--accent-gold);
-        }
-
-        .story-card h3 {
-            color: var(--dark-blue);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         .author-info {
@@ -585,7 +666,7 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <i class="fa-solid font-awesome-logo-full fa-kaaba"></i>
+                <i class="fa-solid fa-kaaba"></i>
                 <div class="logo-text">
                     <h1>Ahlulbayt Zentrum</h1>
                     <p>Schiitische Moscheegemeinde Hessen</p>
@@ -596,7 +677,7 @@
             </div>
             <ul class="nav-links" id="nav-links">
                 <li><a href="#" class="nav-btn active" data-tab="home">Startseite</a></li>
-                <li><a href="#" class="nav-btn" data-tab="kids-stories">Geschichten & Islam</a></li>
+                <li><a href="#" class="nav-btn" data-tab="kids-stories">Geschichten & Lernen</a></li>
                 <li><a href="#" class="nav-btn" data-tab="discussion">Diskussionsrunde</a></li>
                 <li><a href="#" class="nav-btn" data-tab="calendar">Hijri Kalender</a></li>
                 <li><a href="#" class="nav-btn" data-tab="learn">Lernen & Bücher</a></li>
@@ -761,64 +842,216 @@
 
         </div>
 
-        <!-- ================= NEUER TAB: GESCHICHTEN & ISLAM FÜR KINDER ================= -->
+        <!-- ================= TAB 2: GESCHICHTEN & LERNEN (PROPHET & DIE 12 IMAME) ================= -->
         <div id="kids-stories" class="tab-content">
-            <h2 class="section-title">Geschichten über den Islam & Ahlulbayt</h2>
+            <h2 class="section-title">Geschichten & Biografien der Ahlulbayt (a.s.)</h2>
             <p style="text-align: center; margin-bottom: 2rem; color: #555;">
-                Hier lernen Kinder und Jugendliche spannende Geschichten über die Propheten, Imam Hussein (a.s.) und die 12 Imame.
+                Klicke auf den Namen einer Person, um ihre vollständige Lebensgeschichte verständlich für Kinder und Jugendliche zu lesen!
             </p>
 
-            <div style="max-width: 900px; margin: 0 auto;">
-                
-                <!-- Geschichte 1: Die Propheten -->
-                <div class="story-card">
-                    <h3><i class="fas fa-star" style="color:var(--accent-gold);"></i> Die Geschichte der Propheten</h3>
-                    <p class="author-info">Kategorie: Propheten im Islam</p>
-                    <p>
-                        Allah hat den Menschen viele Propheten gesandt, um ihnen den richtigen Weg zu zeigen. Der allererste Prophet war Prophet Adam (a.s.). 
-                        Später kamen große Propheten wie Prophet Ibrahim (a.s.), der die Kaaba erbaute, Prophet Musa (a.s.) und Prophet Isa (a.s.). 
-                        Der allerletzte und Siegel der Propheten ist unser geliebter Prophet Muhammad (s.a.a.s.), der uns den heiligen Koran brachte.
-                    </p>
+            <div class="bio-accordion">
+
+                <!-- PROPHET MUHAMMAD (S.A.A.S.) -->
+                <div class="bio-item">
+                    <div class="bio-header" onclick="toggleBio(this)">
+                        <h3><i class="fas fa-star" style="color:var(--accent-gold);"></i> Prophet Muhammad (s.a.a.s.) <span class="badge-tag">Siegel der Propheten</span></h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="bio-content">
+                        <div class="bio-fact-box">
+                            <strong>Geburt:</strong> In Mekka (Jahr des Elefanten)<br>
+                            <strong>Titel:</strong> Al-Amin (Der Vertrauenswürdige), As-Sadiq (Der Wahrhaftige)<br>
+                            <strong>Besonderheit:</strong> Der allerletzte Prophet Allahs und Überbringer des Heiligen Korans.
+                        </div>
+                        <p><strong>Kindheit und Jugend:</strong> Prophet Muhammad (s.a.a.s.) wuchs als Waisenkind in Mekka auf. Schon als junger Mann war er bei allen Menschen dafür bekannt, dass er niemals log und immer ehrlich war. Deshalb nannten die Menschen ihn "Al-Amin" (den Vertrauenswürdigen).</p>
+                        <p><strong>Die erste Offenbarung:</strong> Im Alter von 40 Jahren zog er sich oft in die Höhle Hira zurück, um über Gott nachzudenken. Eines Tages erschien ihm der Engel Jibrail (Gabriel) und brachte ihm die ersten Verse des Korans. Damit begann seine Mission als Prophet Allahs.</p>
+                        <p><strong>Die Auswanderung (Hijrah):</strong> Die Götzendiener in Mekka behandelten die Muslime sehr schlecht. Deshalb wanderte der Prophet mit den Muslimen nach Medina aus. Dort gründete er eine Gemeinschaft voller Geschwisterlichkeit, Liebe und Gerechtigkeit.</p>
+                        <p><strong>Ghadir Khumm:</strong> Auf seiner letzten Pilgerfahrt nahm der Prophet die Hand von Imam Ali (a.s.) und sagte vor tausenden Muslimen: <em>„Wessen Herrn ich bin, dessen Herr ist auch Ali.“</em> Er lehrte uns, dem Koran und seiner reinen Familie (Ahlulbayt) zu folgen.</p>
+                    </div>
                 </div>
 
-                <!-- Geschichte 2: Imam Hussein & Kerbela -->
-                <div class="story-card">
-                    <h3><i class="fas fa-heart" style="color:#e63946;"></i> Imam Hussein (a.s.) & Die Ereignisse von Kerbela</h3>
-                    <p class="author-info">Kategorie: Ereignisse von Kerbela (Ashura)</p>
-                    <p>
-                        Imam Hussein (a.s.) ist der Enkel des Propheten Muhammad (s.a.a.s.). Er stand für Wahrheit, Gerechtigkeit und Freiheit ein. 
-                        In der Wüste von Kerbela kämpfte er am Tage von Ashura (10. Muharram) mutig gegen Ungerechtigkeit, um den echten Islam zu beschützen. 
-                        Wir gedenken Imam Hussein (a.s.) und seiner Familie voller Liebe und Respekt, weil er uns gelehrt hat, niemals vor Ungerechtigkeit zu schweigen.
-                    </p>
+                <!-- 1. IMAM ALI (A.S.) -->
+                <div class="bio-item">
+                    <div class="bio-header" onclick="toggleBio(this)">
+                        <h3><i class="fas fa-shield-halved" style="color:#2a9d8f;"></i> 1. Imam Ali ibn Abi Talib (a.s.) <span class="badge-tag">Amir al-Mu'minin</span></h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="bio-content">
+                        <div class="bio-fact-box">
+                            <strong>Geburt:</strong> In der Heiligen Kaaba in Mekka<br>
+                            <strong>Titel:</strong> Asadullah (Löwe Gottes), Fürst der Gläubigen
+                        </div>
+                        <p>Imam Ali (a.s.) ist als einziger Mensch direkt im Inneren der heiligen Kaaba geboren worden. Er wuchs im Hause des Propheten Muhammad (s.a.a.s.) auf und war der erste Mann, der den Islam annahm.</p>
+                        <p>Er war berühmt für seinen unglaublichen Mut in den Schlachten, sein tiefes Wissen und seine Nächstenliebe. Nachts trug er heimlich Essen zu den armen Waisenkindern, ohne dass sie wussten, wer er war. Der Prophet sagte über ihn: „Ich bin die Stadt des Wissens und Ali ist ihr Tor.“</p>
+                    </div>
                 </div>
 
-                <!-- Geschichte 3: Die 12 Imame -->
-                <div class="story-card">
-                    <h3><i class="fas fa-crown" style="color:var(--accent-gold);"></i> Die 12 Imame (a.s.)</h3>
-                    <p class="author-info">Kategorie: Die Reine Ahlulbayt</p>
-                    <p>
-                        Nach dem Propheten Muhammad (s.a.a.s.) gab es 12 von Allah erwählte Führer, die uns den Koran erklären und die Gemeinschaft leiten:
-                    </p>
-                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: #444;">
-                        <li>1. Imam Ali (a.s.)</li>
-                        <li>2. Imam Hassan (a.s.)</li>
-                        <li>3. Imam Hussein (a.s.)</li>
-                        <li>4. Imam Sajjad (a.s.)</li>
-                        <li>5. Imam Baqir (a.s.)</li>
-                        <li>6. Imam Sadiq (a.s.)</li>
-                        <li>7. Imam Kazim (a.s.)</li>
-                        <li>8. Imam Reza (a.s.)</li>
-                        <li>9. Imam Jawad (a.s.)</li>
-                        <li>10. Imam Hadi (a.s.)</li>
-                        <li>11. Imam Askari (a.s.)</li>
-                        <li>12. Imam Mahdi (a.j.f.) – Der erwartete Erlöser</li>
-                    </ul>
+                <!-- 2. IMAM HASSAN (A.S.) -->
+                <div class="bio-item">
+                    <div class="bio-header" onclick="toggleBio(this)">
+                        <h3><i class="fas fa-handshake" style="color:#48cae4;"></i> 2. Imam Hassan al-Mujtaba (a.s.) <span class="badge-tag">Der Großzügige</span></h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="bio-content">
+                        <div class="bio-fact-box">
+                            <strong>Geburt:</strong> Medina<br>
+                            <strong>Eigenschaft:</strong> Der Friedensstifter und Beschützer der Muslime
+                        </div>
+                        <p>Imam Hassan (a.s.) war der älteste Enkel des Propheten. Der Prophet liebte ihn und seinen Bruder Hussein über alles und nannte sie "die Führer der Jugendlichen im Paradies".</p>
+                        <p>Imam Hassan war bekannt für seine extreme Großzügigkeit; er spendete mehrmals sein gesamtes Vermögen an die Armen. Um das Leben der Muslime zu schützen und Blutvergießen zu verhindern, schloss er einen klugen Friedensvertrag ab.</p>
+                    </div>
+                </div>
+
+                <!-- 3. IMAM HUSSEIN (A.S.) -->
+                <div class="bio-item">
+                    <div class="bio-header" onclick="toggleBio(this)">
+                        <h3><i class="fas fa-heart" style="color:#e63946;"></i> 3. Imam Hussein (a.s.) <span class="badge-tag">Sayyid al-Shuhada</span></h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="bio-content">
+                        <div class="bio-fact-box">
+                            <strong>Ereignis:</strong> Die Tragödie von Kerbela (Ashura)<br>
+                            <strong>Botschaft:</strong> Niemals Ungerechtigkeit akzeptieren
+                        </div>
+                        <p>Imam Hussein (a.s.) stand auf, als der ungerechte Herrscher Yazid versuchte, den Islam zu zerstören. Am Tag von Ashura (10. Muharram) kämpfte Imam Hussein mit 72 treuen Gefährten in Kerbela für Wahrheit und Freiheit.</p>
+                        <p>Obwohl er und seine Familie in der Wüste Durst litten, gab er niemals nach. Bis heute erinnern wir uns an Kerbela, um zu lernen, immer mutig für das Gute einzustehen.</p>
+                    </div>
+                </div>
+
+                <!-- 4. IMAM SAJJAD (A.S.) -->
+                <div class="bio-item">
+                    <div class="bio-header" onclick="toggleBio(this)">
+                        <h3><i class="fas fa-pray" style="color:#0d1b2a;"></i> 4. Imam Ali ibn al-Hussein (a.s.) <span class="badge-tag">Zayn al-Abidin</span></h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="bio-content">
+                        <div class="bio-fact-box">
+                            <strong>Titel:</strong> Schmuck der Anbetenden<br>
+                            <strong>Vermächtnis:</strong> Das Gebetsbuch "Al-Sahifa al-Sajjadiyya"
+                        </div>
+                        <p>Imam Sajjad (a.s.) erlebte Kerbela als junger Mann, war aber schwer krank und konnte nicht kämpfen. Danach verbreitete er die wahre Botschaft des Islam durch wunderschöne Bittgebete.</p>
+                        <p>Seine Gebete lehren uns, wie man zu Allah spricht, wie man dankbar ist und wie man gute Manieren gegenüber den Eltern und Mitmenschen zeigt.</p>
+                    </div>
+                </div>
+
+                <!-- 5. IMAM BAQIR (A.S.) -->
+                <div class="bio-item">
+                    <div class="bio-header" onclick="toggleBio(this)">
+                        <h3><i class="fas fa-book" style="color:#2a9d8f;"></i> 5. Imam Muhammad al-Baqir (a.s.) <span class="badge-tag">Baqir al-Uloom</span></h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="bio-content">
+                        <div class="bio-fact-box">
+                            <strong>Titel:</strong> Der das Wissen spaltet/öffnete
+                        </div>
+                        <p>Imam Baqir (a.s.) öffnete die Türen der Wissenschaft und Religion. Er unterrichtete hunderte Schüler in Koran, Mathematik, Medizin und Ethik und gründete die große islamische Universität.</p>
+                    </div>
+                </div>
+
+                <!-- 6. IMAM SADIQ (A.S.) -->
+                <div class="bio-item">
+                    <div class="bio-header" onclick="toggleBio(this)">
+                        <h3><i class="fas fa-graduation-cap" style="color:#d4af37;"></i> 6. Imam Ja'far al-Sadiq (a.s.) <span class="badge-tag">As-Sadiq</span></h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="bio-content">
+                        <div class="bio-fact-box">
+                            <strong>Titel:</strong> Der Wahrhaftige<br>
+                            <strong>Bedeutung:</strong> Gründer der schiitischen Rechtsschule (Ja'fari)
+                        </div>
+                        <p>Imam Sadiq (a.s.) bildete über 4000 Gelehrte aus, darunter nicht nur Religionsgelehrte, sondern auch Pionier-Wissenschaftler wie Jabir ibn Hayyan (Vater der Chemie). Er lehrte Logik, Gerechtigkeit und Liebe.</p>
+                    </div>
+                </div>
+
+                <!-- 7. IMAM KAZIM (A.S.) -->
+                <div class="bio-item">
+                    <div class="bio-header" onclick="toggleBio(this)">
+                        <h3><i class="fas fa-feather" style="color:#48cae4;"></i> 7. Imam Musa al-Kazim (a.s.) <span class="badge-tag">Al-Kazim</span></h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="bio-content">
+                        <div class="bio-fact-box">
+                            <strong>Titel:</strong> Der seine Wut Zügelnde
+                        </div>
+                        <p>Imam Kazim (a.s.) verbrachte viele Jahre seines Lebens zu Unrecht im Gefängnis. Trotz der harten Umstände verlor er nie sein Lächeln, betete stundenlang und begegnete selbst seinen Feinden mit Sanftmut.</p>
+                    </div>
+                </div>
+
+                <!-- 8. IMAM REZA (A.S.) -->
+                <div class="bio-item">
+                    <div class="bio-header" onclick="toggleBio(this)">
+                        <h3><i class="fas fa-sun" style="color:#d4af37;"></i> 8. Imam Ali al-Reza (a.s.) <span class="badge-tag">Sonne von Khorasan</span></h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="bio-content">
+                        <div class="bio-fact-box">
+                            <strong>Schrein:</strong> Mashhad (Iran)
+                        </div>
+                        <p>Imam Reza (a.s.) war bekannt für seine großen Debatten mit Gelehrten aus aller Welt (Christen, Juden, Philosophen). Er beantwortete alle Fragen mit Logik und Respekt. Er wird auch als Beschützer der Hilflosen geliebt.</p>
+                    </div>
+                </div>
+
+                <!-- 9. IMAM JAWAD (A.S.) -->
+                <div class="bio-item">
+                    <div class="bio-header" onclick="toggleBio(this)">
+                        <h3><i class="fas fa-lightbulb" style="color:#2a9d8f;"></i> 9. Imam Muhammad al-Jawad (a.s.) <span class="badge-tag">Al-Jawad</span></h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="bio-content">
+                        <div class="bio-fact-box">
+                            <strong>Besonderheit:</strong> Wurde bereits im Kindesalter Imam
+                        </div>
+                        <p>Imam Jawad (a.s.) übernahm das Imamat schon in sehr jungen Jahren. Trotz seines jungen Alters beeindruckte er die gelehrtesten Männer des Reiches mit seinem unerschöpflichen Wissen.</p>
+                    </div>
+                </div>
+
+                <!-- 10. IMAM HADI (A.S.) -->
+                <div class="bio-item">
+                    <div class="bio-header" onclick="toggleBio(this)">
+                        <h3><i class="fas fa-compass" style="color:#0d1b2a;"></i> 10. Imam Ali al-Hadi (a.s.) <span class="badge-tag">Al-Hadi</span></h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="bio-content">
+                        <div class="bio-fact-box">
+                            <strong>Titel:</strong> Der Reines Führende
+                        </div>
+                        <p>Imam Hadi (a.s.) verfasste die berühmte "Ziyarat al-Jami'a al-Kabira", welche die hohe Stellung der Ahlulbayt beschreibt. Er führte die Muslime streng bewacht aus der Stadt Samarra.</p>
+                    </div>
+                </div>
+
+                <!-- 11. IMAM ASKARI (A.S.) -->
+                <div class="bio-item">
+                    <div class="bio-header" onclick="toggleBio(this)">
+                        <h3><i class="fas fa-fort-awesome" style="color:#48cae4;"></i> 11. Imam Hassan al-Askari (a.s.) <span class="badge-tag">Al-Askari</span></h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="bio-content">
+                        <div class="bio-fact-box">
+                            <strong>Bedeutung:</strong> Vater des verheißenen Erlösers
+                        </div>
+                        <p>Imam Askari (a.s.) lebte unter strenger militärischer Überwachung. Er bereitete die Muslime darauf vor, wie sie ihren Glauben aufrechterhalten können, wenn der 12. Imam in die Verborgenheit geht.</p>
+                    </div>
+                </div>
+
+                <!-- 12. IMAM MAHDI (A.J.F.) -->
+                <div class="bio-item">
+                    <div class="bio-header" onclick="toggleBio(this)">
+                        <h3><i class="fas fa-globe" style="color:var(--accent-gold);"></i> 12. Imam Muhammad al-Mahdi (a.j.f.) <span class="badge-tag">Al-Muntazar (Der Erwartete)</span></h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="bio-content">
+                        <div class="bio-fact-box">
+                            <strong>Status:</strong> Der lebende Imam in der Verborgenheit (Ghaybah)<br>
+                            <strong>Zukunft:</strong> Er wird erscheinen, um die Welt mit Frieden und Gerechtigkeit zu füllen.
+                        </div>
+                        <p>Imam Mahdi (a.j.f.) ist unser 12. Imam. Er ist durch Allahs Wunder am Leben, aber für unsere Augen verborgen. Wir beten jeden Tag für sein Erscheinen. Wenn er zurückkehrt, wird er zusammen mit Prophet Isa (Jesus) Ungerechtigkeit und Armut auf der ganzen Welt beenden.</p>
+                    </div>
                 </div>
 
             </div>
         </div>
 
-        <!-- ================= TAB: DISKUSSIONSRUNDE ================= -->
+        <!-- ================= TAB 3: DISKUSSIONSRUNDE ================= -->
         <div id="discussion" class="tab-content">
             <h2 class="section-title">Offene Diskussionsrunde</h2>
             
@@ -849,7 +1082,7 @@
             </div>
         </div>
 
-        <!-- ================= TAB: ARABISCHER / SCHIITISCHER KALENDER ================= -->
+        <!-- ================= TAB 4: ARABISCHER / SCHIITISCHER KALENDER ================= -->
         <div id="calendar" class="tab-content">
             <h2 class="section-title">Islamischer Kalender (Hijri)</h2>
             <div class="calendar-container">
@@ -905,7 +1138,7 @@
             </div>
         </div>
 
-        <!-- ================= TAB: LERNEN & BÜCHER ================= -->
+        <!-- ================= TAB 5: LERNEN & BÜCHER ================= -->
         <div id="learn" class="tab-content">
             <h2 class="section-title">Wissen & Schriften</h2>
             
@@ -932,7 +1165,7 @@
             </div>
         </div>
 
-        <!-- ================= TAB: MEDIATHEK / RÜCKBLICK ================= -->
+        <!-- ================= TAB 6: MEDIATHEK / RÜCKBLICK ================= -->
         <div id="media" class="tab-content">
             <h2 class="section-title">Mediathek & Rückblick</h2>
             <p style="text-align:center; margin-bottom: 2rem;">Hier finden Sie Aufzeichnungen von Vorträgen, Fotos und Berichte, falls Sie an einer Veranstaltung nicht teilnehmen konnten.</p>
@@ -968,7 +1201,7 @@
             </div>
         </div>
 
-        <!-- ================= TAB: ANONYME FRAGEN AN DEN PREDIGER ================= -->
+        <!-- ================= TAB 7: ANONYME FRAGEN AN DEN PREDIGER ================= -->
         <div id="ask" class="tab-content">
             <h2 class="section-title">Fragen im Herzen?</h2>
             
@@ -1088,6 +1321,12 @@
                 progTitle.innerText = "Programm für Moschee Mainz-Kastel";
                 footerAddress.innerHTML = `<i class="fas fa-map-marker-alt"></i> Mainz-Kastel`;
             }
+        }
+
+        // ACCORDION LOGIK FÜR DIE BIOGRAFIEN (KLICK-EFFEKT)
+        function toggleBio(headerElem) {
+            const item = headerElem.parentElement;
+            item.classList.toggle('active');
         }
 
         // FORMULAR ANONYME FRAGE

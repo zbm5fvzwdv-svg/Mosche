@@ -37,7 +37,7 @@
             color: inherit;
         }
 
-        /* ==================== HEADER & NAVIGATION ==================== */
+        /* ==================== HEADER & SWIPEABLE NAVIGATION ==================== */
         header {
             background-color: var(--dark-blue);
             color: #ffffff;
@@ -49,11 +49,17 @@
 
         .navbar {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column; /* Auf Mobilgeräten Logo über dem Menü */
             align-items: center;
-            padding: 1.2rem 2rem;
+            padding: 1rem 1.5rem;
             max-width: 1200px;
             margin: 0 auto;
+            width: 100%;
+        }
+
+        .logo-text {
+            text-align: center;
+            margin-bottom: 0.8rem;
         }
 
         .logo-text h1 {
@@ -69,10 +75,25 @@
             letter-spacing: 1px;
         }
 
+        /* HORIZONTAL SCROLLBAR / WISCHBARES MENÜ */
         .nav-links {
             display: flex;
             list-style: none;
             gap: 0.5rem;
+            width: 100%;
+            overflow-x: auto; /* Aktiviert das Wischen nach links/rechts */
+            white-space: nowrap; /* Verhindert Zeilenumbruch */
+            padding: 0.4rem 0.2rem;
+            -webkit-overflow-scrolling: touch; /* Flüssiges Wischen auf iOS/iPhone */
+        }
+
+        /* Versteckt die unschöne Scrollleiste, lässt Wischen aber aktiv */
+        .nav-links::-webkit-scrollbar {
+            display: none;
+        }
+        .nav-links {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
         .nav-links a {
@@ -83,11 +104,12 @@
             border-radius: 4px;
             transition: all 0.2s ease;
             display: inline-block;
+            flex-shrink: 0; /* Verhindert Quetschen der Buttons */
         }
 
         .nav-links a:hover, .nav-links a.active {
             color: #ffffff;
-            background-color: rgba(255, 255, 255, 0.08);
+            background-color: rgba(255, 255, 255, 0.12);
         }
 
         /* SHAKE ANIMATION FÜR MENÜ-BUTTONS */
@@ -108,7 +130,7 @@
         .hero {
             background-color: var(--dark-blue);
             color: #ffffff;
-            padding: 3.5rem 2rem;
+            padding: 3rem 1.5rem;
             text-align: center;
             border-bottom: 1px solid var(--border-color);
         }
@@ -119,20 +141,20 @@
         }
 
         .hero h2 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 400;
             margin-bottom: 0.5rem;
             letter-spacing: -0.5px;
         }
 
         .hero p {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #94a3b8;
         }
 
         .mosque-selector-box {
-            margin-top: 2rem;
-            padding-top: 1.5rem;
+            margin-top: 1.8rem;
+            padding-top: 1.2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -141,23 +163,24 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--accent-gold);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             font-weight: 600;
         }
 
         .mosque-buttons {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 0.8rem;
+            flex-wrap: wrap;
         }
 
         .mosque-btn {
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: #ffffff;
-            padding: 0.6rem 1.4rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 4px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.2s ease;
         }
@@ -177,8 +200,8 @@
         /* ==================== MAIN CONTAINER & SECTIONS ==================== */
         .container {
             max-width: 1000px;
-            margin: 3rem auto;
-            padding: 0 1.5rem;
+            margin: 2.5rem auto;
+            padding: 0 1.2rem;
         }
 
         .tab-content {
@@ -190,20 +213,20 @@
         }
 
         .section-header {
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             text-align: center;
         }
 
         .section-header h2 {
-            font-size: 1.75rem;
+            font-size: 1.6rem;
             color: var(--dark-blue);
             font-weight: 500;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
         .section-header p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         /* ==================== RASTER / GRID & KARTEN ==================== */
@@ -217,7 +240,7 @@
             background-color: #ffffff;
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            padding: 1.8rem;
+            padding: 1.5rem;
             transition: border-color 0.2s ease, transform 0.2s ease;
         }
 
@@ -232,14 +255,14 @@
             letter-spacing: 1px;
             color: var(--accent-gold);
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             display: block;
         }
 
         .card-title {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: var(--dark-blue);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             font-weight: 600;
         }
 
@@ -249,7 +272,7 @@
             line-height: 1.6;
         }
 
-        /* ==================== EVENT MEDIA GALERIE & UPLOAD ==================== */
+        /* ==================== EVENT MEDIA GALERIE ==================== */
         .media-section {
             margin-top: 3.5rem;
             padding-top: 2rem;
@@ -285,27 +308,18 @@
             font-weight: 500;
         }
 
-        .upload-box {
-            background: #ffffff;
-            border: 2px dashed var(--border-color);
-            padding: 1.5rem;
-            border-radius: 6px;
-            text-align: center;
-            margin-top: 1.5rem;
-        }
-
         /* ==================== INTERAKTIVES KATEGORIEN-RASTER (WISSEN) ==================== */
         .category-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 0.8rem;
             margin-bottom: 2rem;
         }
 
         .cat-btn {
             background: #ffffff;
             border: 1px solid var(--border-color);
-            padding: 1rem;
+            padding: 0.8rem;
             text-align: center;
             border-radius: 6px;
             cursor: pointer;
@@ -326,7 +340,7 @@
 
         .din-buttons-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 0.8rem;
             margin-top: 1rem;
             margin-bottom: 1.5rem;
@@ -338,7 +352,7 @@
             padding: 0.8rem;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 500;
             color: var(--dark-blue);
             text-align: center;
@@ -354,7 +368,7 @@
             display: none;
             background: #ffffff;
             border: 1px solid var(--border-color);
-            padding: 2rem;
+            padding: 1.8rem;
             border-radius: 6px;
         }
 
@@ -364,16 +378,11 @@
 
         .knowledge-detail h3 {
             color: var(--dark-blue);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.25rem;
         }
 
-        .knowledge-detail p {
-            margin-bottom: 1rem;
-            color: #334155;
-        }
-
-        /* ==================== AUSFÜHRLICHE BIOGRAFIEN (AKKORDEON) ==================== */
+        /* ==================== BIOGRAFIEN ==================== */
         .bio-accordion {
             display: flex;
             flex-direction: column;
@@ -388,7 +397,7 @@
         }
 
         .bio-header {
-            padding: 1.2rem 1.5rem;
+            padding: 1.2rem;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -402,47 +411,31 @@
         }
 
         .bio-header h3 {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--dark-blue);
             font-weight: 600;
         }
 
-        .bio-header .bio-subtitle {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            font-weight: 400;
-            margin-left: 0.5rem;
-        }
-
         .bio-content {
             display: none;
-            padding: 2rem;
+            padding: 1.5rem;
             border-top: 1px solid var(--border-color);
             background-color: #fafafa;
-            font-size: 0.96rem;
+            font-size: 0.95rem;
             color: #334155;
-            line-height: 1.85;
-        }
-
-        .bio-content p {
-            margin-bottom: 1.2rem;
+            line-height: 1.8;
         }
 
         .bio-item.active .bio-content {
             display: block;
         }
 
-        .bio-item.active .bio-header {
-            background-color: #f1f5f9;
-            border-bottom: 1px solid var(--border-color);
-        }
-
         .bio-fact-box {
             background: #ffffff;
             border-left: 4px solid var(--accent-gold);
-            padding: 1rem 1.2rem;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.88rem;
             color: var(--text-muted);
         }
 
@@ -450,12 +443,12 @@
         .form-box {
             background: #ffffff;
             border: 1px solid var(--border-color);
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 6px;
         }
 
         .form-group {
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
         }
 
         .form-group label {
@@ -464,8 +457,6 @@
             font-size: 0.85rem;
             font-weight: 600;
             color: var(--dark-blue);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .form-control {
@@ -477,36 +468,26 @@
             background: #ffffff;
         }
 
-        .form-control:focus {
-            outline: none;
-            border-color: var(--dark-blue);
-        }
-
         textarea.form-control {
-            min-height: 110px;
+            min-height: 100px;
             resize: vertical;
         }
 
         .btn {
             background-color: var(--dark-blue);
             color: #ffffff;
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem 1.4rem;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-size: 0.9rem;
             font-weight: 500;
-            transition: background 0.2s;
-        }
-
-        .btn:hover {
-            background-color: var(--medium-blue);
         }
 
         .question-card {
             background: #ffffff;
             border: 1px solid var(--border-color);
-            padding: 1.5rem;
+            padding: 1.2rem;
             margin-bottom: 1rem;
             border-radius: 6px;
         }
@@ -514,79 +495,68 @@
         .author-meta {
             font-size: 0.8rem;
             color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
-
-        .author-name {
-            color: var(--dark-blue);
-            font-weight: 600;
+            margin-bottom: 0.4rem;
         }
 
         .answers-container {
-            margin-top: 1rem;
-            padding-left: 1rem;
+            margin-top: 0.8rem;
+            padding-left: 0.8rem;
             border-left: 2px solid var(--border-color);
         }
 
         .answer-item {
             background: #f8fafc;
-            padding: 0.8rem;
+            padding: 0.6rem;
             border-radius: 4px;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.88rem;
+            margin-bottom: 0.4rem;
         }
 
         /* ==================== FOOTER ==================== */
         footer {
             background-color: var(--dark-blue);
             color: #cbd5e1;
-            padding: 3rem 1.5rem 2rem;
-            margin-top: 5rem;
+            padding: 2.5rem 1.5rem 1.5rem;
+            margin-top: 4rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
+            font-size: 0.88rem;
         }
 
         .footer-content {
             max-width: 1000px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .footer-column h3 {
             color: #ffffff;
-            font-size: 1rem;
-            margin-bottom: 1rem;
+            font-size: 0.98rem;
+            margin-bottom: 0.8rem;
             font-weight: 600;
         }
 
         .footer-bottom {
             text-align: center;
-            padding-top: 2rem;
+            padding-top: 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: #64748b;
-        }
-
-        @media (max-width: 600px) {
-            .navbar {
-                flex-direction: column;
-                gap: 1rem;
-            }
         }
     </style>
 </head>
 <body>
 
-    <!-- HEADER & SAUBERE NAVIGATION -->
+    <!-- HEADER & WISCHBARES MENÜ -->
     <header>
         <nav class="navbar">
             <div class="logo-text">
                 <h1>Ahlulbayt Zentrum</h1>
                 <p>Moscheegemeinde Hessen</p>
             </div>
+            <!-- Wischbare Menüleiste -->
             <ul class="nav-links">
                 <li><a href="#" class="nav-btn active" data-tab="home">Startseite</a></li>
                 <li><a href="#" class="nav-btn" data-tab="stories">Geschichte & Imame</a></li>
@@ -656,7 +626,7 @@
                 </div>
             </div>
 
-            <!-- NEU: RÜCKBLICK & EVENT-MEDIEN (BILDER/VIDEOS) -->
+            <!-- EVENT-MEDIEN GALERIE (NUR VOM ADMIN BEARBElTBAR) -->
             <div class="media-section">
                 <div class="section-header">
                     <h2>Rückblick: Vergangene Veranstaltungen</h2>
@@ -664,11 +634,13 @@
                 </div>
 
                 <!-- Medien-Galerie Container -->
-                <div class="media-grid" id="mediaContainer">
+                <div class="media-grid">
+                    <!-- Bild-Beispiel -->
                     <div class="media-card">
                         <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=600&q=80" alt="Gemeinschaftsleben">
                         <p>Gemeinsames Iftar im Monat Ramadan</p>
                     </div>
+                    <!-- Video-Beispiel -->
                     <div class="media-card">
                         <video controls poster="https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=600&q=80">
                             <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
@@ -676,19 +648,17 @@
                         </video>
                         <p>Vortrag & Recitation (Video-Ausschnitt)</p>
                     </div>
-                </div>
-
-                <!-- Upload Bereich für neue Medien -->
-                <div class="upload-box">
-                    <h3 style="font-size:1rem; color:var(--dark-blue); margin-bottom:0.5rem;">Medien hochladen</h3>
-                    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">Füge Bilder oder Videos von vergangenen Veranstaltungen hinzu:</p>
-                    <input type="file" id="mediaUploadInput" accept="image/*,video/*" style="display:none;" onchange="handleFileUpload(event)">
-                    <button class="btn" onclick="document.getElementById('mediaUploadInput').click()">Datei auswählen</button>
+                    <!-- HIER KANNST DU NEUE BILDER/VIDEOS EINTRAGEN:
+                    <div class="media-card">
+                        <img src="dein-bild.jpg" alt="Beschreibung">
+                        <p>Titel des Bildes</p>
+                    </div> 
+                    -->
                 </div>
             </div>
         </div>
 
-        <!-- ================= TAB 2: AUSFÜHRLICHE GESCHICHTEN & IMAME ================= -->
+        <!-- ================= TAB 2: GESCHICHTEN & IMAME ================= -->
         <div id="stories" class="tab-content">
             <div class="section-header">
                 <h2>Die 14 Infalliblen (Ahlulbayt)</h2>
@@ -699,7 +669,7 @@
                 <!-- PROPHET MUHAMMAD (S.A.A.S.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
-                        <h3>Prophet Muhammad <span class="bio-subtitle">(s.a.a.s.) — Das Siegel der Propheten</span></h3>
+                        <h3>Prophet Muhammad <span style="font-size:0.85rem; color:var(--text-muted); font-weight:400;">(s.a.a.s.) — Das Siegel der Propheten</span></h3>
                     </div>
                     <div class="bio-content">
                         <div class="bio-fact-box">
@@ -712,7 +682,7 @@
                 <!-- FATIMA AZ-ZAHRA (S.A.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
-                        <h3>Fatima az-Zahra <span class="bio-subtitle">(s.a.) — Die Herrin aller Frauen</span></h3>
+                        <h3>Fatima az-Zahra <span style="font-size:0.85rem; color:var(--text-muted); font-weight:400;">(s.a.) — Die Herrin aller Frauen</span></h3>
                     </div>
                     <div class="bio-content">
                         <div class="bio-fact-box">
@@ -725,7 +695,7 @@
                 <!-- 1. IMAM ALI (A.S.) -->
                 <div class="bio-item">
                     <div class="bio-header" onclick="toggleBio(this)">
-                        <h3>1. Imam Ali ibn Abi Talib <span class="bio-subtitle">(a.s.) — Fürst der Gläubigen</span></h3>
+                        <h3>1. Imam Ali ibn Abi Talib <span style="font-size:0.85rem; color:var(--text-muted); font-weight:400;">(a.s.) — Fürst der Gläubigen</span></h3>
                     </div>
                     <div class="bio-content">
                         <div class="bio-fact-box">
@@ -737,7 +707,7 @@
             </div>
         </div>
 
-        <!-- ================= TAB 3: NEU: USUL AD-DIN & 10 FURU AD-DIN ================= -->
+        <!-- ================= TAB 3: USUL AD-DIN & 10 FURU AD-DIN ================= -->
         <div id="knowledge" class="tab-content">
             <div class="section-header">
                 <h2>Wissen & Lehre</h2>
@@ -755,7 +725,7 @@
             <!-- SEKTION: USUL AD-DIN -->
             <div id="kn-usul" class="knowledge-detail active">
                 <h3>Usul ad-Din (Die 5 Grundpfeiler des Glaubens)</h3>
-                <p>Klicke auf einen der Grundpfeiler, um mehr darüber zu erfahren:</p>
+                <p style="margin-bottom:1rem; font-size:0.9rem;">Klicke auf einen der Grundpfeiler, um mehr darüber zu erfahren:</p>
 
                 <div class="din-buttons-grid">
                     <button class="din-btn" onclick="showDinDetail('Tawhid', 'Tawhid bezeichnet den reinen Monotheismus – den Glauben an die absolute Einheit, Einzigartigkeit und Unteilbarkeit Gottes.')">1. Tawhid</button>
@@ -767,14 +737,14 @@
 
                 <div id="dinInfoBox" style="background:#f8fafc; padding:1.2rem; border-left:4px solid var(--dark-blue); border-radius:4px; display:none;">
                     <h4 id="dinInfoTitle" style="color:var(--dark-blue); margin-bottom:0.4rem;"></h4>
-                    <p id="dinInfoText" style="margin:0; color:#334155; font-size:0.95rem;"></p>
+                    <p id="dinInfoText" style="margin:0; color:#334155; font-size:0.92rem;"></p>
                 </div>
             </div>
 
             <!-- SEKTION: 10 FURU AD-DIN -->
             <div id="kn-furu" class="knowledge-detail">
                 <h3>10 Furu' ad-Din (Die Zweige der Praxis)</h3>
-                <p>Klicke auf eine der Pflichten, um die Erklärung anzuzeigen:</p>
+                <p style="margin-bottom:1rem; font-size:0.9rem;">Klicke auf eine der Pflichten, um die Erklärung anzuzeigen:</p>
 
                 <div class="din-buttons-grid">
                     <button class="din-btn" onclick="showDinDetail('Salat (Das Gebet)', 'Das tägliche Gebet ist die fundamentale Verbindung zwischen dem Schöpfer und dem Menschen. Es wird fünfmal am Tag verrichtet.')">1. Salat</button>
@@ -794,7 +764,7 @@
             <div id="kn-fiqh" class="knowledge-detail">
                 <h3>Gebet & Rituelle Reinheit (Fiqh)</h3>
                 <p>Das Gebet nach der schiitischen Rechtsschule (Ja'fari) basiert exakt auf den Praxis-Überlieferungen des Propheten (s.a.a.s.) und seiner Ahlulbayt (a.s.).</p>
-                <p><strong>Die Niederwerfung (Sujud):</strong> Die Niederwerfung erfolgt ausschließlich auf natürlicher Erde, Stein oder nicht-essbarem Holz (z.B. auf einem Gebetsstein/Turbah aus Kerbela-Erde).</p>
+                <p style="margin-top:0.5rem;"><strong>Die Niederwerfung (Sujud):</strong> Die Niederwerfung erfolgt ausschließlich auf natürlicher Erde, Stein oder nicht-essbarem Holz (z.B. auf einem Gebetsstein/Turbah aus Kerbela-Erde).</p>
             </div>
 
             <!-- SEKTION: GHADIR KHUMM -->
@@ -812,7 +782,7 @@
             </div>
 
             <div class="form-box" style="margin-bottom: 2rem;">
-                <h3 style="margin-bottom: 1rem; color:var(--dark-blue);">Frage einreichen</h3>
+                <h3 style="margin-bottom: 1rem; color:var(--dark-blue); font-size:1.1rem;">Frage einreichen</h3>
                 <div class="form-group">
                     <label>Name / Pseudonym (optional)</label>
                     <input type="text" id="discName" class="form-control" placeholder="z. B. Ali oder Anonym">
@@ -880,7 +850,7 @@
 
     <!-- LOGIK & SKRIPTE -->
     <script>
-        // 1. MENÜ-NAVIGATION & SHAKE-ANIMATION (LINKS/RECHTS BEWEGUNG)
+        // 1. MENÜ-NAVIGATION & SHAKE-ANIMATION
         const navButtons = document.querySelectorAll('.nav-btn');
         const tabContents = document.querySelectorAll('.tab-content');
         const locationBox = document.getElementById('location-box');
@@ -932,32 +902,14 @@
             });
         });
 
-        // 2. MEDIEN-UPLOAD LOGIK (BILDER/VIDEOS)
-        function handleFileUpload(event) {
-            const files = event.target.files;
-            const container = document.getElementById('mediaContainer');
-
-            for (let file of files) {
-                const fileURL = URL.createObjectURL(file);
-                const mediaCard = document.createElement('div');
-                mediaCard.className = 'media-card';
-
-                if (file.type.startsWith('image/')) {
-                    mediaCard.innerHTML = `<img src="${fileURL}" alt="Hochgeladenes Bild"><p>${file.name}</p>`;
-                } else if (file.type.startsWith('video/')) {
-                    mediaCard.innerHTML = `<video controls src="${fileURL}"></video><p>${file.name}</p>`;
-                }
-                container.appendChild(mediaCard);
-            }
-        }
-
-        // 3. WISSENSBEREICH (USUL & FURU AD-DIN SELEKTOREN)
+        // 2. WISSENSBEREICH (USUL & FURU AD-DIN SELEKTOREN)
         function showKnowledgeTab(id, btn) {
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.knowledge-detail').forEach(d => d.classList.remove('active'));
 
             btn.classList.add('active');
             document.getElementById('kn-' + id).classList.add('active');
+            document.getElementById('dinInfoBox').style.display = 'none';
         }
 
         function showDinDetail(title, description) {

@@ -75,7 +75,7 @@
             letter-spacing: 1px;
         }
 
-        /* PERFEKT DRAGGABLE / WISCHBARES MENÜ */
+        /* WISCHBARE & DRAGGABLE MENÜLEISTE */
         .nav-links {
             display: flex;
             list-style: none;
@@ -93,7 +93,6 @@
             cursor: grabbing;
         }
 
-        /* Versteckt die Scrollleiste */
         .nav-links::-webkit-scrollbar {
             display: none;
         }
@@ -111,7 +110,7 @@
             transition: background-color 0.2s ease, color 0.2s ease;
             display: inline-block;
             flex-shrink: 0;
-            white-space: nowrap; /* Garantiert einzeilige Menüpunkte */
+            white-space: nowrap;
         }
 
         .nav-links a:hover, .nav-links a.active {
@@ -119,7 +118,6 @@
             background-color: rgba(255, 255, 255, 0.15);
         }
 
-        /* SHAKE ANIMATION FÜR MENÜ-BUTTONS */
         @keyframes shakeHorizontal {
             0% { transform: translateX(0); }
             20% { transform: translateX(-5px); }
@@ -279,11 +277,25 @@
             line-height: 1.6;
         }
 
-        /* ==================== EVENT MEDIA GALERIE ==================== */
+        /* ==================== EVENT MEDIA GALERIE & UPLOAD ==================== */
         .media-section {
             margin-top: 3.5rem;
             padding-top: 2rem;
             border-top: 1px solid var(--border-color);
+        }
+
+        .upload-box {
+            background: #ffffff;
+            border: 1px dashed var(--accent-gold);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+        }
+
+        .upload-box h3 {
+            font-size: 1rem;
+            color: var(--dark-blue);
+            margin-bottom: 0.8rem;
         }
 
         .media-grid {
@@ -298,6 +310,7 @@
             border: 1px solid var(--border-color);
             border-radius: 6px;
             overflow: hidden;
+            position: relative;
         }
 
         .media-card img, .media-card video {
@@ -313,6 +326,19 @@
             font-size: 0.88rem;
             color: var(--dark-blue);
             font-weight: 500;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(220, 38, 38, 0.85);
+            color: white;
+            border: none;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
         }
 
         /* ==================== WISSEN SEKTION ==================== */
@@ -633,14 +659,25 @@
                 </div>
             </div>
 
-            <!-- EVENT-MEDIEN GALERIE (EXKLUSIV ADMIN) -->
+            <!-- EVENT-MEDIEN GALERIE MIT UPLOAD-FUNKTION -->
             <div class="media-section">
                 <div class="section-header">
                     <h2>Rückblick: Vergangene Veranstaltungen</h2>
                     <p>Eindrücke, Bilder und Videos unserer bisherigen Treffen und Feierlichkeiten.</p>
                 </div>
 
-                <div class="media-grid">
+                <!-- MEDIEN UPLOAD BEREICH -->
+                <div class="upload-box">
+                    <h3>📷 Medien verwalten (Neues Bild oder Video hochladen)</h3>
+                    <div style="display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center;">
+                        <input type="file" id="mediaFileInput" accept="image/*,video/*" class="form-control" style="max-width: 280px; padding: 0.4rem;">
+                        <input type="text" id="mediaCaptionInput" class="form-control" placeholder="Beschreibung (z.B. Fest 2026)" style="max-width: 250px; padding: 0.5rem;">
+                        <button type="button" class="btn" onclick="uploadMedia()">Hochladen</button>
+                    </div>
+                </div>
+
+                <!-- MEDIEN RASTER -->
+                <div class="media-grid" id="mediaGrid">
                     <div class="media-card">
                         <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=600&q=80" alt="Gemeinschaftsleben">
                         <p>Gemeinsames Iftar im Monat Ramadan</p>
@@ -913,7 +950,42 @@
             navContainer.scrollLeft = scrollLeft - walk;
         });
 
-        // 3. WISSENSBEREICH
+        // 3. MEDIEN UPLOAD & ENTFERNEN LOGIK
+        function uploadMedia() {
+            const fileInput = document.getElementById('mediaFileInput');
+            const captionInput = document.getElementById('mediaCaptionInput');
+            const mediaGrid = document.getElementById('mediaGrid');
+
+            if (!fileInput.files || !fileInput.files[0]) {
+                alert('Bitte wähle zuerst eine Datei aus.');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const caption = captionInput.value.trim() || 'Veranstaltung';
+            const fileURL = URL.createObjectURL(file);
+
+            const card = document.createElement('div');
+            card.className = 'media-card';
+
+            const deleteBtn = `<button class="delete-btn" onclick="this.parentElement.remove()">Löschen</button>`;
+
+            if (file.type.startsWith('image/')) {
+                card.innerHTML = `${deleteBtn}<img src="${fileURL}" alt="${caption}"><p>${caption}</p>`;
+            } else if (file.type.startsWith('video/')) {
+                card.innerHTML = `${deleteBtn}<video controls src="${fileURL}"></video><p>${caption}</p>`;
+            } else {
+                alert('Bitte wähle eine Bild- oder Videodatei.');
+                return;
+            }
+
+            mediaGrid.prepend(card);
+
+            fileInput.value = '';
+            captionInput.value = '';
+        }
+
+        // 4. WISSENSBEREICH
         function showKnowledgeTab(id, btn) {
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.knowledge-detail').forEach(d => d.classList.remove('active'));
